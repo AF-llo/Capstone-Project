@@ -70,7 +70,20 @@ public class Level {
         return reachedExperience;
     }
 
+    public int getTotalExperience() {
+        return totalExperience;
+    }
+
     public Skill getSkill() {
-        return skill;
+        return skill.copy();
+    }
+
+    protected Level copy() {
+        Level level = new Level();
+        level.maxExperience = maxExperience;
+        level.reachedExperience = reachedExperience;
+        level.totalExperience = totalExperience;
+        level.skill = skill.copy();
+        return level;
     }
 }

@@ -14,7 +14,7 @@ public class Skill {
     private static final int LEVEL_INTERVAL = 25;
 
     @Retention(RetentionPolicy.SOURCE)
-    @StringDef({})
+    @StringDef({BEGINNER, ADVANCED, EXPERT})
     public @interface Name {}
     public static final String BEGINNER = "BEGINNER";
     public static final String ADVANCED = "ADVANCED";
@@ -57,5 +57,11 @@ public class Skill {
 
     public @Name String getName() {
         return name;
+    }
+
+    protected Skill copy()  {
+        Skill skill = new Skill();
+        skill.name = name;
+        return skill;
     }
 }

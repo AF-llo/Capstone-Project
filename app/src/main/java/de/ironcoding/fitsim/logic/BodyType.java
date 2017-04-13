@@ -40,7 +40,7 @@ public class BodyType {
         this.buildUp = buildUp;
     }
 
-    public static BodyType get(@Skill.Name String name) {
+    public static BodyType getType(@Skill.Name String name) {
         switch (name) {
             case EKTOMORPH:
                 return new BodyType(EKTOMORPH, METABOLISM_EKTOMORPH, BUILDUP_EKTOMORPH);
