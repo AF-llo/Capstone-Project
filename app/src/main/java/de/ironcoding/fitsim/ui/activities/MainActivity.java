@@ -1,7 +1,9 @@
-package de.ironcoding.fitsim;
+package de.ironcoding.fitsim.ui.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import de.ironcoding.fitsim.R;
 
 public class MainActivity extends AppCompatActivity {
 
