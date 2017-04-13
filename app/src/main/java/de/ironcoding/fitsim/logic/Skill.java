@@ -41,7 +41,7 @@ public class Skill {
         return skill;
     }
 
-    public void improveForLevel(int level) {
+    void improveForLevel(int level) {
         int skillCount = level / LEVEL_INTERVAL;
         switch (skillCount) {
             case 0:

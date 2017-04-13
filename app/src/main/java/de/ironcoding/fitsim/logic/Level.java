@@ -32,6 +32,12 @@ public class Level {
         return level;
     }
 
+    /**
+     * Adds the gained experience to reached. When maxExperience is reached, next level is reached.
+     *
+     * @param experience
+     *                      gained experience
+     */
     public void gainExperience(int experience) {
         if (experience < 0) {
             experience = 0;
