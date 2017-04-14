@@ -21,6 +21,12 @@ public class Body {
      */
     private static final float MIN_WEIGHT = 50;
 
+    private static final int MIN_FITNESS = 40;
+
+    private static final int MAX_FITNESS = 100;
+
+    private static final int INITIAL_FITNESS = 60;
+
     private BodyType type;
 
     private Stats stats;
@@ -103,21 +109,68 @@ public class Body {
 
     public static class Fitness {
 
-        private int power;
+        private float power = INITIAL_FITNESS;
 
-        private int stamina;
+        private float stamina = INITIAL_FITNESS;
 
         public Fitness(int power, int stamina) {
-
+            if (power < MIN_FITNESS) {
+                power = MIN_FITNESS;
+            }
+            if (power > MAX_FITNESS) {
+                power = MAX_FITNESS;
+            }
+            this.power = power;
+            if (stamina < MIN_FITNESS) {
+                stamina = MIN_FITNESS;
+            }
+            if (stamina > MAX_FITNESS) {
+                stamina = MAX_FITNESS;
+            }
+            this.stamina = stamina;
         }
 
-        // TODO: 13.04.2017 implement relattion power - muscles, stamina - muscles - power
+        private void improveStrength() {
+            power += calculateIprovement(power);
+        }
 
-        public int getPower() {
+        private void improveStamina() {
+            stamina += calculateIprovement(stamina);
+        }
+
+        private float calculateIprovement(float current) {
+            // TODO: 14.04.2017  implement not linear
+            float baseImprovement = 2;
+            if (current <= MAX_FITNESS - baseImprovement) {
+                return baseImprovement;
+            } else {
+                return MAX_FITNESS - current;
+            }
+        }
+
+        private void impairStrength() {
+            power -= calculateDecline(power);
+        }
+
+        private void impairStamina() {
+            stamina -= calculateDecline(stamina);
+        }
+
+        private float calculateDecline(float current) {
+            // TODO: 14.04.2017  implement not linear
+            float baseDecline = 1;
+            if (current >= MIN_FITNESS + baseDecline) {
+                return baseDecline;
+            } else {
+                return current - MIN_FITNESS;
+            }
+        }
+
+        public float getPower() {
             return power;
         }
 
-        public int getStamina() {
+        public float getStamina() {
             return stamina;
         }
     }
