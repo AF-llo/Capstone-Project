@@ -20,6 +20,7 @@ public class Calories {
     public static final float DEFAULT_SIZE_FEMALE = 170.0F;
     public static final int DEFAULT_AGE = 25;
 
+    // constans for metabolismrate based on harris-benedict-formula
     private static final float BASIC_VALUE_MALE = 66.47F;
     private static final float BASIC_VALUE_FEMALE = 655.1F;
 
@@ -106,6 +107,20 @@ public class Calories {
         return proteine + carbs + fat == 1;
     }
 
+    /**
+     * Calculates the metabolic rate based on formula of harrison-benedict
+     * @param gender
+     *                  male or female
+     * @param weight
+     *                  weight in kg. {@link #DEFAULT_WEIGHT_MALE}/{@link #DEFAULT_WEIGHT_FEMALE} is
+     *                  used when negative weight is passed.
+     * @param size
+     *                  size in cm. {@link #DEFAULT_SIZE_MALE}/{@link #DEFAULT_SIZE_FEMALE} is used
+     *                  when negative size is passed.
+     * @param age
+     *                  age in years. {@link #DEFAULT_AGE} is used when negative age is passed.
+     * @return
+     */
     public static float metabolicRatePerDay(@Athlete.Gender int gender, float weight, float size, int age) {
         if (weight < 0) {
             weight = gender == Athlete.MALE ? DEFAULT_WEIGHT_MALE : DEFAULT_WEIGHT_FEMALE;
@@ -134,6 +149,16 @@ public class Calories {
         return baseValue + (factorWeight * weight) + (factorSize * size) - (factorAge * age);
     }
 
+    /**
+     * Calculates the energy metabolism for hours.
+     * @param metabolicRate
+     *                          metabolic rate for whole day. 0 is used when negative value is passed.
+     * @param pal
+     *                          pal of activity. 1 is used when negative value is passed.
+     * @param hours
+     *                          hours for activity. 0 is used when negative value is passed. 24 is used
+     *                          when value greater than 24 is passed.
+     */
     public static float energyMetabolismForPal(float metabolicRate, float pal, float hours) {
         if (metabolicRate < 0) {
             metabolicRate = 0;
