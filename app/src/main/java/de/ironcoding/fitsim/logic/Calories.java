@@ -19,6 +19,10 @@ public class Calories {
     public static final float DEFAULT_SIZE_MALE = 175.0F;
     public static final float DEFAULT_SIZE_FEMALE = 170.0F;
     public static final int DEFAULT_AGE = 25;
+    public static final float MIN_KFA = 5.0F;
+
+    private static final float FFMI_FACTOR_ONE = 6.3F;
+    private static final float FFMI_FACTOR_TWO = 1.8F;
 
     // constans for metabolismrate based on harris-benedict-formula
     private static final float BASIC_VALUE_MALE = 66.47F;
@@ -105,6 +109,61 @@ public class Calories {
 
     public static boolean validPropotion(float proteine, float carbs, float fat) {
         return proteine + carbs + fat == 1;
+    }
+
+    /**
+     * Calculates the BMI
+     * @param weight
+     *                  in kg
+     * @param size
+     *                  in cm
+     * @return
+     *                  bmi or 0 when invalid weight or size is passed.
+     */
+    public static float getBmi(float weight, float size) {
+        if (weight < 0) {
+            weight = 0;
+        }
+        if (size <= 0) {
+            // prevent division with zero
+            size = 1;
+            weight = 0;
+        }
+        float cmPerMeter = 100;
+        size = size / cmPerMeter;
+        return weight / (size * size);
+    }
+
+    /**
+     * Calculates the ffmi
+     * @param weight
+     *                  in kg
+     * @param size
+     *                  in cm
+     * @param kfa
+     *                  in percent (e.g. 15.0)
+     * @return
+     *                  ffmi or 0 when invalid weight or size is passed. When kfa < {@link #MIN_KFA},
+     *                  the min kfa is used.
+     */
+    public static float getFfmi(float weight, float size, float kfa) {
+        if (weight < weight) {
+            weight = 0;
+        }
+        if (size <= 0) {
+            size = 1;
+            weight = 0;
+        }
+        if (kfa < MIN_KFA) {
+            kfa = MIN_KFA;
+        }
+        float cmPerMeter = 100;
+        float fatFreeMass = weight * ((100 - kfa) / 100);
+        float correctionFactor = FFMI_FACTOR_ONE * (FFMI_FACTOR_TWO - size / cmPerMeter);
+        if (weight == 0 | size ==  0) {
+            correctionFactor = 0;
+        }
+        return getBmi(fatFreeMass, size) + correctionFactor;
     }
 
     /**

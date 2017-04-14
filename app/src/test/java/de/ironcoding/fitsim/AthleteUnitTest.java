@@ -108,5 +108,14 @@ public class AthleteUnitTest {
 
         palCaloriesForHours = Calories.energyMetabolismForPal(-1, -1, -1);
         Assert.assertEquals(0.0F, palCaloriesForHours);
+
+        // BMI
+        Assert.assertEquals(0.0F, Calories.getBmi(-1, 168));
+        Assert.assertEquals(0.0F, Calories.getBmi(75, -1));
+        Assert.assertEquals(0.0F, Calories.getBmi(-1, -1));
+
+        Assert.assertEquals(0.0F, Calories.getFfmi(0, 168, 12));
+        Assert.assertEquals(0.0F, Calories.getFfmi(75, 0, 12));
+        Assert.assertTrue(Calories.getFfmi(75, 168, 0) > 25);
     }
 }
