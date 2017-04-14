@@ -27,15 +27,13 @@ public class Athlete {
 
     private Athlete () {}
 
-    public static Athlete warmUp(@Gender int gender,
-                               int experience,
-                               Body body) {
+    public static Athlete build(@Gender int gender, int experience, Body body) {
         if (body == null) {
-            throw new IllegalArgumentException("Your body was null. An athlets body should not be empty!");
+            throw new IllegalArgumentException("Your body was null. An athlets needs a body to eat and do sport");
         }
         Athlete athlete = InstanceHolder.INSTANCE;
         if (athlete.isInitialized) {
-            throw new IllegalStateException("Your athlete is already warmed up. Please call Athlete.warmUp(...) only once");
+            throw new IllegalStateException("Your athlete has already been build. Please call Athlete.build(...) only once");
         }
         athlete.gender = gender;
         athlete.level = Level.create(experience);
@@ -74,6 +72,14 @@ public class Athlete {
 
     public void gainExperience(int experience) {
         level.gainExperience(experience);
+    }
+
+    public void eat(Food food) {
+        body.digest(food);
+    }
+
+    public void doActivity(Activity activity) {
+        body.performActivity(activity);
     }
 
     private static final class InstanceHolder {

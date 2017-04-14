@@ -46,6 +46,14 @@ public class Body {
         return body;
     }
 
+    public void performActivity(Activity activity) {
+        // TODO: 13.04.2017  
+    }
+
+    public void digest(Food food) {
+        // TODO: 13.04.2017
+    }
+
     public Body copy() {
         Body body = new Body();
         body.stats = stats;
