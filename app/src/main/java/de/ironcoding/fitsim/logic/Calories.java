@@ -14,11 +14,6 @@ public class Calories {
     private static final float DEFAULT_CARBS_PROPORTION = 0.4F;
     private static final float DEFAULT_FAT_PROPORTION = 0.2F;
 
-    public static final float DEFAULT_WEIGHT_MALE = 75.0F;
-    public static final float DEFAULT_WEIGHT_FEMALE = 65.0F;
-    public static final float DEFAULT_SIZE_MALE = 175.0F;
-    public static final float DEFAULT_SIZE_FEMALE = 170.0F;
-    public static final int DEFAULT_AGE = 25;
     public static final float MIN_KFA = 5.0F;
 
     private static final float FFMI_FACTOR_ONE = 6.3F;
@@ -171,24 +166,24 @@ public class Calories {
      * @param gender
      *                  male or female
      * @param weight
-     *                  weight in kg. {@link #DEFAULT_WEIGHT_MALE}/{@link #DEFAULT_WEIGHT_FEMALE} is
+     *                  weight in kg. {@link Body#INITIAL_WEIGHT_MALE}/{@link Body#INITIAL_WEIGHT_FEMALE} is
      *                  used when negative weight is passed.
      * @param size
-     *                  size in cm. {@link #DEFAULT_SIZE_MALE}/{@link #DEFAULT_SIZE_FEMALE} is used
+     *                  size in cm. {@link Body#DEFAULT_SIZE_MALE}/{@link Body#DEFAULT_SIZE_FEMALE} is used
      *                  when negative size is passed.
      * @param age
-     *                  age in years. {@link #DEFAULT_AGE} is used when negative age is passed.
+     *                  age in years. {@link Body#DEFAULT_AGE} is used when negative age is passed.
      * @return
      */
     public static float metabolicRatePerDay(@Athlete.Gender int gender, float weight, float size, int age) {
         if (weight < 0) {
-            weight = gender == Athlete.MALE ? DEFAULT_WEIGHT_MALE : DEFAULT_WEIGHT_FEMALE;
+            weight = gender == Athlete.MALE ? Body.INITIAL_WEIGHT_MALE : Body.INITIAL_WEIGHT_FEMALE;
         }
         if (size < 0) {
-            size = gender == Athlete.MALE ? DEFAULT_SIZE_MALE : DEFAULT_SIZE_FEMALE;
+            size = gender == Athlete.MALE ? Body.DEFAULT_SIZE_MALE : Body.DEFAULT_SIZE_FEMALE;
         }
         if (age < 0) {
-            age = DEFAULT_AGE;
+            age = Body.DEFAULT_AGE;
         }
         float baseValue;
         float factorWeight;

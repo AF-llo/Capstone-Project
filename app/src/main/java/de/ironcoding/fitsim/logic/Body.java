@@ -9,23 +9,29 @@ public class Body {
     /**
      * Min energy -> Less than zero is not possible
      */
-    private static final int MIN_ENERGY = 0;
+    public static final int MIN_ENERGY = 0;
 
     /**
      * Max energy -> Every one has some limits
      */
-    private static final int MAX_ENERGY = 100;
+    public static final int MAX_ENERGY = 100;
 
     /**
      * Minimum weight to prepare from anorexia
      */
-    private static final float MIN_WEIGHT = 50;
+    public static final float MIN_WEIGHT = 50;
 
-    private static final int MIN_FITNESS = 40;
+    public static final float MIN_FITNESS = 40.0F;
 
-    private static final int MAX_FITNESS = 100;
+    public static final float MAX_FITNESS = 100.0F;
 
-    private static final int INITIAL_FITNESS = 60;
+    public static final float INITIAL_FITNESS = 60.0F;
+
+    public static final float INITIAL_WEIGHT_MALE = 75.0F;
+    public static final float INITIAL_WEIGHT_FEMALE = 65.0F;
+    public static final float DEFAULT_SIZE_MALE = 175.0F;
+    public static final float DEFAULT_SIZE_FEMALE = 170.0F;
+    public static final int DEFAULT_AGE = 25;
 
     private BodyType type;
 
@@ -75,26 +81,32 @@ public class Body {
         private float weight;
 
         public Stats(int energy, float weight) {
+            if (energy < MIN_ENERGY) {
+                energy = MIN_ENERGY;
+            }
+            if (energy > MAX_ENERGY) {
+                energy = MAX_ENERGY;
+            }
             this.energy = energy;
             this.weight = weight < MIN_WEIGHT ? MIN_WEIGHT : weight;
         }
 
-        private void consumeEnergy(int consumedEnergy) {
+        public void consumeEnergy(int consumedEnergy) {
             int leftEnergy = energy - consumedEnergy;
             energy = leftEnergy < MIN_ENERGY ? MIN_ENERGY : leftEnergy;
         }
 
-        private void gainEnergy(int gainedEnergy) {
+        public void gainEnergy(int gainedEnergy) {
             int obtainedEnergy = energy + gainedEnergy;
             energy = obtainedEnergy > MAX_ENERGY ? MAX_ENERGY : obtainedEnergy;
         }
 
-        private void loseWeight(float lostWeight) {
+        public void loseWeight(float lostWeight) {
             float leftWeight = weight - lostWeight;
             weight = leftWeight < MIN_WEIGHT ? MIN_WEIGHT : leftWeight;
         }
 
-        private void putOnWeight(float increasedWeight) {
+        public void putOnWeight(float increasedWeight) {
             weight += increasedWeight;
         }
 
@@ -109,18 +121,18 @@ public class Body {
 
     public static class Fitness {
 
-        private float power = INITIAL_FITNESS;
+        private float strength = INITIAL_FITNESS;
 
         private float stamina = INITIAL_FITNESS;
 
-        public Fitness(int power, int stamina) {
-            if (power < MIN_FITNESS) {
-                power = MIN_FITNESS;
+        public Fitness(float strength, float stamina) {
+            if (strength < MIN_FITNESS) {
+                strength = MIN_FITNESS;
             }
-            if (power > MAX_FITNESS) {
-                power = MAX_FITNESS;
+            if (strength > MAX_FITNESS) {
+                strength = MAX_FITNESS;
             }
-            this.power = power;
+            this.strength = strength;
             if (stamina < MIN_FITNESS) {
                 stamina = MIN_FITNESS;
             }
@@ -130,11 +142,11 @@ public class Body {
             this.stamina = stamina;
         }
 
-        private void improveStrength() {
-            power += calculateIprovement(power);
+        public void improveStrength() {
+            strength += calculateIprovement(strength);
         }
 
-        private void improveStamina() {
+        public void improveStamina() {
             stamina += calculateIprovement(stamina);
         }
 
@@ -148,11 +160,11 @@ public class Body {
             }
         }
 
-        private void impairStrength() {
-            power -= calculateDecline(power);
+        public void impairStrength() {
+            strength -= calculateDecline(strength);
         }
 
-        private void impairStamina() {
+        public void impairStamina() {
             stamina -= calculateDecline(stamina);
         }
 
@@ -166,8 +178,8 @@ public class Body {
             }
         }
 
-        public float getPower() {
-            return power;
+        public float getStrength() {
+            return strength;
         }
 
         public float getStamina() {

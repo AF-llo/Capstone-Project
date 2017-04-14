@@ -5,6 +5,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import de.ironcoding.fitsim.logic.Athlete;
+import de.ironcoding.fitsim.logic.Body;
 import de.ironcoding.fitsim.logic.Calories;
 import de.ironcoding.fitsim.logic.Level;
 import de.ironcoding.fitsim.logic.Skill;
@@ -117,5 +118,70 @@ public class AthleteUnitTest {
         Assert.assertEquals(0.0F, Calories.getFfmi(0, 168, 12));
         Assert.assertEquals(0.0F, Calories.getFfmi(75, 0, 12));
         Assert.assertTrue(Calories.getFfmi(75, 168, 0) > 25);
+    }
+
+    @Test
+    public void body_stats_test() throws Exception {
+        // energy
+        Body.Stats stats = new Body.Stats(50, Body.INITIAL_WEIGHT_MALE);
+        stats.consumeEnergy(10);
+        Assert.assertEquals(40, stats.getEnergy());
+
+        stats.gainEnergy(10);
+        Assert.assertEquals(50, stats.getEnergy());
+
+        stats.gainEnergy(51);
+        Assert.assertEquals(Body.MAX_ENERGY, stats.getEnergy());
+
+        stats.consumeEnergy(101);
+        Assert.assertEquals(Body.MIN_ENERGY, stats.getEnergy());
+
+        // weight
+
+        stats.loseWeight(5);
+        Assert.assertEquals(70.0F, stats.getWeight());
+
+        stats.putOnWeight(5);
+        Assert.assertEquals(75.0F, stats.getWeight());
+
+        stats.loseWeight(40);
+        Assert.assertEquals(Body.MIN_WEIGHT, stats.getWeight());
+
+        stats.putOnWeight(100);
+        Assert.assertEquals(Body.MIN_WEIGHT + 100, stats.getWeight());
+    }
+
+    @Test
+    public void body_fitness_test() throws Exception {
+        // strength
+        Body.Fitness fitness = new Body.Fitness(Body.INITIAL_FITNESS, Body.INITIAL_FITNESS);
+        fitness.improveStrength();
+        Assert.assertEquals(62.0F, fitness.getStrength());
+
+        fitness.impairStrength();
+        Assert.assertEquals(61.0F, fitness.getStrength());
+
+        fitness = new Body.Fitness(99.5F, Body.INITIAL_FITNESS);
+        fitness.improveStrength();
+        Assert.assertEquals(Body.MAX_FITNESS, fitness.getStrength());
+
+        fitness = new Body.Fitness(40.5F, Body.INITIAL_FITNESS);
+        fitness.impairStrength();
+        Assert.assertEquals(Body.MIN_FITNESS, fitness.getStrength());
+        // stamina
+
+        fitness.improveStamina();
+        Assert.assertEquals(62.0F, fitness.getStamina());
+
+        fitness.impairStamina();
+        Assert.assertEquals(61.0F, fitness.getStamina());
+
+        fitness = new Body.Fitness(Body.INITIAL_FITNESS, 99.5F);
+        fitness.improveStamina();
+        Assert.assertEquals(Body.MAX_FITNESS, fitness.getStamina());
+
+        fitness = new Body.Fitness(Body.INITIAL_FITNESS, 40.5F);
+        fitness.impairStamina();
+        Assert.assertEquals(Body.MIN_FITNESS, fitness.getStamina());
     }
 }
