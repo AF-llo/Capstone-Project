@@ -43,6 +43,8 @@ public class Body {
 
     private Properties properties;
 
+    // TODO: 15.04.2017 create list of muscles
+
     private Body() {}
 
     public static Body warmUpAverageMale(@BodyType.Name String type) {
@@ -82,14 +84,17 @@ public class Body {
         return body;
     }
 
-    public void performActivity(Activity activity) {
-        // TODO: 13.04.2017  
+    boolean isAbleToDo(Activity activity) {
+        return activity.getEffort() <= stats.getEnergy() && !activity.isToDemanding();
     }
 
-    public void digest(Nutrition nutrition) {
-        if (nutrition != null) {
-            calories.consume(nutrition);
-        }
+    void performActivity(Activity activity) {
+        stats.consumeEnergy(activity.getEffort());
+        activity.perform(stats, fitness);
+    }
+
+    void digest(Nutrition nutrition) {
+        calories.consume(nutrition);
     }
 
     public Body copy() {

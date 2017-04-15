@@ -83,6 +83,13 @@ public class Calories {
         return calories;
     }
 
+    public void startNewConsumption() {
+        consumedProteine = 0;
+        consumedCarbs = 0;
+        consumedFat = 0;
+        requiredEnergy = metabolicRate;
+    }
+
     public void consume(Nutrition nutrition) {
         if (nutrition != null) {
             consumedProteine += nutrition.getProteine();

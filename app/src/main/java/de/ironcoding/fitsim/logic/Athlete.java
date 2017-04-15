@@ -67,16 +67,27 @@ public class Athlete {
         return body.copy();
     }
 
-    public void gainExperience(int experience) {
-        level.gainExperience(experience);
-    }
-
     public void eat(Nutrition nutrition) {
+        if (nutrition == null) {
+            return;
+        }
         body.digest(nutrition);
     }
 
     public void doActivity(Activity activity) {
+        if (activity == null) {
+            return;
+        }
+        gainExperience(activity.getExperience());
         body.performActivity(activity);
+    }
+
+    public boolean isAbleToDo(Activity activity) {
+        return activity != null && body.isAbleToDo(activity);
+    }
+
+    private void gainExperience(int experience) {
+        level.gainExperience(experience);
     }
 
     private static final class InstanceHolder {

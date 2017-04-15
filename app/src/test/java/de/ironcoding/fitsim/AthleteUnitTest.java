@@ -4,10 +4,12 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+import de.ironcoding.fitsim.logic.Activity;
 import de.ironcoding.fitsim.logic.Athlete;
 import de.ironcoding.fitsim.logic.Body;
 import de.ironcoding.fitsim.logic.BodyType;
 import de.ironcoding.fitsim.logic.Calories;
+import de.ironcoding.fitsim.logic.Exercise;
 import de.ironcoding.fitsim.logic.Level;
 import de.ironcoding.fitsim.logic.Nutrition;
 import de.ironcoding.fitsim.logic.Skill;
@@ -203,12 +205,20 @@ public class AthleteUnitTest {
 
     @Test
     public void body_test() throws Exception {
-        Athlete athlete = Athlete.buildNew(Body.warmUpAverageMale(BodyType.ENDOMORPH));
-        athlete.eat(new Nutrition(10, 10, 5));
+
     }
 
     @Test
     public void athlete_test() throws Exception {
-
+        Athlete athlete = Athlete.buildNew(Body.warmUpAverageMale(BodyType.ENDOMORPH));
+        for (int i = 0; i <= 11; i++) {
+            Activity activity = new Exercise(1.2F, 10, 50);
+            if (athlete.isAbleToDo(activity)) {
+                athlete.doActivity(activity);
+            } else {
+                activity.getEffort();
+            }
+        }
+        athlete.eat(new Nutrition(10, 10, 5));
     }
 }
