@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import de.ironcoding.fitsim.logic.Athlete;
 import de.ironcoding.fitsim.logic.Body;
+import de.ironcoding.fitsim.logic.BodyType;
 import de.ironcoding.fitsim.logic.Calories;
 import de.ironcoding.fitsim.logic.Level;
 import de.ironcoding.fitsim.logic.Skill;
@@ -63,7 +64,8 @@ public class AthleteUnitTest {
 
     @Test
     public void calories_proportional_calculations_test() throws Exception {
-        Calories calories = Calories.createDefault();
+        Body body = Body.warmUpAverageMale(BodyType.ENDOMORPH);
+        Calories calories = body.getCalories();
         float totalCalories = 2200;
 
         Assert.assertEquals(0.0F, calories.proportionalProteineKalories(-1));
@@ -90,6 +92,7 @@ public class AthleteUnitTest {
         totalCalories = Calories.metabolicRatePerDay(Athlete.MALE, 75, 168, 32);
         Assert.assertEquals(1716.37F, totalCalories);
 
+
         // pal calories
 
         float palCaloriesForHours = Calories.energyMetabolismForPal(totalCalories, 1, 24);
@@ -110,6 +113,17 @@ public class AthleteUnitTest {
         palCaloriesForHours = Calories.energyMetabolismForPal(-1, -1, -1);
         Assert.assertEquals(0.0F, palCaloriesForHours);
 
+        // increase energy
+
+        Body body = Body.warmUp(
+                BodyType.ENDOMORPH,
+                new Body.Properties(Athlete.MALE, 168, 32),
+                new Body.Stats(Body.MAX_ENERGY, 75),
+                new Body.Fitness(Body.INITIAL_FITNESS, Body.INITIAL_FITNESS));
+        Calories calories = body.getCalories();
+        calories.increaseRequiredEnergy(1.4F, 8);
+        Assert.assertEquals(2517.3428F, calories.getRequiredEnergy());
+
         // BMI
         Assert.assertEquals(0.0F, Calories.getBmi(-1, 168));
         Assert.assertEquals(0.0F, Calories.getBmi(75, -1));
@@ -118,6 +132,7 @@ public class AthleteUnitTest {
         Assert.assertEquals(0.0F, Calories.getFfmi(0, 168, 12));
         Assert.assertEquals(0.0F, Calories.getFfmi(75, 0, 12));
         Assert.assertTrue(Calories.getFfmi(75, 168, 0) > 25);
+
     }
 
     @Test
@@ -183,5 +198,15 @@ public class AthleteUnitTest {
         fitness = new Body.Fitness(Body.INITIAL_FITNESS, 40.5F);
         fitness.impairStamina();
         Assert.assertEquals(Body.MIN_FITNESS, fitness.getStamina());
+    }
+
+    @Test
+    public void body_test() throws Exception {
+        
+    }
+
+    @Test
+    public void athlete_test() throws Exception {
+
     }
 }

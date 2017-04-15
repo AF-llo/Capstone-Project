@@ -23,11 +23,9 @@ public class Athlete {
 
     private Body body;
 
-    private @Gender int gender;
-
     private Athlete () {}
 
-    public static Athlete build(@Gender int gender, int experience, Body body) {
+    public static Athlete build(int experience, Body body) {
         if (body == null) {
             throw new IllegalArgumentException("Your body was null. An athlets needs a body to eat and do sport");
         }
@@ -35,7 +33,6 @@ public class Athlete {
         if (athlete.isInitialized) {
             throw new IllegalStateException("Your athlete has already been build. Please call Athlete.build(...) only once");
         }
-        athlete.gender = gender;
         athlete.level = Level.create(experience);
         athlete.body = body;
         athlete.isInitialized = true;
@@ -66,16 +63,12 @@ public class Athlete {
         return body.copy();
     }
 
-    public @Gender int getGender() {
-        return gender;
-    }
-
     public void gainExperience(int experience) {
         level.gainExperience(experience);
     }
 
-    public void eat(Food food) {
-        body.digest(food);
+    public void eat(Nutrition nutrition) {
+        body.digest(nutrition);
     }
 
     public void doActivity(Activity activity) {

@@ -14,8 +14,20 @@ public class BodyType {
     @Retention(RetentionPolicy.SOURCE)
     @StringDef ({EKTOMORPH, MESOMORPH, ENDOMORPH})
     public @interface Name {}
+
+    /**
+     * Slim body that has no problems with kfa. But has problems to build up muscles.
+     */
     public static final String EKTOMORPH = "EKTOMORPH";
+
+    /**
+     * The natural athletic type with good relation to muscles and kfa.
+     */
     public static final String MESOMORPH = "MESOMORPH";
+
+    /**
+     * Can easilly build up muscles but has to take care of nutrition.
+     */
     public static final String ENDOMORPH = "ENDOMORPH";
 
     // TODO: 13.04.2017 adjust values
@@ -51,7 +63,7 @@ public class BodyType {
         }
     }
 
-    public String getName() {
+    public @Name String getName() {
         return name;
     }
 

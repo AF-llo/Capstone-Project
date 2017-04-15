@@ -39,9 +39,27 @@ public class Body {
 
     private Fitness fitness;
 
+    private Calories calories;
+
+    private Properties properties;
+
     private Body() {}
 
-    public static Body warmUp(@BodyType.Name String type, Stats stats, Fitness fitness) {
+    public static Body warmUpAverageMale(@BodyType.Name String type) {
+        Properties properties = new Properties(Athlete.MALE, DEFAULT_SIZE_MALE, DEFAULT_AGE);
+        Stats stats = new Stats(MAX_ENERGY, INITIAL_WEIGHT_MALE);
+        Fitness fitness = new Fitness(INITIAL_FITNESS, INITIAL_FITNESS);
+        return warmUp(type, properties, stats, fitness);
+    }
+
+    public static Body warmUpAverageFemale(@BodyType.Name String type) {
+        Properties properties = new Properties(Athlete.FEMALE, DEFAULT_SIZE_FEMALE, DEFAULT_AGE);
+        Stats stats = new Stats(MAX_ENERGY, INITIAL_WEIGHT_FEMALE);
+        Fitness fitness = new Fitness(INITIAL_FITNESS, INITIAL_FITNESS);
+        return warmUp(type, properties, stats, fitness);
+    }
+
+    public static Body warmUp(@BodyType.Name String type, Properties properties, Stats stats, Fitness fitness) {
         if (type == null) {
             throw new IllegalArgumentException("Every body should have a valid type!");
         }
@@ -51,10 +69,16 @@ public class Body {
         if (fitness == null) {
             throw new IllegalArgumentException("Without fitness you cant do anything!");
         }
+        if (properties == null) {
+            throw new IllegalArgumentException("When you have been born, you got some properties!");
+        }
+        BodyType bodyType = BodyType.getType(type);
         Body body = new Body();
-        body.type = BodyType.getType(type);
+        body.type = bodyType;
         body.stats = stats;
         body.fitness = fitness;
+        body.calories = Calories.createWithDefaultProportion(properties, stats);
+        body.properties = properties;
         return body;
     }
 
@@ -62,8 +86,10 @@ public class Body {
         // TODO: 13.04.2017  
     }
 
-    public void digest(Food food) {
-        // TODO: 13.04.2017
+    public void digest(Nutrition nutrition) {
+        if (nutrition != null) {
+            calories.consume(nutrition);
+        }
     }
 
     public Body copy() {
@@ -71,7 +97,56 @@ public class Body {
         body.stats = stats;
         body.fitness = fitness;
         body.type = type;
+        body.properties = properties;
         return body;
+    }
+
+    public Stats getStats() {
+        return stats;
+    }
+
+    public Fitness getFitness() {
+        return fitness;
+    }
+
+    public Calories getCalories() {
+        return calories;
+    }
+
+    public Properties getProperties() {
+        return properties;
+    }
+
+    public static class Properties {
+        private final @Athlete.Gender int gender;
+
+        private final float size;
+
+        private final int age;
+
+        public Properties(int gender, float size, int age) {
+            this.gender = gender;
+            if (size < 0 ) {
+                size = gender == Athlete.MALE ? DEFAULT_SIZE_MALE : DEFAULT_SIZE_FEMALE;
+            }
+            this.size = size;
+            if (age < 0) {
+                age = DEFAULT_AGE;
+            }
+            this.age = age;
+        }
+
+        public @Athlete.Gender int getGender() {
+            return gender;
+        }
+
+        public float getSize() {
+            return size;
+        }
+
+        public int getAge() {
+            return age;
+        }
     }
 
     public static class Stats {

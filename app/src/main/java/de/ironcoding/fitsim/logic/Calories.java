@@ -6,6 +6,8 @@ package de.ironcoding.fitsim.logic;
 
 public class Calories {
 
+    private static final float HOURS_PER_DAY = 24.0F;
+
     public static final float KCAL_PER_G_PROTEINE = 4.1F;
     public static final float KCAL_PER_G_CARBS = 4.1F;
     public static final float KCAL_PER_G_FAT = 9.3F;
@@ -38,10 +40,20 @@ public class Calories {
 
     private float fatProportion;
 
+    private float consumedProteine = 0;
+
+    private float consumedCarbs = 0;
+
+    private float consumedFat = 0;
+
+    private float requiredEnergy;
+
+    private float metabolicRate;
+
     private Calories() {}
 
-    public static Calories createDefault() {
-        return createWithProportion(DEFAULT_PROTEINE_PROPORTION, DEFAULT_CARBS_PROPORTION, DEFAULT_FAT_PROPORTION);
+    static Calories createWithDefaultProportion(Body.Properties properties, Body.Stats stats) {
+        return createWithProportion(properties, stats, DEFAULT_PROTEINE_PROPORTION, DEFAULT_CARBS_PROPORTION, DEFAULT_FAT_PROPORTION);
     }
 
     /**
@@ -58,15 +70,58 @@ public class Calories {
      * @throws
      *                  IllegalArgumentException when sum of passed macros is not equal to one
      */
-    public static Calories createWithProportion(float proteine, float carbs, float fat) {
+    private static Calories createWithProportion(Body.Properties properties, Body.Stats stats, float proteine, float carbs, float fat) {
         if (!validPropotion(proteine, carbs, fat)) {
-            throw new IllegalArgumentException("Invalid proptions for macros. More than 100% is not possible");
+            throw new IllegalArgumentException("Invalid proptions for macros. More than 100% is not possible.");
         }
         Calories calories = new Calories();
         calories.proteineProportion = proteine;
         calories.carbsProportion = carbs;
         calories.fatProportion = fat;
+        calories.requiredEnergy = Calories.metabolicRatePerDay(properties.getGender(), stats.getWeight(), properties.getSize(), properties.getAge());
+        calories.metabolicRate = calories.requiredEnergy;
         return calories;
+    }
+
+    public void consume(Nutrition nutrition) {
+        if (nutrition != null) {
+            consumedProteine += nutrition.getProteine();
+            consumedCarbs += nutrition.getCarbs();
+            consumedFat += nutrition.getFat();
+        }
+    }
+
+    public void increaseRequiredEnergy(float pal, float hours) {
+        if (pal < 0) {
+            pal = 0;
+        }
+        if (hours < 0) {
+            hours = 0;
+        }
+        if (hours > HOURS_PER_DAY) {
+            hours = HOURS_PER_DAY;
+        }
+        requiredEnergy += energyMetabolismForPal(metabolicRate, pal, hours);
+    }
+
+    public float getConsumedProteine() {
+        return consumedProteine;
+    }
+
+    public float getConsumedCarbs() {
+        return consumedCarbs;
+    }
+
+    public float getConsumedFat() {
+        return consumedFat;
+    }
+
+    public float getConsumedEnergy() {
+        return KCAL_PER_G_PROTEINE * consumedProteine + KCAL_PER_G_CARBS * consumedCarbs + KCAL_PER_G_FAT * consumedFat;
+    }
+
+    public float getRequiredEnergy() {
+        return requiredEnergy;
     }
 
     public float proportionalProteineKalories(float totalCalories) {
@@ -223,11 +278,11 @@ public class Calories {
         if (hours < 0) {
             hours = 0;
         }
-        float hoursPerDay = 24.0F;
-        if (hours > hoursPerDay) {
-            hours = hoursPerDay;
+
+        if (hours > HOURS_PER_DAY) {
+            hours = HOURS_PER_DAY;
         }
-        return metabolicRate * pal * hours / hoursPerDay;
+        return metabolicRate * pal * hours / HOURS_PER_DAY;
     }
 
 }
