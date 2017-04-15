@@ -25,6 +25,10 @@ public class Athlete {
 
     private Athlete () {}
 
+    public static Athlete buildNew(Body body) {
+        return build(0, body);
+    }
+
     public static Athlete build(int experience, Body body) {
         if (body == null) {
             throw new IllegalArgumentException("Your body was null. An athlets needs a body to eat and do sport");

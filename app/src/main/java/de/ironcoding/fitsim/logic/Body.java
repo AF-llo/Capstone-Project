@@ -77,7 +77,7 @@ public class Body {
         body.type = bodyType;
         body.stats = stats;
         body.fitness = fitness;
-        body.calories = Calories.createWithDefaultProportion(properties, stats);
+        body.calories = Calories.createWithDefaultProportion(body.type , properties, stats);
         body.properties = properties;
         return body;
     }

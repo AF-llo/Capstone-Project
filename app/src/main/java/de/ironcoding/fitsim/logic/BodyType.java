@@ -31,13 +31,13 @@ public class BodyType {
     public static final String ENDOMORPH = "ENDOMORPH";
 
     // TODO: 13.04.2017 adjust values
-    private static final float METABOLISM_EKTOMORPH = 0.7F;
+    private static final float METABOLISM_EKTOMORPH = 1.25F;
     private static final float BUILDUP_EKTOMORPH = 0.8F;
 
-    private static final float METABOLISM_MESOMORPH = 0.85F;
+    private static final float METABOLISM_MESOMORPH = 1.15F;
     private static final float BUILDUP_MESOMORPH = 1.2F;
 
-    private static final float METABOLISM_ENDOMORPH = 1.0F;
+    private static final float METABOLISM_ENDOMORPH = 0.95F;
     private static final float BUILDUP_ENDOMORPH = 1.1F;
 
     private final @Name String name;

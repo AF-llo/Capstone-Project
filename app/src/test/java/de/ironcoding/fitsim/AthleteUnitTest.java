@@ -9,6 +9,7 @@ import de.ironcoding.fitsim.logic.Body;
 import de.ironcoding.fitsim.logic.BodyType;
 import de.ironcoding.fitsim.logic.Calories;
 import de.ironcoding.fitsim.logic.Level;
+import de.ironcoding.fitsim.logic.Nutrition;
 import de.ironcoding.fitsim.logic.Skill;
 
 /**
@@ -122,7 +123,7 @@ public class AthleteUnitTest {
                 new Body.Fitness(Body.INITIAL_FITNESS, Body.INITIAL_FITNESS));
         Calories calories = body.getCalories();
         calories.increaseRequiredEnergy(1.4F, 8);
-        Assert.assertEquals(2517.3428F, calories.getRequiredEnergy());
+        Assert.assertEquals(2391.4756F, calories.getRequiredEnergy());
 
         // BMI
         Assert.assertEquals(0.0F, Calories.getBmi(-1, 168));
@@ -202,7 +203,8 @@ public class AthleteUnitTest {
 
     @Test
     public void body_test() throws Exception {
-        
+        Athlete athlete = Athlete.buildNew(Body.warmUpAverageMale(BodyType.ENDOMORPH));
+        athlete.eat(new Nutrition(10, 10, 5));
     }
 
     @Test

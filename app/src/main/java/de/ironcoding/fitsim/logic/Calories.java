@@ -52,8 +52,8 @@ public class Calories {
 
     private Calories() {}
 
-    static Calories createWithDefaultProportion(Body.Properties properties, Body.Stats stats) {
-        return createWithProportion(properties, stats, DEFAULT_PROTEINE_PROPORTION, DEFAULT_CARBS_PROPORTION, DEFAULT_FAT_PROPORTION);
+    static Calories createWithDefaultProportion(BodyType type, Body.Properties properties, Body.Stats stats) {
+        return createWithProportion(type, properties, stats, DEFAULT_PROTEINE_PROPORTION, DEFAULT_CARBS_PROPORTION, DEFAULT_FAT_PROPORTION);
     }
 
     /**
@@ -70,7 +70,7 @@ public class Calories {
      * @throws
      *                  IllegalArgumentException when sum of passed macros is not equal to one
      */
-    private static Calories createWithProportion(Body.Properties properties, Body.Stats stats, float proteine, float carbs, float fat) {
+    private static Calories createWithProportion(BodyType type, Body.Properties properties, Body.Stats stats, float proteine, float carbs, float fat) {
         if (!validPropotion(proteine, carbs, fat)) {
             throw new IllegalArgumentException("Invalid proptions for macros. More than 100% is not possible.");
         }
@@ -78,7 +78,7 @@ public class Calories {
         calories.proteineProportion = proteine;
         calories.carbsProportion = carbs;
         calories.fatProportion = fat;
-        calories.requiredEnergy = Calories.metabolicRatePerDay(properties.getGender(), stats.getWeight(), properties.getSize(), properties.getAge());
+        calories.requiredEnergy = type.getMetabolism() * Calories.metabolicRatePerDay(properties.getGender(), stats.getWeight(), properties.getSize(), properties.getAge());
         calories.metabolicRate = calories.requiredEnergy;
         return calories;
     }
