@@ -6,13 +6,26 @@ package de.ironcoding.fitsim.logic;
 
 public abstract class Activity {
 
+    private static final float BASE_ATTRACTION_FROM_EFFORT = 0.1F;
+
+    /**
+     * Default duration of an activity: 0.25h = 15min
+     */
+    public static final float DEFAULT_DURATION = 0.25F;
+
+    public static final float MAX_DURATION = 24.0F;
+
     private final float pal;
 
     private final int effort;
 
     private final int experience;
 
-    public Activity(float pal, int effort, int experience) {
+    private final String name;
+
+    private final float duration;
+
+    Activity(String name, float pal, int effort, int experience, float duration) {
         if (pal < 0) {
             pal = 0;
         }
@@ -22,9 +35,28 @@ public abstract class Activity {
         if (experience < 0) {
             experience = 0;
         }
+        if (name == null) {
+            name = "";
+        }
+        if (duration < 0) {
+            duration = 0;
+        }
+        if (duration > MAX_DURATION) {
+            duration = MAX_DURATION;
+        }
+        this.name = name;
         this.pal = pal;
         this.effort = effort;
         this.experience = experience;
+        this.duration = duration;
+    }
+
+    Activity(String name, float pal, int effort, int experience) {
+        this(name, pal, effort, experience, DEFAULT_DURATION);
+    }
+
+    public String getName() {
+        return name;
     }
 
     public float getPal() {
@@ -39,7 +71,15 @@ public abstract class Activity {
         return experience;
     }
 
-    public abstract void perform(Body.Stats stats, Body.Fitness fitness);
+    public float getDuration() {
+        return duration;
+    }
+
+    public int getAttraction(float buildUp) {
+        return (int) (buildUp * effort * BASE_ATTRACTION_FROM_EFFORT + 1);
+    }
+
+    public abstract void perform(Body.Fitness fitness, BodyType bodyType);
 
     public abstract boolean isToDemanding();
 }

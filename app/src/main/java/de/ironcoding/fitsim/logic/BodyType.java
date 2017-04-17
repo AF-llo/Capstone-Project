@@ -11,6 +11,8 @@ import java.lang.annotation.RetentionPolicy;
 
 public class BodyType {
 
+    private static final float BASE_SCALE = 1.0F;
+
     @Retention(RetentionPolicy.SOURCE)
     @StringDef ({EKTOMORPH, MESOMORPH, ENDOMORPH})
     public @interface Name {}
@@ -52,7 +54,7 @@ public class BodyType {
         this.buildUp = buildUp;
     }
 
-    public static BodyType getType(@Skill.Name String name) {
+    public static BodyType getType(@Name String name) {
         switch (name) {
             case EKTOMORPH:
                 return new BodyType(EKTOMORPH, METABOLISM_EKTOMORPH, BUILDUP_EKTOMORPH);
@@ -73,5 +75,10 @@ public class BodyType {
 
     public float getBuildUp() {
         return buildUp;
+    }
+
+    public float getEndurance() {
+        float deviation = Math.abs(BASE_SCALE - buildUp);
+        return buildUp < BASE_SCALE ? BASE_SCALE + deviation : BASE_SCALE - deviation;
     }
 }

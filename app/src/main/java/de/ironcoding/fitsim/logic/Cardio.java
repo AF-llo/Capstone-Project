@@ -5,17 +5,18 @@ package de.ironcoding.fitsim.logic;
  */
 
 public class Cardio extends Activity {
-    public Cardio(float pal, int effort, int experience) {
-        super(pal, effort, experience);
+    public Cardio(String name, float pal, int effort, int experience) {
+        super(name, pal, effort, experience);
     }
 
     @Override
-    public void perform(Body.Stats stats, Body.Fitness fitness) {
-        // TODO: 15.04.2017
+    public void perform(Body.Fitness fitness, BodyType bodyType) {
+        fitness.improveStamina(bodyType.getEndurance());
     }
 
     @Override
     public boolean isToDemanding() {
+        // cardio is always possible when enough energy is availables
         return false;
     }
 }

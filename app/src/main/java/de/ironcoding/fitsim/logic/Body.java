@@ -90,7 +90,8 @@ public class Body {
 
     void performActivity(Activity activity) {
         stats.consumeEnergy(activity.getEffort());
-        activity.perform(stats, fitness);
+        calories.increaseRequiredEnergy(activity.getPal(), activity.getDuration());
+        activity.perform(fitness, type);
     }
 
     void digest(Nutrition nutrition) {
@@ -222,19 +223,18 @@ public class Body {
             this.stamina = stamina;
         }
 
-        public void improveStrength() {
-            strength += calculateIprovement(strength);
+        public void improveStrength(float buildUp) {
+            strength += calculateIprovement(strength, buildUp);
         }
 
-        public void improveStamina() {
-            stamina += calculateIprovement(stamina);
+        public void improveStamina(float endurance) {
+            stamina += calculateIprovement(stamina, endurance);
         }
 
-        private float calculateIprovement(float current) {
+        private float calculateIprovement(float current, float metabolism) {
             // TODO: 14.04.2017  implement not linear
-            float baseImprovement = 2;
-            if (current <= MAX_FITNESS - baseImprovement) {
-                return baseImprovement;
+            if (current <= MAX_FITNESS - metabolism) {
+                return metabolism;
             } else {
                 return MAX_FITNESS - current;
             }

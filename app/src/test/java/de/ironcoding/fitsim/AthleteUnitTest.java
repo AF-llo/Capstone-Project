@@ -4,13 +4,18 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.ironcoding.fitsim.logic.Activity;
 import de.ironcoding.fitsim.logic.Athlete;
 import de.ironcoding.fitsim.logic.Body;
 import de.ironcoding.fitsim.logic.BodyType;
 import de.ironcoding.fitsim.logic.Calories;
+import de.ironcoding.fitsim.logic.Cardio;
 import de.ironcoding.fitsim.logic.Exercise;
 import de.ironcoding.fitsim.logic.Level;
+import de.ironcoding.fitsim.logic.Muscle;
 import de.ironcoding.fitsim.logic.Nutrition;
 import de.ironcoding.fitsim.logic.Skill;
 
@@ -171,16 +176,17 @@ public class AthleteUnitTest {
 
     @Test
     public void body_fitness_test() throws Exception {
+        BodyType bodyType = BodyType.getType(BodyType.ENDOMORPH);
         // strength
         Body.Fitness fitness = new Body.Fitness(Body.INITIAL_FITNESS, Body.INITIAL_FITNESS);
-        fitness.improveStrength();
+        fitness.improveStrength(bodyType.getBuildUp());
         Assert.assertEquals(62.0F, fitness.getStrength());
 
         fitness.impairStrength();
         Assert.assertEquals(61.0F, fitness.getStrength());
 
         fitness = new Body.Fitness(99.5F, Body.INITIAL_FITNESS);
-        fitness.improveStrength();
+        fitness.improveStrength(bodyType.getBuildUp());
         Assert.assertEquals(Body.MAX_FITNESS, fitness.getStrength());
 
         fitness = new Body.Fitness(40.5F, Body.INITIAL_FITNESS);
@@ -188,14 +194,14 @@ public class AthleteUnitTest {
         Assert.assertEquals(Body.MIN_FITNESS, fitness.getStrength());
         // stamina
 
-        fitness.improveStamina();
+        fitness.improveStamina(bodyType.getEndurance());
         Assert.assertEquals(62.0F, fitness.getStamina());
 
         fitness.impairStamina();
         Assert.assertEquals(61.0F, fitness.getStamina());
 
         fitness = new Body.Fitness(Body.INITIAL_FITNESS, 99.5F);
-        fitness.improveStamina();
+        fitness.improveStamina(bodyType.getEndurance());
         Assert.assertEquals(Body.MAX_FITNESS, fitness.getStamina());
 
         fitness = new Body.Fitness(Body.INITIAL_FITNESS, 40.5F);
@@ -204,21 +210,23 @@ public class AthleteUnitTest {
     }
 
     @Test
-    public void body_test() throws Exception {
-
+    public void athlete_test() throws Exception {
+        // TODO: 15.04.2017
+        int chestId = 1;
+        List<Muscle> muscles = new ArrayList<>();
+        muscles.add(Muscle.build(chestId, "Chest", 60));
+        Athlete athlete = Athlete.buildNew(Body.warmUpAverageMale(BodyType.ENDOMORPH), muscles);
+        Activity exercise = new Exercise("Excercise", 1.2F, 15, 50, chestId);
+        Activity cardio = new Cardio("Cardio", 1.5F, 5, 40);
+        for (int i = 0; i <= 4; i++) {
+            athlete.doActivity(exercise);
+            athlete.doActivity(cardio);
+        }
+        athlete.eat(new Nutrition(10, 10, 5));
     }
 
     @Test
-    public void athlete_test() throws Exception {
-        Athlete athlete = Athlete.buildNew(Body.warmUpAverageMale(BodyType.ENDOMORPH));
-        for (int i = 0; i <= 11; i++) {
-            Activity activity = new Exercise(1.2F, 10, 50);
-            if (athlete.isAbleToDo(activity)) {
-                athlete.doActivity(activity);
-            } else {
-                activity.getEffort();
-            }
-        }
-        athlete.eat(new Nutrition(10, 10, 5));
+    public void  muscle_test() throws Exception {
+        // TODO: 15.04.2017
     }
 }

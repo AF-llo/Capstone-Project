@@ -6,8 +6,6 @@ package de.ironcoding.fitsim.logic;
 
 public class Calories {
 
-    private static final float HOURS_PER_DAY = 24.0F;
-
     public static final float KCAL_PER_G_PROTEINE = 4.1F;
     public static final float KCAL_PER_G_CARBS = 4.1F;
     public static final float KCAL_PER_G_FAT = 9.3F;
@@ -105,8 +103,8 @@ public class Calories {
         if (hours < 0) {
             hours = 0;
         }
-        if (hours > HOURS_PER_DAY) {
-            hours = HOURS_PER_DAY;
+        if (hours > Activity.MAX_DURATION) {
+            hours = Activity.MAX_DURATION;
         }
         requiredEnergy += energyMetabolismForPal(metabolicRate, pal, hours);
     }
@@ -286,10 +284,10 @@ public class Calories {
             hours = 0;
         }
 
-        if (hours > HOURS_PER_DAY) {
-            hours = HOURS_PER_DAY;
+        if (hours > Activity.MAX_DURATION) {
+            hours = Activity.MAX_DURATION;
         }
-        return metabolicRate * pal * hours / HOURS_PER_DAY;
+        return metabolicRate * pal * hours / Activity.MAX_DURATION;
     }
 
 }

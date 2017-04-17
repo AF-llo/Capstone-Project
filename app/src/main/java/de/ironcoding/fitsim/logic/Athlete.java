@@ -4,6 +4,7 @@ import android.support.annotation.IntDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.List;
 
 /**
  * Created by larsl on 12.04.2017.
@@ -25,11 +26,11 @@ public class Athlete {
 
     private Athlete () {}
 
-    public static Athlete buildNew(Body body) {
-        return build(0, body);
+    public static Athlete buildNew(Body body, List<Muscle> muscles) {
+        return build(0, body, muscles);
     }
 
-    public static Athlete build(int experience, Body body) {
+    public static Athlete build(int experience, Body body, List<Muscle> muscles) {
         if (body == null) {
             throw new IllegalArgumentException("Your body was null. An athlets needs a body to eat and do sport");
         }
@@ -40,6 +41,7 @@ public class Athlete {
         athlete.level = Level.create(experience);
         athlete.body = body;
         athlete.isInitialized = true;
+        Muscles.buildUpMuscles(muscles);
         return athlete;
     }
 

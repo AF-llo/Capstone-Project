@@ -5,17 +5,22 @@ package de.ironcoding.fitsim.logic;
  */
 
 public class Exercise extends Activity {
-    public Exercise(float pal, int effort, int experience) {
-        super(pal, effort, experience);
+
+    private final int strainedMuscle;
+
+    public Exercise(String name, float pal, int effort, int experience, int strainedMuscle) {
+        super(name, pal, effort, experience);
+        this.strainedMuscle = strainedMuscle;
     }
 
     @Override
-    public void perform(Body.Stats stats, Body.Fitness fitness) {
-        // TODO: 15.04.2017
+    public void perform(Body.Fitness fitness, BodyType bodyType) {
+        fitness.improveStrength(bodyType.getBuildUp());
+        Muscles.get().strain(strainedMuscle, getAttraction(bodyType.getBuildUp()));
     }
 
     @Override
     public boolean isToDemanding() {
-        return false;
+        return !Muscles.get().isDurable(strainedMuscle);
     }
 }
