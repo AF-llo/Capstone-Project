@@ -1,7 +1,5 @@
 package de.ironcoding.fitsim.logic;
 
-import de.ironcoding.fitsim.logic.nutrition.Nutrition;
-
 /**
  * Created by larsl on 12.04.2017.
  */

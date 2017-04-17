@@ -6,8 +6,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
-import de.ironcoding.fitsim.logic.nutrition.Nutrition;
-
 /**
  * Created by larsl on 12.04.2017.
  */

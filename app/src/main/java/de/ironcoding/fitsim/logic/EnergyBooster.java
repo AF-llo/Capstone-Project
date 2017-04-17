@@ -1,6 +1,4 @@
-package de.ironcoding.fitsim.logic.nutrition;
-
-import de.ironcoding.fitsim.logic.Body;
+package de.ironcoding.fitsim.logic;
 
 /**
  * Created by larsl on 17.04.2017.

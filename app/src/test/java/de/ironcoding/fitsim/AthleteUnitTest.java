@@ -13,7 +13,7 @@ import de.ironcoding.fitsim.logic.Calories;
 import de.ironcoding.fitsim.logic.Level;
 import de.ironcoding.fitsim.logic.Muscle;
 import de.ironcoding.fitsim.logic.Skill;
-import de.ironcoding.fitsim.logic.nutrition.Nutrition;
+import de.ironcoding.fitsim.logic.Nutrition;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -210,10 +210,5 @@ public class AthleteUnitTest {
             }
             athlete.refresh();
         }
-    }
-
-    @Test
-    public void  muscle_test() throws Exception {
-        // TODO: 15.04.2017
     }
 }
