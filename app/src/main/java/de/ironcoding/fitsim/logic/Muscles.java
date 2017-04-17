@@ -2,6 +2,7 @@ package de.ironcoding.fitsim.logic;
 
 import android.util.SparseArray;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -50,6 +51,18 @@ public class Muscles {
 
     private static final class InstanceHolder {
         static final Muscles INSTANCE = new Muscles();
+    }
+
+    public List<Muscle> getAllCopied() {
+        List<Muscle> allMuscles = new ArrayList<>();
+        for (int i = 0; i < availableMuscles.size(); i++) {
+            int key = availableMuscles.keyAt(i);
+            Muscle muscle = availableMuscles.get(key);
+            if (muscle != null) {
+                allMuscles.add(muscle.copy());
+            }
+        }
+        return allMuscles;
     }
 
 }

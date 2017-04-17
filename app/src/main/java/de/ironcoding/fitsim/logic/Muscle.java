@@ -32,7 +32,7 @@ public class Muscle {
 
     private @Muscle.Condition int condition;
 
-    private Muscle(int id, String name, int volume, int limit, @Condition int condition) {
+    Muscle(int id, String name, int volume, int limit, @Condition int condition) {
         this.id = id;
         this.name = name;
         this.volume = volume;
@@ -106,5 +106,9 @@ public class Muscle {
 
     public @Condition int getCondition() {
         return condition;
+    }
+
+    Muscle copy() {
+        return new Muscle(id, name, volume, limit, condition);
     }
 }

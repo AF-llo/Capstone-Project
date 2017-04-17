@@ -43,8 +43,6 @@ public class Body {
 
     private Properties properties;
 
-    // TODO: 15.04.2017 create list of muscles
-
     private Body() {}
 
     public static Body warmUpAverageMale(@BodyType.Name String type) {
@@ -100,27 +98,28 @@ public class Body {
 
     public Body copy() {
         Body body = new Body();
-        body.stats = stats;
-        body.fitness = fitness;
-        body.type = type;
-        body.properties = properties;
+        body.stats = getStats();
+        body.fitness = getFitness();
+        body.type = BodyType.getType(type.getName());
+        body.properties = getProperties();
+        body.calories = getCalories();
         return body;
     }
 
     public Stats getStats() {
-        return stats;
+        return new Stats(stats.energy, stats.weight);
     }
 
     public Fitness getFitness() {
-        return fitness;
+        return new Fitness(fitness.strength, fitness.stamina);
     }
 
     public Calories getCalories() {
-        return calories;
+        return calories.copy();
     }
 
     public Properties getProperties() {
-        return properties;
+        return new Properties(properties.gender, properties.size, properties.age);
     }
 
     public static class Properties {

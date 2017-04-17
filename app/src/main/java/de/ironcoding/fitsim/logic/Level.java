@@ -83,7 +83,7 @@ public class Level {
         level.maxExperience = maxExperience;
         level.reachedExperience = reachedExperience;
         level.totalExperience = totalExperience;
-        level.skill = skill.copy();
+        level.skill = getSkill();
         return level;
     }
 }

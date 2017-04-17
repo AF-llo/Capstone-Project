@@ -48,7 +48,7 @@ public class Calories {
 
     private float metabolicRate;
 
-    private Calories() {}
+    Calories() {}
 
     static Calories createWithDefaultProportion(BodyType type, Body.Properties properties, Body.Stats stats) {
         return createWithProportion(type, properties, stats, DEFAULT_PROTEINE_PROPORTION, DEFAULT_CARBS_PROPORTION, DEFAULT_FAT_PROPORTION);
@@ -68,7 +68,7 @@ public class Calories {
      * @throws
      *                  IllegalArgumentException when sum of passed macros is not equal to one
      */
-    private static Calories createWithProportion(BodyType type, Body.Properties properties, Body.Stats stats, float proteine, float carbs, float fat) {
+    static Calories createWithProportion(BodyType type, Body.Properties properties, Body.Stats stats, float proteine, float carbs, float fat) {
         if (!validPropotion(proteine, carbs, fat)) {
             throw new IllegalArgumentException("Invalid proptions for macros. More than 100% is not possible.");
         }
@@ -160,6 +160,19 @@ public class Calories {
 
     public float proportionalFatGram(float totalCalories) {
         return proportionalFatKalories(totalCalories) / KCAL_PER_G_FAT;
+    }
+
+    Calories copy() {
+        Calories calories = new Calories();
+        calories.proteineProportion = proteineProportion;
+        calories.carbsProportion = carbsProportion;
+        calories.fatProportion = fatProportion;
+        calories.requiredEnergy = requiredEnergy;
+        calories.metabolicRate = metabolicRate;
+        calories.consumedProteine = consumedProteine;
+        calories.consumedCarbs = consumedCarbs;
+        calories.consumedFat = consumedFat;
+        return calories;
     }
 
     public static boolean validPropotion(float proteine, float carbs, float fat) {
