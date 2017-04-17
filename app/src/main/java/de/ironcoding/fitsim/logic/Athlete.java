@@ -68,7 +68,11 @@ public class Athlete {
     public Body getBody() {
         return body.copy();
     }
-    
+
+    public List<Muscle> getMuscles() {
+        return Muscles.get().getAll();
+    }
+
     // BEGIN all actions for athlete
 
     public void eat(Nutrition nutrition) {
@@ -76,10 +80,6 @@ public class Athlete {
             return;
         }
         body.digest(nutrition);
-    }
-
-    public List<Muscle> getMuscles() {
-        return Muscles.get().getAll();
     }
 
     public void doActivity(Activity activity) {
@@ -90,7 +90,7 @@ public class Athlete {
         body.performActivity(activity);
     }
 
-    public void refresh() {
+    public void refreshBody() {
         body.refresh();
     }
 

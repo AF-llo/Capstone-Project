@@ -49,17 +49,21 @@ public class Body {
         Properties properties = new Properties(Athlete.MALE, DEFAULT_SIZE_MALE, DEFAULT_AGE);
         Stats stats = new Stats(MAX_ENERGY, INITIAL_WEIGHT_MALE);
         Fitness fitness = new Fitness(INITIAL_FITNESS, INITIAL_FITNESS);
-        return warmUp(type, properties, stats, fitness);
+        BodyType bodyType = BodyType.getType(type);
+        Calories calories = Calories.createDefault(bodyType, properties, stats);
+        return warmUp(bodyType, properties, stats, fitness, calories);
     }
 
     public static Body warmUpAverageFemale(@BodyType.Name String type) {
         Properties properties = new Properties(Athlete.FEMALE, DEFAULT_SIZE_FEMALE, DEFAULT_AGE);
         Stats stats = new Stats(MAX_ENERGY, INITIAL_WEIGHT_FEMALE);
         Fitness fitness = new Fitness(INITIAL_FITNESS, INITIAL_FITNESS);
-        return warmUp(type, properties, stats, fitness);
+        BodyType bodyType = BodyType.getType(type);
+        Calories calories = Calories.createDefault(bodyType, properties, stats);
+        return warmUp(bodyType, properties, stats, fitness, calories);
     }
 
-    public static Body warmUp(@BodyType.Name String type, Properties properties, Stats stats, Fitness fitness) {
+    public static Body warmUp(BodyType type, Properties properties, Stats stats, Fitness fitness, Calories calories) {
         if (type == null) {
             throw new IllegalArgumentException("Every body should have a valid type!");
         }
@@ -72,12 +76,14 @@ public class Body {
         if (properties == null) {
             throw new IllegalArgumentException("When you have been born, you got some properties!");
         }
-        BodyType bodyType = BodyType.getType(type);
+        if (calories == null) {
+            throw new IllegalArgumentException("Without calories you will not be able to eat and do activities!");
+        }
         Body body = new Body();
-        body.type = bodyType;
+        body.type = type;
         body.stats = stats;
         body.fitness = fitness;
-        body.calories = Calories.createWithDefaultProportion(body.type , properties, stats);
+        body.calories = calories;
         body.properties = properties;
         return body;
     }

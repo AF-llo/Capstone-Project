@@ -12,10 +12,6 @@ public class Calories {
     public static final float KCAL_PER_G_CARBS = 4.1F;
     public static final float KCAL_PER_G_FAT = 9.3F;
 
-    private static final float DEFAULT_PROTEINE_PROPORTION = 0.4F;
-    private static final float DEFAULT_CARBS_PROPORTION = 0.4F;
-    private static final float DEFAULT_FAT_PROPORTION = 0.2F;
-
     public static final float MIN_KFA = 5.0F;
 
     private static final float FFMI_FACTOR_ONE = 6.3F;
@@ -34,17 +30,7 @@ public class Calories {
     private static final float AGE_FACTOR_MALE = 6.8F;
     private static final float AGE_FACTOR_FEMALE = 4.7F;
 
-    private float proteineProportion;
-
-    private float carbsProportion;
-
-    private float fatProportion;
-
-    private float consumedProteine = 0;
-
-    private float consumedCarbs = 0;
-
-    private float consumedFat = 0;
+    private Macros macros;
 
     private float requiredEnergy;
 
@@ -52,34 +38,32 @@ public class Calories {
 
     Calories() {}
 
-    static Calories createWithDefaultProportion(BodyType type, Body.Properties properties, Body.Stats stats) {
-        return createWithProportion(type, properties, stats, DEFAULT_PROTEINE_PROPORTION, DEFAULT_CARBS_PROPORTION, DEFAULT_FAT_PROPORTION);
+    static Calories createDefault(BodyType type, Body.Properties properties, Body.Stats stats) {
+        return createForMacros(type, properties, stats, Macros.getDefault());
     }
 
     /**
      * Creates calories with proportions for macros.
      *
-     * @param proteine
-     *                  Proportion of Proteine
-     * @param carbs
-     *                  Proportion of Carbs
-     * @param fat
-     *                  Proportion of Fat
+     * @param macros
+     *                          Macrorelations for proteine, carbs, fat
      * @return
      *                  Calories with passed proportions
      * @throws
      *                  IllegalArgumentException when sum of passed macros is not equal to one
      */
-    static Calories createWithProportion(BodyType type, Body.Properties properties, Body.Stats stats, float proteine, float carbs, float fat) {
-        if (!validPropotion(proteine, carbs, fat)) {
-            throw new IllegalArgumentException("Invalid proptions for macros. More than 100% is not possible.");
+    static Calories createForMacros(BodyType type, Body.Properties properties, Body.Stats stats, Macros macros) {
+        return create(type, properties, stats, macros, 0);
+    }
+
+    static Calories create(BodyType type, Body.Properties properties, Body.Stats stats, Macros macros, float requiredEnergy) {
+        if (macros == null) {
+            macros = Macros.getDefault();
         }
         Calories calories = new Calories();
-        calories.proteineProportion = proteine;
-        calories.carbsProportion = carbs;
-        calories.fatProportion = fat;
-        calories.requiredEnergy = type.getMetabolism() * Calories.metabolicRatePerDay(properties.getGender(), stats.getWeight(), properties.getSize(), properties.getAge());
-        calories.metabolicRate = calories.requiredEnergy;
+        calories.macros = macros;
+        calories.metabolicRate = type.getMetabolism() * Calories.metabolicRatePerDay(properties.getGender(), stats.getWeight(), properties.getSize(), properties.getAge());;
+        calories.requiredEnergy = requiredEnergy < calories.metabolicRate ? calories.metabolicRate : requiredEnergy;
         return calories;
     }
 
@@ -89,17 +73,13 @@ public class Calories {
     }
 
     void startNewConsumption() {
-        consumedProteine = 0;
-        consumedCarbs = 0;
-        consumedFat = 0;
         requiredEnergy = metabolicRate;
+        macros.resetConsumed();
     }
 
     void consume(Nutrition nutrition) {
         if (nutrition != null) {
-            consumedProteine += nutrition.getProteine();
-            consumedCarbs += nutrition.getCarbs();
-            consumedFat += nutrition.getFat();
+            macros.consumeMacros(nutrition.getProteine(), nutrition.getCarbs(), nutrition.getFat());
         }
     }
 
@@ -116,20 +96,8 @@ public class Calories {
         requiredEnergy += energyMetabolismForPal(metabolicRate, pal, hours);
     }
 
-    public float getConsumedProteine() {
-        return consumedProteine;
-    }
-
-    public float getConsumedCarbs() {
-        return consumedCarbs;
-    }
-
-    public float getConsumedFat() {
-        return consumedFat;
-    }
-
     public float getConsumedEnergy() {
-        return KCAL_PER_G_PROTEINE * consumedProteine + KCAL_PER_G_CARBS * consumedCarbs + KCAL_PER_G_FAT * consumedFat;
+        return KCAL_PER_G_PROTEINE * macros.getConsumedProteine() + KCAL_PER_G_CARBS * macros.getConsumedCarbs() + KCAL_PER_G_FAT * macros.getConsumedFat();
     }
 
     public float getRequiredEnergy() {
@@ -140,7 +108,7 @@ public class Calories {
         if (totalCalories < 0) {
             totalCalories = 0;
         }
-        return totalCalories * proteineProportion;
+        return totalCalories * macros.getProteineProportion();
     }
 
     public float proportionalProteineGram(float totalCalories) {
@@ -151,7 +119,7 @@ public class Calories {
         if (totalCalories < 0) {
             totalCalories = 0;
         }
-        return totalCalories * carbsProportion;
+        return totalCalories * macros.getCarbsProportion();
     }
 
     public float proportionalCarbsGram(float totalCalories) {
@@ -162,7 +130,7 @@ public class Calories {
         if (totalCalories < 0) {
             totalCalories = 0;
         }
-        return totalCalories * fatProportion;
+        return totalCalories * macros.getFatProportion();
     }
 
     public float proportionalFatGram(float totalCalories) {
@@ -171,19 +139,10 @@ public class Calories {
 
     Calories copy() {
         Calories calories = new Calories();
-        calories.proteineProportion = proteineProportion;
-        calories.carbsProportion = carbsProportion;
-        calories.fatProportion = fatProportion;
+        calories.macros = macros.copy();
         calories.requiredEnergy = requiredEnergy;
         calories.metabolicRate = metabolicRate;
-        calories.consumedProteine = consumedProteine;
-        calories.consumedCarbs = consumedCarbs;
-        calories.consumedFat = consumedFat;
         return calories;
-    }
-
-    public static boolean validPropotion(float proteine, float carbs, float fat) {
-        return proteine + carbs + fat == 1;
     }
 
     /**

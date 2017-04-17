@@ -208,7 +208,7 @@ public class AthleteUnitTest {
             for (int i = 0; i <= 4; i++) {
                 athlete.eat(new Nutrition(30, 60, 10));
             }
-            athlete.refresh();
+            athlete.refreshBody();
         }
     }
 }
