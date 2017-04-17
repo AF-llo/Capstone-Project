@@ -1,4 +1,6 @@
-package de.ironcoding.fitsim.logic;
+package de.ironcoding.fitsim.logic.nutrition;
+
+import de.ironcoding.fitsim.logic.Body;
 
 /**
  * Created by larsl on 12.04.2017.
@@ -29,5 +31,7 @@ public class Nutrition {
     public float getFat() {
         return fat;
     }
+
+    protected void consume(Body.Stats stats, Body.Fitness fitness) {}
 
 }

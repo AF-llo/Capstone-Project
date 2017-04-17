@@ -1,10 +1,14 @@
 package de.ironcoding.fitsim.logic;
 
+import de.ironcoding.fitsim.logic.nutrition.Nutrition;
+
 /**
  * Created by larsl on 14.04.2017.
  */
 
 public class Calories {
+
+    private static final float KG_PER_KCAL_PER_DAY = 0.001F  /  Activity.DAYS_PER_WEEK;
 
     public static final float KCAL_PER_G_PROTEINE = 4.1F;
     public static final float KCAL_PER_G_CARBS = 4.1F;
@@ -81,14 +85,19 @@ public class Calories {
         return calories;
     }
 
-    public void startNewConsumption() {
+    float weightForEnergyDifference() {
+        float energyDifference = getConsumedEnergy() - getRequiredEnergy();
+        return energyDifference * KG_PER_KCAL_PER_DAY;
+    }
+
+    void startNewConsumption() {
         consumedProteine = 0;
         consumedCarbs = 0;
         consumedFat = 0;
         requiredEnergy = metabolicRate;
     }
 
-    public void consume(Nutrition nutrition) {
+    void consume(Nutrition nutrition) {
         if (nutrition != null) {
             consumedProteine += nutrition.getProteine();
             consumedCarbs += nutrition.getCarbs();

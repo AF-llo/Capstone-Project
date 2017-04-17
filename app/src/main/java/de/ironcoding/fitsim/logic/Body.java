@@ -1,5 +1,7 @@
 package de.ironcoding.fitsim.logic;
 
+import de.ironcoding.fitsim.logic.nutrition.Nutrition;
+
 /**
  * Created by larsl on 12.04.2017.
  */
@@ -96,6 +98,11 @@ public class Body {
         calories.consume(nutrition);
     }
 
+    void refresh() {
+        stats.adjustWeight(calories.weightForEnergyDifference());
+        calories.startNewConsumption();
+    }
+
     public Body copy() {
         Body body = new Body();
         body.stats = getStats();
@@ -181,13 +188,11 @@ public class Body {
             energy = obtainedEnergy > MAX_ENERGY ? MAX_ENERGY : obtainedEnergy;
         }
 
-        public void loseWeight(float lostWeight) {
-            float leftWeight = weight - lostWeight;
-            weight = leftWeight < MIN_WEIGHT ? MIN_WEIGHT : leftWeight;
-        }
-
-        public void putOnWeight(float increasedWeight) {
-            weight += increasedWeight;
+        public void adjustWeight(float changedWeight) {
+            weight += changedWeight;
+            if (weight < MIN_WEIGHT) {
+                weight = MIN_WEIGHT;
+            }
         }
 
         public int getEnergy() {

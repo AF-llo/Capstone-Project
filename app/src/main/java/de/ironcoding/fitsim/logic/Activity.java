@@ -15,6 +15,8 @@ public abstract class Activity {
 
     public static final float MAX_DURATION = 24.0F;
 
+    public static final float DAYS_PER_WEEK = 7.0F;
+
     private final float pal;
 
     private final int effort;

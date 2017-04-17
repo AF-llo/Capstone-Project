@@ -6,6 +6,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
 
+import de.ironcoding.fitsim.logic.nutrition.Nutrition;
+
 /**
  * Created by larsl on 12.04.2017.
  */
@@ -68,6 +70,8 @@ public class Athlete {
     public Body getBody() {
         return body.copy();
     }
+    
+    // BEGIN all actions for athlete
 
     public void eat(Nutrition nutrition) {
         if (nutrition == null) {
@@ -77,11 +81,16 @@ public class Athlete {
     }
 
     public void doActivity(Activity activity) {
-        if (activity == null) {
+        if (!isAbleToDo(activity)) {
             return;
         }
         gainExperience(activity.getExperience());
         body.performActivity(activity);
+    }
+
+    // TODO: 17.04.2017 gainEnergy, loseEnergy, handle muscles inc/dec, handle refresh ->
+    public void refresh() {
+        body.refresh();
     }
 
     public boolean isAbleToDo(Activity activity) {
@@ -91,6 +100,8 @@ public class Athlete {
     private void gainExperience(int experience) {
         level.gainExperience(experience);
     }
+    
+    // END
 
     private static final class InstanceHolder {
         static final Athlete INSTANCE = new Athlete();

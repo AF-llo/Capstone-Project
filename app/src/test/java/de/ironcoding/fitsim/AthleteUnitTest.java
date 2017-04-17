@@ -4,20 +4,16 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
-import de.ironcoding.fitsim.logic.Activity;
 import de.ironcoding.fitsim.logic.Athlete;
 import de.ironcoding.fitsim.logic.Body;
 import de.ironcoding.fitsim.logic.BodyType;
 import de.ironcoding.fitsim.logic.Calories;
-import de.ironcoding.fitsim.logic.Cardio;
-import de.ironcoding.fitsim.logic.Exercise;
 import de.ironcoding.fitsim.logic.Level;
 import de.ironcoding.fitsim.logic.Muscle;
-import de.ironcoding.fitsim.logic.Nutrition;
 import de.ironcoding.fitsim.logic.Skill;
+import de.ironcoding.fitsim.logic.nutrition.Nutrition;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -161,17 +157,12 @@ public class AthleteUnitTest {
 
         // weight
 
-        stats.loseWeight(5);
+        stats.adjustWeight(5);
         Assert.assertEquals(70.0F, stats.getWeight());
 
-        stats.putOnWeight(5);
-        Assert.assertEquals(75.0F, stats.getWeight());
-
-        stats.loseWeight(40);
+        stats.adjustWeight(40);
         Assert.assertEquals(Body.MIN_WEIGHT, stats.getWeight());
 
-        stats.putOnWeight(100);
-        Assert.assertEquals(Body.MIN_WEIGHT + 100, stats.getWeight());
     }
 
     @Test
@@ -212,17 +203,13 @@ public class AthleteUnitTest {
     @Test
     public void athlete_test() throws Exception {
         // TODO: 15.04.2017
-        int chestId = 1;
-        List<Muscle> muscles = new ArrayList<>();
-        muscles.add(Muscle.build(chestId, "Chest", 60));
-        Athlete athlete = Athlete.buildNew(Body.warmUpAverageMale(BodyType.ENDOMORPH), muscles);
-        Activity exercise = new Exercise("Excercise", 1.2F, 15, 50, chestId);
-        Activity cardio = new Cardio("Cardio", 1.5F, 5, 40);
-        for (int i = 0; i <= 4; i++) {
-            athlete.doActivity(exercise);
-            athlete.doActivity(cardio);
+        Athlete athlete = Athlete.buildNew(Body.warmUpAverageMale(BodyType.ENDOMORPH), Collections.<Muscle>emptyList());
+        for (int j = 0; j < 7; j++) {
+            for (int i = 0; i <= 4; i++) {
+                athlete.eat(new Nutrition(30, 60, 10));
+            }
+            athlete.refresh();
         }
-        athlete.eat(new Nutrition(10, 10, 5));
     }
 
     @Test
