@@ -87,10 +87,13 @@ public class Athlete {
         gainExperience(activity.getExperience());
         body.performActivity(activity);
     }
-
-    // TODO: 17.04.2017 gainEnergy, loseEnergy, handle muscles inc/dec, handle refresh ->
+    
     public void refresh() {
         body.refresh();
+    }
+
+    public void relaxMuscles() {
+        Muscles.get().relaxAll();
     }
 
     public boolean isAbleToDo(Activity activity) {

@@ -99,7 +99,7 @@ public class Body {
     }
 
     void refresh() {
-        stats.adjustWeight(calories.weightForEnergyDifference());
+        stats.adjustStats(calories.weightForEnergyDifference());
         calories.startNewConsumption();
     }
 
@@ -188,7 +188,8 @@ public class Body {
             energy = obtainedEnergy > MAX_ENERGY ? MAX_ENERGY : obtainedEnergy;
         }
 
-        public void adjustWeight(float changedWeight) {
+        public void adjustStats(float changedWeight) {
+            energy = MAX_ENERGY;
             weight += changedWeight;
             if (weight < MIN_WEIGHT) {
                 weight = MIN_WEIGHT;

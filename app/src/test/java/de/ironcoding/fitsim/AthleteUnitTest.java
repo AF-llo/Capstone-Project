@@ -157,10 +157,10 @@ public class AthleteUnitTest {
 
         // weight
 
-        stats.adjustWeight(5);
+        stats.adjustStats(5);
         Assert.assertEquals(70.0F, stats.getWeight());
 
-        stats.adjustWeight(40);
+        stats.adjustStats(40);
         Assert.assertEquals(Body.MIN_WEIGHT, stats.getWeight());
 
     }

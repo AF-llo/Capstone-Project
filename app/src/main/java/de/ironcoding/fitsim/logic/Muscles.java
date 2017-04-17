@@ -37,16 +37,18 @@ public class Muscles {
         return availableMuscles != null && availableMuscles.get(muscleId) != null;
     }
 
-    public void strain(int musleId, int attraction) {
-        Muscle muscle = availableMuscles.get(musleId);
-        if (muscle != null) {
-            muscle.strain(attraction);
-        }
+    void strain(int musleId, int attraction) {
+        availableMuscles.get(musleId).strain(attraction);
     }
 
-    public boolean isDurable(int muscleId) {
-        Muscle muscle = availableMuscles.get(muscleId);
-        return muscle != null && muscle.isDurable();
+    boolean isDurable(int muscleId) {
+        return availableMuscles.get(muscleId).isDurable();
+    }
+
+    void relaxAll() {
+        for (int i = 0; i < availableMuscles.size(); i++) {
+            availableMuscles.get(availableMuscles.keyAt(i)).relax();
+        }
     }
 
     private static final class InstanceHolder {
@@ -56,11 +58,7 @@ public class Muscles {
     public List<Muscle> getAllCopied() {
         List<Muscle> allMuscles = new ArrayList<>();
         for (int i = 0; i < availableMuscles.size(); i++) {
-            int key = availableMuscles.keyAt(i);
-            Muscle muscle = availableMuscles.get(key);
-            if (muscle != null) {
-                allMuscles.add(muscle.copy());
-            }
+            allMuscles.add(availableMuscles.get(availableMuscles.keyAt(i)).copy());
         }
         return allMuscles;
     }
