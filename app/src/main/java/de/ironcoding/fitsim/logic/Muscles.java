@@ -55,7 +55,7 @@ public class Muscles {
         static final Muscles INSTANCE = new Muscles();
     }
 
-    public List<Muscle> getAllCopied() {
+    public List<Muscle> getAll() {
         List<Muscle> allMuscles = new ArrayList<>();
         for (int i = 0; i < availableMuscles.size(); i++) {
             allMuscles.add(availableMuscles.get(availableMuscles.keyAt(i)).copy());

@@ -80,6 +80,10 @@ public class Athlete {
         body.digest(nutrition);
     }
 
+    public List<Muscle> getMuscles() {
+        return Muscles.get().getAll();
+    }
+
     public void doActivity(Activity activity) {
         if (!isAbleToDo(activity)) {
             return;
@@ -87,7 +91,7 @@ public class Athlete {
         gainExperience(activity.getExperience());
         body.performActivity(activity);
     }
-    
+
     public void refresh() {
         body.refresh();
     }
