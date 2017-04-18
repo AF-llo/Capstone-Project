@@ -5,6 +5,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import java.util.Collections;
+import java.util.List;
 
 import de.ironcoding.fitsim.logic.Athlete;
 import de.ironcoding.fitsim.logic.Body;
@@ -12,8 +13,13 @@ import de.ironcoding.fitsim.logic.BodyType;
 import de.ironcoding.fitsim.logic.Calories;
 import de.ironcoding.fitsim.logic.Level;
 import de.ironcoding.fitsim.logic.Muscle;
-import de.ironcoding.fitsim.logic.Skill;
 import de.ironcoding.fitsim.logic.Nutrition;
+import de.ironcoding.fitsim.logic.Skill;
+import de.ironcoding.fitsim.repository.IRepository;
+import de.ironcoding.fitsim.repository.LevelListRepository;
+import de.ironcoding.fitsim.repository.LevelSpecification;
+import de.ironcoding.fitsim.repository.mock.MusclesMockDao;
+import de.ironcoding.fitsim.repository.mock.NutritionMockDao;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -119,11 +125,7 @@ public class AthleteUnitTest {
 
         // increase energy
 
-        Body body = Body.warmUp(
-                BodyType.ENDOMORPH,
-                new Body.Properties(Athlete.MALE, 168, 32),
-                new Body.Stats(Body.MAX_ENERGY, 75),
-                new Body.Fitness(Body.INITIAL_FITNESS, Body.INITIAL_FITNESS));
+        Body body = Body.warmUpAverageMale(BodyType.ENDOMORPH);
         Calories calories = body.getCalories();
         calories.increaseRequiredEnergy(1.4F, 8);
         Assert.assertEquals(2391.4756F, calories.getRequiredEnergy());
@@ -206,9 +208,25 @@ public class AthleteUnitTest {
         Athlete athlete = Athlete.buildNew(Body.warmUpAverageMale(BodyType.ENDOMORPH), Collections.<Muscle>emptyList());
         for (int j = 0; j < 7; j++) {
             for (int i = 0; i <= 4; i++) {
-                athlete.eat(new Nutrition(30, 60, 10));
+                athlete.eat(new Nutrition("Food", 30, 60, 10, 1));
             }
             athlete.refreshBody();
         }
+    }
+
+    @Test
+    public void repository_test() throws Exception {
+        Level level = Level.create(0);
+        IRepository<List<Muscle>> muscleRepository = new LevelListRepository<>(new MusclesMockDao());
+        IRepository<List<Nutrition>> nutritionRepository = new LevelListRepository<>(new NutritionMockDao());
+        List<Muscle> muscles = muscleRepository.load(new LevelSpecification(level));
+        Assert.assertEquals(4, muscles.size());
+        List<Nutrition> nutritions = nutritionRepository.load(new LevelSpecification(level));
+        Assert.assertEquals(4, nutritions.size());
+        level.gainExperience(5000);
+        muscles = muscleRepository.load(new LevelSpecification(level));
+        Assert.assertEquals(5, muscles.size());
+        nutritions = nutritionRepository.load(new LevelSpecification(level));
+        Assert.assertEquals(5, nutritions.size());
     }
 }

@@ -4,7 +4,9 @@ package de.ironcoding.fitsim.logic;
  * Created by larsl on 12.04.2017.
  */
 
-public class Nutrition {
+public class Nutrition extends BaseLevelItem {
+
+    private final String name;
 
     private final float proteine;
 
@@ -12,10 +14,19 @@ public class Nutrition {
 
     private final float fat;
 
-    public Nutrition(float proteine, float carbs, float fat) {
+    public Nutrition(String name, float proteine, float carbs, float fat, int minLevel) {
+        super(minLevel);
+        if (name == null) {
+            name = "";
+        }
+        this.name = name;
         this.proteine = proteine;
         this.carbs = carbs;
         this.fat = fat;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public float getProteine() {

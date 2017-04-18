@@ -8,8 +8,8 @@ public class EnergyBooster extends Nutrition {
 
     private final int energy;
 
-    public EnergyBooster(int energy) {
-        super(0, 0, 0);
+    public EnergyBooster(String name, int energy, int minLevel) {
+        super(name, 0, 0, 0, minLevel);
         if (energy < 0) {
             energy = 0;
         }
