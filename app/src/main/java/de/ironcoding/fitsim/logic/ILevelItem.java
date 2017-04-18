@@ -1,4 +1,4 @@
-package de.ironcoding.fitsim.repository;
+package de.ironcoding.fitsim.logic;
 
 /**
  * Created by larsl on 18.04.2017.

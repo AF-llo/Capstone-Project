@@ -3,6 +3,8 @@ package de.ironcoding.fitsim.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.ironcoding.fitsim.logic.ILevelItem;
+
 /**
  * Created by larsl on 18.04.2017.
  */

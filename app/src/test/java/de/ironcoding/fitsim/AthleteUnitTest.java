@@ -216,16 +216,22 @@ public class AthleteUnitTest {
 
     @Test
     public void repository_test() throws Exception {
-        Level level = Level.create(0);
         IRepository<List<Muscle>> muscleRepository = new LevelListRepository<>(new MusclesMockDao());
         IRepository<List<Nutrition>> nutritionRepository = new LevelListRepository<>(new NutritionMockDao());
+
+        Level level = Level.create(0);
+
         List<Muscle> muscles = muscleRepository.load(new LevelSpecification(level));
         Assert.assertEquals(4, muscles.size());
+
         List<Nutrition> nutritions = nutritionRepository.load(new LevelSpecification(level));
         Assert.assertEquals(4, nutritions.size());
+
         level.gainExperience(5000);
+
         muscles = muscleRepository.load(new LevelSpecification(level));
         Assert.assertEquals(5, muscles.size());
+
         nutritions = nutritionRepository.load(new LevelSpecification(level));
         Assert.assertEquals(5, nutritions.size());
     }

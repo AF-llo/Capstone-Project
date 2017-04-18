@@ -1,5 +1,6 @@
 package de.ironcoding.fitsim.repository;
 
+import de.ironcoding.fitsim.logic.ILevelItem;
 import de.ironcoding.fitsim.logic.Level;
 
 /**
