@@ -21,6 +21,7 @@ public class AthleteRepository implements IAthleteRepository {
             throw new IllegalArgumentException("IAthleteDao may not be null!");
         }
         AthleteRepository athleteRepository = InstanceHolder.INSTANCE;
+        athleteRepository.athleteDao = athleteDao;
         athleteRepository.isInitialized = true;
     }
 
@@ -40,14 +41,14 @@ public class AthleteRepository implements IAthleteRepository {
             }
             athlete = athleteDao.load();
         }
-        return athlete.copy();
+        return athlete == null ? null : athlete.copy();
     }
 
     public void updateAthlete(Athlete athlete) {
         if (athlete == null) {
             return;
         }
-        this.athlete = athlete;
+        this.athlete = athlete.copy();
         if (athleteDao != null ) {
             athleteDao.storeAthlete(athlete);
         }

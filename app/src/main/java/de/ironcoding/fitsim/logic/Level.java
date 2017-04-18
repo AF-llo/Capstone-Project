@@ -78,7 +78,7 @@ public class Level {
         return skill.copy();
     }
 
-    protected Level copy() {
+    public Level copy() {
         Level level = new Level();
         level.maxExperience = maxExperience;
         level.reachedExperience = reachedExperience;

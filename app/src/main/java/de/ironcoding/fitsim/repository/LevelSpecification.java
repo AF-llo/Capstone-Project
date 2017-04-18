@@ -9,10 +9,14 @@ import de.ironcoding.fitsim.logic.Level;
 
 public class LevelSpecification implements IBooleanSpecification<ILevelItem> {
 
-    private final Level level;
+    private Level level;
 
     public LevelSpecification(Level level) {
-        this.level = level;
+        this.level = level.copy();
+    }
+
+    public void setLevel(Level level) {
+        this.level = level.copy();
     }
 
     @Override

@@ -224,30 +224,35 @@ public class AthleteUnitTest {
         IRepository<List<Nutrition>> nutritionRepository = new LevelListRepository<>(new NutritionMockDao());
         IRepository<List<Activity>> activitiesRepository = new LevelListRepository<>(new ActivitiesMockDao());
 
-        Level level = Level.create(0);
 
-        List<Muscle> muscles = muscleRepository.load(new LevelSpecification(level));
+        Level level = Level.create(0);
+        LevelSpecification levelSpecification = new LevelSpecification(level);
+
+        List<Muscle> muscles = muscleRepository.load(levelSpecification);
         Assert.assertEquals(4, muscles.size());
 
-        List<Nutrition> nutritions = nutritionRepository.load(new LevelSpecification(level));
+        List<Nutrition> nutritions = nutritionRepository.load(levelSpecification);
         Assert.assertEquals(4, nutritions.size());
 
-        List<Activity> activities = activitiesRepository.load(new LevelSpecification(level));
+        List<Activity> activities = activitiesRepository.load(levelSpecification);
         Assert.assertEquals(5, activities.size());
 
         level.gainExperience(5000);
+        levelSpecification.setLevel(level);
 
-        muscles = muscleRepository.load(new LevelSpecification(level));
+        muscles = muscleRepository.load(levelSpecification);
         Assert.assertEquals(5, muscles.size());
 
-        nutritions = nutritionRepository.load(new LevelSpecification(level));
+        nutritions = nutritionRepository.load(levelSpecification);
         Assert.assertEquals(5, nutritions.size());
 
-        activities = activitiesRepository.load(new LevelSpecification(level));
+        activities = activitiesRepository.load(levelSpecification);
         Assert.assertEquals(7, activities.size());
 
-        AthleteRepository.init(new AthleteMockDao());
+        AthleteRepository.init(new AthleteMockDao(new MusclesMockDao()));
         Athlete athlete = AthleteRepository.get().load(null);
+        athlete.eat(new Nutrition("Food", 10, 30, 5, 1));
         AthleteRepository.get().updateAthlete(athlete);
+        athlete = AthleteRepository.get().load(null);
     }
 }
