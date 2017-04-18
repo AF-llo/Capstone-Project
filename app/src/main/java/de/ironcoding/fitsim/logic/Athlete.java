@@ -98,6 +98,11 @@ public class Athlete {
         Muscles.get().relaxAll();
     }
 
+    public void muscleBreakDown() {
+        Muscles.get().breakDown();
+        body.breakDown();
+    }
+
     public boolean isAbleToDo(Activity activity) {
         return activity != null && body.isAbleToDo(activity);
     }

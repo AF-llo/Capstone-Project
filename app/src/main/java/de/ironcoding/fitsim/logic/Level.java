@@ -14,11 +14,11 @@ public class Level {
 
     private int value = START_LEVEL;
 
-    private int maxExperience = START_EXPERIENCE;
+    private long maxExperience = START_EXPERIENCE;
 
-    private int reachedExperience = 0;
+    private long reachedExperience = 0;
 
-    private int totalExperience = 0;
+    private long totalExperience = 0;
 
     private Skill skill;
 
@@ -62,15 +62,15 @@ public class Level {
         return value;
     }
 
-    public int getMaxExperience() {
+    public long getMaxExperience() {
         return maxExperience;
     }
 
-    public int getReachedExperience() {
+    public long getReachedExperience() {
         return reachedExperience;
     }
 
-    public int getTotalExperience() {
+    public long getTotalExperience() {
         return totalExperience;
     }
 

@@ -51,6 +51,12 @@ public class Muscles {
         }
     }
 
+    void breakDown() {
+        for (int i = 0; i < availableMuscles.size(); i++) {
+            availableMuscles.get(availableMuscles.keyAt(i)).shrink();
+        }
+    }
+
     private static final class InstanceHolder {
         static final Muscles INSTANCE = new Muscles();
     }

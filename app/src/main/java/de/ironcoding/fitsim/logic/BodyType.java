@@ -32,7 +32,6 @@ public class BodyType {
      */
     public static final String ENDOMORPH = "ENDOMORPH";
 
-    // TODO: 13.04.2017 adjust values
     private static final float METABOLISM_EKTOMORPH = 1.25F;
     private static final float BUILDUP_EKTOMORPH = 0.8F;
 

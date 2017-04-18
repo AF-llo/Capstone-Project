@@ -100,11 +100,17 @@ public class Body {
 
     void digest(Nutrition nutrition) {
         calories.consume(nutrition);
+        nutrition.consume(stats, fitness);
     }
 
     void refresh() {
         stats.adjustStats(calories.weightForEnergyDifference());
         calories.startNewConsumption();
+    }
+
+    void breakDown() {
+        fitness.impairStrength();
+        fitness.impairStamina();
     }
 
     public Body copy() {
@@ -183,8 +189,10 @@ public class Body {
         }
 
         public void consumeEnergy(int consumedEnergy) {
-            int leftEnergy = energy - consumedEnergy;
-            energy = leftEnergy < MIN_ENERGY ? MIN_ENERGY : leftEnergy;
+            energy -= consumedEnergy;
+            if (energy < MIN_ENERGY) {
+                energy = MIN_ENERGY;
+            }
         }
 
         public void gainEnergy(int gainedEnergy) {
@@ -240,10 +248,9 @@ public class Body {
             stamina += calculateIprovement(stamina, endurance);
         }
 
-        private float calculateIprovement(float current, float metabolism) {
-            // TODO: 14.04.2017  implement not linear
-            if (current <= MAX_FITNESS - metabolism) {
-                return metabolism;
+        private float calculateIprovement(float current, float scale) {
+            if (current <= MAX_FITNESS - scale) {
+                return scale;
             } else {
                 return MAX_FITNESS - current;
             }
@@ -258,7 +265,6 @@ public class Body {
         }
 
         private float calculateDecline(float current) {
-            // TODO: 14.04.2017  implement not linear
             float baseDecline = 1;
             if (current >= MIN_FITNESS + baseDecline) {
                 return baseDecline;

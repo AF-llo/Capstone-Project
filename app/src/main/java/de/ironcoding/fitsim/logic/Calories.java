@@ -62,7 +62,7 @@ public class Calories {
         }
         Calories calories = new Calories();
         calories.macros = macros;
-        calories.metabolicRate = type.getMetabolism() * Calories.metabolicRatePerDay(properties.getGender(), stats.getWeight(), properties.getSize(), properties.getAge());;
+        calories.metabolicRate = type.getMetabolism() * Calories.metabolicRatePerDay(properties.getGender(), stats.getWeight(), properties.getSize(), properties.getAge());
         calories.requiredEnergy = requiredEnergy < calories.metabolicRate ? calories.metabolicRate : requiredEnergy;
         return calories;
     }
