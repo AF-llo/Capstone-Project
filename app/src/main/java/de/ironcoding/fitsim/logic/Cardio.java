@@ -5,8 +5,9 @@ package de.ironcoding.fitsim.logic;
  */
 
 public class Cardio extends Activity {
-    public Cardio(String name, float pal, int effort, int experience) {
-        super(name, pal, effort, experience);
+
+    public Cardio(String name, float pal, int effort, int experience, int minLevel) {
+        super(name, pal, effort, experience, minLevel);
     }
 
     @Override

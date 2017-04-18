@@ -4,7 +4,7 @@ package de.ironcoding.fitsim.logic;
  * Created by larsl on 12.04.2017.
  */
 
-public abstract class Activity {
+public abstract class Activity extends BaseLevelItem {
 
     private static final float BASE_ATTRACTION_FROM_EFFORT = 0.1F;
 
@@ -27,7 +27,8 @@ public abstract class Activity {
 
     private final float duration;
 
-    Activity(String name, float pal, int effort, int experience, float duration) {
+    Activity(String name, float pal, int effort, int experience, float duration, int minLevel) {
+        super(minLevel);
         if (pal < 0) {
             pal = 0;
         }
@@ -53,8 +54,8 @@ public abstract class Activity {
         this.duration = duration;
     }
 
-    Activity(String name, float pal, int effort, int experience) {
-        this(name, pal, effort, experience, DEFAULT_DURATION);
+    Activity(String name, float pal, int effort, int experience, int minLevel) {
+        this(name, pal, effort, experience, DEFAULT_DURATION, minLevel);
     }
 
     public String getName() {

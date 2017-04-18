@@ -8,8 +8,8 @@ public class Exercise extends Activity {
 
     private final int strainedMuscle;
 
-    public Exercise(String name, float pal, int effort, int experience, int strainedMuscle) {
-        super(name, pal, effort, experience);
+    public Exercise(String name, float pal, int effort, int experience, int strainedMuscle, int minLevel) {
+        super(name, pal, effort, experience, minLevel);
         this.strainedMuscle = strainedMuscle;
     }
 

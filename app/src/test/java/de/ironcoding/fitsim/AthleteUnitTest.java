@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.Collections;
 import java.util.List;
 
+import de.ironcoding.fitsim.logic.Activity;
 import de.ironcoding.fitsim.logic.Athlete;
 import de.ironcoding.fitsim.logic.Body;
 import de.ironcoding.fitsim.logic.BodyType;
@@ -18,6 +19,7 @@ import de.ironcoding.fitsim.logic.Skill;
 import de.ironcoding.fitsim.repository.IRepository;
 import de.ironcoding.fitsim.repository.LevelListRepository;
 import de.ironcoding.fitsim.repository.LevelSpecification;
+import de.ironcoding.fitsim.repository.mock.ActivitiesMockDao;
 import de.ironcoding.fitsim.repository.mock.MusclesMockDao;
 import de.ironcoding.fitsim.repository.mock.NutritionMockDao;
 
@@ -218,6 +220,7 @@ public class AthleteUnitTest {
     public void repository_test() throws Exception {
         IRepository<List<Muscle>> muscleRepository = new LevelListRepository<>(new MusclesMockDao());
         IRepository<List<Nutrition>> nutritionRepository = new LevelListRepository<>(new NutritionMockDao());
+        IRepository<List<Activity>> activitiesRepository = new LevelListRepository<>(new ActivitiesMockDao());
 
         Level level = Level.create(0);
 
@@ -227,6 +230,9 @@ public class AthleteUnitTest {
         List<Nutrition> nutritions = nutritionRepository.load(new LevelSpecification(level));
         Assert.assertEquals(4, nutritions.size());
 
+        List<Activity> activities = activitiesRepository.load(new LevelSpecification(level));
+        Assert.assertEquals(5, activities.size());
+
         level.gainExperience(5000);
 
         muscles = muscleRepository.load(new LevelSpecification(level));
@@ -234,5 +240,8 @@ public class AthleteUnitTest {
 
         nutritions = nutritionRepository.load(new LevelSpecification(level));
         Assert.assertEquals(5, nutritions.size());
+
+        activities = activitiesRepository.load(new LevelSpecification(level));
+        Assert.assertEquals(7, activities.size());
     }
 }
