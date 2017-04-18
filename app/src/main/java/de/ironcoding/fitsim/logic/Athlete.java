@@ -18,8 +18,6 @@ public class Athlete {
     public static final int FEMALE = 0;
     public static final int MALE = 1;
 
-    private boolean isInitialized = false;
-
     private Level level;
 
     private Body body;
@@ -31,26 +29,14 @@ public class Athlete {
     }
 
     public static Athlete build(int experience, Body body, List<Muscle> muscles) {
-        Athlete athlete = InstanceHolder.INSTANCE;
-        if (athlete.isInitialized) {
-            return Athlete.get();
-        }
+        Athlete athlete = new Athlete();
         if (body == null) {
             throw new IllegalArgumentException("Your body was null. An athlets needs a body to eat and do sport");
         }
         athlete.level = Level.create(experience);
         athlete.body = body;
         Muscles.buildUpMuscles(muscles);
-        athlete.isInitialized = true;
         return athlete;
-    }
-
-    public static Athlete get() {
-        Athlete athlete = InstanceHolder.INSTANCE;
-        if (!athlete.isInitialized) {
-            throw new IllegalStateException("Your athelete is not ready yet. Please call Athlete.warmUp(...) once before usage!");
-        }
-        return InstanceHolder.INSTANCE;
     }
 
     /**
@@ -113,8 +99,11 @@ public class Athlete {
     
     // END
 
-    private static final class InstanceHolder {
-        static final Athlete INSTANCE = new Athlete();
+    public Athlete copy() {
+        Athlete athlete = new Athlete();
+        athlete.level = level.copy();
+        athlete.body = body.copy();
+        return athlete;
     }
 
 }

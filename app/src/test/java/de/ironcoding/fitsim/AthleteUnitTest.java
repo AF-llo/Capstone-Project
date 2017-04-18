@@ -16,10 +16,12 @@ import de.ironcoding.fitsim.logic.Level;
 import de.ironcoding.fitsim.logic.Muscle;
 import de.ironcoding.fitsim.logic.Nutrition;
 import de.ironcoding.fitsim.logic.Skill;
+import de.ironcoding.fitsim.repository.AthleteRepository;
 import de.ironcoding.fitsim.repository.IRepository;
 import de.ironcoding.fitsim.repository.LevelListRepository;
 import de.ironcoding.fitsim.repository.LevelSpecification;
 import de.ironcoding.fitsim.repository.mock.ActivitiesMockDao;
+import de.ironcoding.fitsim.repository.mock.AthleteMockDao;
 import de.ironcoding.fitsim.repository.mock.MusclesMockDao;
 import de.ironcoding.fitsim.repository.mock.NutritionMockDao;
 
@@ -243,5 +245,9 @@ public class AthleteUnitTest {
 
         activities = activitiesRepository.load(new LevelSpecification(level));
         Assert.assertEquals(7, activities.size());
+
+        AthleteRepository.init(new AthleteMockDao());
+        Athlete athlete = AthleteRepository.get().load(null);
+        AthleteRepository.get().updateAthlete(athlete);
     }
 }

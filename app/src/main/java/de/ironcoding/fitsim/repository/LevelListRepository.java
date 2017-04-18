@@ -21,7 +21,7 @@ public class LevelListRepository<T extends ILevelItem> extends BaseLevelReposito
         if (dao != null) {
             List<T> list = dao.load();
             for (T listItem : list) {
-                if (levelSpecification.specify(listItem)) {
+                if (levelSpecification.meetSpecification(listItem)) {
                     specificList.add(listItem);
                 }
             }

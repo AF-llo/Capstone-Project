@@ -7,7 +7,7 @@ import de.ironcoding.fitsim.logic.Level;
  * Created by larsl on 18.04.2017.
  */
 
-public class LevelSpecification implements ISpecification<ILevelItem> {
+public class LevelSpecification implements IBooleanSpecification<ILevelItem> {
 
     private final Level level;
 
@@ -16,7 +16,7 @@ public class LevelSpecification implements ISpecification<ILevelItem> {
     }
 
     @Override
-    public boolean specify(ILevelItem data) {
+    public boolean meetSpecification(ILevelItem data) {
         return level.getValue() >= data.getMinLevel();
     }
 }

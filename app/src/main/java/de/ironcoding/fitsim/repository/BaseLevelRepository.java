@@ -6,7 +6,7 @@ import de.ironcoding.fitsim.logic.Level;
  * Created by larsl on 18.04.2017.
  */
 
-public abstract class BaseLevelRepository<T> extends BaseDataRepository<T> {
+public abstract class BaseLevelRepository<T> extends BaseDaoRepository<T> {
 
     protected Level level;
 

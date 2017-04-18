@@ -8,6 +8,6 @@ import de.ironcoding.fitsim.logic.Athlete;
 
 public interface IAthleteRepository extends IRepository<Athlete> {
 
-    void storeAthlete(Athlete athlete);
+    void updateAthlete(Athlete athlete);
 
 }
