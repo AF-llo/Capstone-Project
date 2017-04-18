@@ -22,6 +22,8 @@ public class Athlete {
 
     private Body body;
 
+    private boolean isBusy = false;
+
     private Athlete () {}
 
     public static Athlete buildNew(Body body, List<Muscle> muscles) {
@@ -68,10 +70,11 @@ public class Athlete {
         body.digest(nutrition);
     }
 
-    public void doActivity(Activity activity) {
+    public void doActivity(Activity activity, boolean isBusy) {
         if (!isAbleToDo(activity)) {
             return;
         }
+        this.isBusy = isBusy;
         gainExperience(activity.getExperience());
         body.performActivity(activity);
     }
@@ -89,8 +92,12 @@ public class Athlete {
         body.breakDown();
     }
 
+    public void setReady() {
+        isBusy = false;
+    }
+
     public boolean isAbleToDo(Activity activity) {
-        return activity != null && body.isAbleToDo(activity);
+        return !isBusy && activity != null && body.isAbleToDo(activity);
     }
 
     private void gainExperience(int experience) {

@@ -80,6 +80,7 @@ public class Level {
 
     public Level copy() {
         Level level = new Level();
+        level.value = value;
         level.maxExperience = maxExperience;
         level.reachedExperience = reachedExperience;
         level.totalExperience = totalExperience;

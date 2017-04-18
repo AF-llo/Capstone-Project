@@ -9,11 +9,13 @@ public abstract class Activity extends BaseLevelItem {
     private static final float BASE_ATTRACTION_FROM_EFFORT = 0.1F;
 
     /**
-     * Default duration of an activity: 0.25h = 15min
+     * Default duration of an activity: 0.05h = 3min
      */
-    public static final float DEFAULT_DURATION = 0.25F;
+    public static final float DEFAULT_DURATION = 0.1F;
 
     public static final float MAX_DURATION = 24.0F;
+
+    private static final long MILLIS_PER_HOUR = 60 * 60 * 1000;
 
     public static final float DAYS_PER_WEEK = 7.0F;
 
@@ -74,8 +76,12 @@ public abstract class Activity extends BaseLevelItem {
         return experience;
     }
 
-    public float getDuration() {
+    public float getDurationInHours() {
         return duration;
+    }
+
+    public long getDurationInMillis() {
+        return (long) (duration * MILLIS_PER_HOUR);
     }
 
     public int getAttraction(float buildUp) {

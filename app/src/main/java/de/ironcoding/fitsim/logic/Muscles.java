@@ -1,9 +1,9 @@
 package de.ironcoding.fitsim.logic;
 
-import android.util.SparseArray;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by larsl on 15.04.2017.
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Muscles {
 
-    private static SparseArray<Muscle> availableMuscles = new SparseArray<>();
+    private static Map<Integer, Muscle> availableMuscles = new HashMap<>();
 
     private boolean areBuild = false;
 
@@ -20,7 +20,7 @@ public class Muscles {
         muscles.areBuild = true;
         for (Muscle newMuscle : newMuscles) {
             if (newMuscle != null && !muscles.has(newMuscle.getId())) {
-                availableMuscles.put(newMuscle.getCondition(), newMuscle);
+                availableMuscles.put(newMuscle.getId(), newMuscle);
             }
         }
     }
@@ -46,14 +46,14 @@ public class Muscles {
     }
 
     void relaxAll() {
-        for (int i = 0; i < availableMuscles.size(); i++) {
-            availableMuscles.get(availableMuscles.keyAt(i)).relax();
+        for (Muscle muscle : availableMuscles.values()) {
+            muscle.relax();
         }
     }
 
     void breakDown() {
-        for (int i = 0; i < availableMuscles.size(); i++) {
-            availableMuscles.get(availableMuscles.keyAt(i)).shrink();
+        for (Muscle muscle : availableMuscles.values()) {
+            muscle.shrink();
         }
     }
 
@@ -63,8 +63,8 @@ public class Muscles {
 
     public List<Muscle> getAll() {
         List<Muscle> allMuscles = new ArrayList<>();
-        for (int i = 0; i < availableMuscles.size(); i++) {
-            allMuscles.add(availableMuscles.get(availableMuscles.keyAt(i)).copy());
+        for (Muscle muscle : availableMuscles.values()) {
+            allMuscles.add(muscle);
         }
         return allMuscles;
     }

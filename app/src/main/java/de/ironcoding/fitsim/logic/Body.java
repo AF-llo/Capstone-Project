@@ -94,7 +94,7 @@ public class Body {
 
     void performActivity(Activity activity) {
         stats.consumeEnergy(activity.getEffort());
-        calories.increaseRequiredEnergy(activity.getPal(), activity.getDuration());
+        calories.increaseRequiredEnergy(activity.getPal(), activity.getDurationInHours());
         activity.perform(fitness, type);
     }
 

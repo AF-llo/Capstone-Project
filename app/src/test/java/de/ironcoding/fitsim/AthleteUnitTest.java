@@ -12,6 +12,7 @@ import de.ironcoding.fitsim.logic.Athlete;
 import de.ironcoding.fitsim.logic.Body;
 import de.ironcoding.fitsim.logic.BodyType;
 import de.ironcoding.fitsim.logic.Calories;
+import de.ironcoding.fitsim.logic.Exercise;
 import de.ironcoding.fitsim.logic.Level;
 import de.ironcoding.fitsim.logic.Muscle;
 import de.ironcoding.fitsim.logic.Nutrition;
@@ -224,7 +225,6 @@ public class AthleteUnitTest {
         IRepository<List<Nutrition>> nutritionRepository = new LevelListRepository<>(new NutritionMockDao());
         IRepository<List<Activity>> activitiesRepository = new LevelListRepository<>(new ActivitiesMockDao());
 
-
         Level level = Level.create(0);
         LevelSpecification levelSpecification = new LevelSpecification(level);
 
@@ -252,6 +252,10 @@ public class AthleteUnitTest {
         AthleteRepository.init(new AthleteMockDao(new MusclesMockDao()));
         Athlete athlete = AthleteRepository.get().load(null);
         athlete.eat(new Nutrition("Food", 10, 30, 5, 1));
+        Activity exercise = new Exercise("Benchpress", 1.4F, 20, 50, 1, 1);
+        athlete.doActivity(exercise, true);
+        long duration = exercise.getDurationInMillis();
+        athlete.setReady();
         AthleteRepository.get().updateAthlete(athlete);
         athlete = AthleteRepository.get().load(null);
     }
