@@ -16,7 +16,7 @@ public class LevelSpecification implements ISpecification<ILevelItem> {
     }
 
     @Override
-    public boolean meetSpecification(ILevelItem data) {
+    public boolean specify(ILevelItem data) {
         return level.getValue() >= data.getMinLevel();
     }
 }

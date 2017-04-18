@@ -5,5 +5,5 @@ package de.ironcoding.fitsim.repository;
  */
 
 public interface ISpecification<T> {
-    boolean meetSpecification(T data);
+    boolean specify(T data);
 }

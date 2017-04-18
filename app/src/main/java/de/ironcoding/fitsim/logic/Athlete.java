@@ -31,17 +31,17 @@ public class Athlete {
     }
 
     public static Athlete build(int experience, Body body, List<Muscle> muscles) {
+        Athlete athlete = InstanceHolder.INSTANCE;
+        if (athlete.isInitialized) {
+            return Athlete.get();
+        }
         if (body == null) {
             throw new IllegalArgumentException("Your body was null. An athlets needs a body to eat and do sport");
         }
-        Athlete athlete = InstanceHolder.INSTANCE;
-        if (athlete.isInitialized) {
-            throw new IllegalStateException("Your athlete has already been build. Please call Athlete.build(...) only once");
-        }
         athlete.level = Level.create(experience);
         athlete.body = body;
-        athlete.isInitialized = true;
         Muscles.buildUpMuscles(muscles);
+        athlete.isInitialized = true;
         return athlete;
     }
 
