@@ -3,10 +3,13 @@ package de.ironcoding.fitsim.ui.activities;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.databinding.ActivityMainBinding;
+import de.ironcoding.fitsim.ui.fragments.GymFragment;
+import de.ironcoding.fitsim.ui.fragments.MoreFragment;
+import de.ironcoding.fitsim.ui.fragments.NutritionFragment;
+import de.ironcoding.fitsim.ui.fragments.ProfileFragment;
 
 public class MainActivity extends BaseActivity {
 
@@ -16,21 +19,24 @@ public class MainActivity extends BaseActivity {
         getFitSimApp().getAppComponent().injectMainActivity(this);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.bottomNavigation.setOnNavigationItemSelectedListener(this::onBottomItemSelected);
+        if (savedInstanceState == null) {
+            replaceContent(ProfileFragment.getInstance());
+        }
     }
 
     private boolean onBottomItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_profile:
-                Toast.makeText(MainActivity.this, R.string.profile, Toast.LENGTH_SHORT).show();
+                replaceContent(ProfileFragment.getInstance());
                 return true;
             case R.id.action_gym:
-                Toast.makeText(MainActivity.this, R.string.gym, Toast.LENGTH_SHORT).show();
+                replaceContent(GymFragment.getInstance());
                 return true;
             case R.id.action_nutrition:
-                Toast.makeText(MainActivity.this, R.string.nutrition, Toast.LENGTH_SHORT).show();
+                replaceContent(NutritionFragment.getInstance());
                 return true;
             case R.id.action_more:
-                Toast.makeText(MainActivity.this, R.string.more, Toast.LENGTH_SHORT).show();
+                replaceContent(MoreFragment.getInstance());
                 return true;
         }
         return false;
