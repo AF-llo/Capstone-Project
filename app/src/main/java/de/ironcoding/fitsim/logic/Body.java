@@ -77,7 +77,7 @@ public class Body {
             throw new IllegalArgumentException("When you have been born, you got some properties!");
         }
         if (calories == null) {
-            throw new IllegalArgumentException("Without calories you will not be able to eat and do activities!");
+            throw new IllegalArgumentException("Without calories you will not be able to train and do activities!");
         }
         Body body = new Body();
         body.type = type;

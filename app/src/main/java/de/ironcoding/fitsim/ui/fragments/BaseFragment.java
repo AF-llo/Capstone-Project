@@ -1,17 +1,21 @@
 package de.ironcoding.fitsim.ui.fragments;
 
 import android.content.Context;
+import android.databinding.ObservableField;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.View;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import de.ironcoding.fitsim.app.FitSimApp;
 import de.ironcoding.fitsim.app.injection.RepositoryModule;
+import de.ironcoding.fitsim.logic.Athlete;
 import de.ironcoding.fitsim.repository.AthleteRepository;
 import de.ironcoding.fitsim.ui.activities.BaseActivity;
+import de.ironcoding.fitsim.ui.model.AthleteViewModel;
 import de.ironcoding.fitsim.util.AppSettings;
 
 /**
@@ -27,6 +31,8 @@ public class BaseFragment extends Fragment {
     @Named(RepositoryModule.REPOSITORY_MOCKED)
     AthleteRepository athleteRepository;
 
+    public ObservableField<AthleteViewModel> athleteModel = new ObservableField<>();
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -41,10 +47,21 @@ public class BaseFragment extends Fragment {
         getFitSimApp().getAppComponent().injectBaseFragment(this);
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        setAthlete(athleteRepository.load(null));
+    }
+
     protected FitSimApp getFitSimApp() {
         return ((BaseActivity)getActivity()).getFitSimApp();
     }
 
-    
+    protected Athlete getAthlete() {
+        return athleteModel.get().getAthlete();
+    }
+
+    protected void setAthlete(Athlete athlete) {
+        athleteModel.set(new AthleteViewModel(athlete));
+    }
 
 }

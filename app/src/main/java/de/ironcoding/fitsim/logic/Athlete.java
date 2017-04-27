@@ -33,7 +33,7 @@ public class Athlete {
     public static Athlete build(int experience, Body body, List<Muscle> muscles) {
         Athlete athlete = new Athlete();
         if (body == null) {
-            throw new IllegalArgumentException("Your body was null. An athlets needs a body to eat and do sport");
+            throw new IllegalArgumentException("Your body was null. An athlets needs a body to train and do sport");
         }
         athlete.level = Level.create(experience);
         athlete.body = body;
@@ -61,7 +61,7 @@ public class Athlete {
         return Muscles.get().getAll();
     }
 
-    // BEGIN all actions for athlete
+    // BEGIN all actions for athleteModel
 
     public void eat(Nutrition nutrition) {
         if (nutrition == null) {

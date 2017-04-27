@@ -5,8 +5,11 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import de.ironcoding.fitsim.repository.ActivitiesRepository;
 import de.ironcoding.fitsim.repository.AthleteRepository;
+import de.ironcoding.fitsim.repository.IActivitiesDao;
 import de.ironcoding.fitsim.repository.IAthleteDao;
+import de.ironcoding.fitsim.repository.mock.ActivitiesMockDao;
 import de.ironcoding.fitsim.repository.mock.AthleteMockDao;
 import de.ironcoding.fitsim.repository.mock.MusclesMockDao;
 
@@ -30,10 +33,23 @@ public class RepositoryModule {
     }
 
     @Provides
+    @Named(REPOSITORY_MOCKED)
+    IActivitiesDao providesActivitiesMockDao() {
+        return new ActivitiesMockDao();
+    }
+
+    @Provides
     @Singleton
     @Named(REPOSITORY_MOCKED)
     AthleteRepository provideMockedAthleteRepo(@Named(REPOSITORY_MOCKED) IAthleteDao athleteDao) {
         return new AthleteRepository(athleteDao);
+    }
+
+    @Provides
+    @Singleton
+    @Named(REPOSITORY_MOCKED)
+    ActivitiesRepository provideMockedActivitiesRepo(@Named(REPOSITORY_MOCKED) IActivitiesDao activitiesDao) {
+        return new ActivitiesRepository(activitiesDao);
     }
 
 }

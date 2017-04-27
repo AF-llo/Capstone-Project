@@ -24,6 +24,7 @@ public class ProfileFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentProfileBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false);
+        binding.setProfileFragment(this);
         return binding.getRoot();
     }
 

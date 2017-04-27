@@ -6,13 +6,13 @@ import java.util.List;
 import de.ironcoding.fitsim.logic.Activity;
 import de.ironcoding.fitsim.logic.Cardio;
 import de.ironcoding.fitsim.logic.Exercise;
-import de.ironcoding.fitsim.repository.IDao;
+import de.ironcoding.fitsim.repository.IActivitiesDao;
 
 /**
  * Created by larsl on 18.04.2017.
  */
 
-public class ActivitiesMockDao implements IDao<List<Activity>> {
+public class ActivitiesMockDao implements IActivitiesDao {
     @Override
     public List<Activity> load() {
         List<Activity> activities = new ArrayList<>();
