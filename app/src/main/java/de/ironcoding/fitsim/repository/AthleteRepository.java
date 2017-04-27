@@ -12,25 +12,8 @@ public class AthleteRepository implements IAthleteRepository {
 
     private Athlete athlete;
 
-    private boolean isInitialized;
-
-    private AthleteRepository(){}
-
-    public static void init(IAthleteDao athleteDao) {
-        if (athleteDao == null) {
-            throw new IllegalArgumentException("IAthleteDao may not be null!");
-        }
-        AthleteRepository athleteRepository = InstanceHolder.INSTANCE;
-        athleteRepository.athleteDao = athleteDao;
-        athleteRepository.isInitialized = true;
-    }
-
-    public static AthleteRepository get() {
-        AthleteRepository athleteRepository = InstanceHolder.INSTANCE;
-        if (!athleteRepository.isInitialized) {
-            throw new IllegalStateException("Please initialize AthleteRepository first!");
-        }
-        return athleteRepository;
+    public AthleteRepository(IAthleteDao athleteDao){
+        this.athleteDao = athleteDao;
     }
 
     @Override
@@ -52,9 +35,5 @@ public class AthleteRepository implements IAthleteRepository {
         if (athleteDao != null ) {
             athleteDao.storeAthlete(athlete);
         }
-    }
-
-    private static final class InstanceHolder {
-        static AthleteRepository INSTANCE = new AthleteRepository();
     }
 }

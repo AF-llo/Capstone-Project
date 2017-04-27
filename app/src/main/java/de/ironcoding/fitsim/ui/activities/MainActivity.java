@@ -2,18 +2,18 @@ package de.ironcoding.fitsim.ui.activities;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getFitSimApp().getAppComponent().injectMainActivity(this);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.bottomNavigation.setOnNavigationItemSelectedListener(this::onBottomItemSelected);
     }

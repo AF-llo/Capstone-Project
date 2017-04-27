@@ -249,14 +249,14 @@ public class AthleteUnitTest {
         activities = activitiesRepository.load(levelSpecification);
         Assert.assertEquals(7, activities.size());
 
-        AthleteRepository.init(new AthleteMockDao(new MusclesMockDao()));
-        Athlete athlete = AthleteRepository.get().load(null);
+        AthleteRepository repository = new AthleteRepository(new AthleteMockDao(new MusclesMockDao()));
+        Athlete athlete = repository.load(null);
         athlete.eat(new Nutrition("Food", 10, 30, 5, 1));
         Activity exercise = new Exercise("Benchpress", 1.4F, 20, 50, 1, 1);
         athlete.doActivity(exercise, true);
         long duration = exercise.getDurationInMillis();
         athlete.setReady();
-        AthleteRepository.get().updateAthlete(athlete);
-        athlete = AthleteRepository.get().load(null);
+        repository.updateAthlete(athlete);
+        athlete = repository.load(null);
     }
 }
