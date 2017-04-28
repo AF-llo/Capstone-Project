@@ -1,6 +1,8 @@
 package de.ironcoding.fitsim.ui.model;
 
 import de.appsfactory.mvplib.presenter.MVPEventRecyclerItem;
+import de.ironcoding.fitsim.BR;
+import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.events.NutritionSelectedEvent;
 import de.ironcoding.fitsim.logic.Nutrition;
 
@@ -18,12 +20,16 @@ public class NutritionRecyclerItem extends MVPEventRecyclerItem<NutritionSelecte
 
     @Override
     public int getLayoutId() {
-        return 0;
+        return R.layout.layout_nutrition_item;
     }
 
     @Override
     public int getItemId() {
-        return 0;
+        return BR.item;
+    }
+
+    public String getName() {
+        return nutrition.getName();
     }
 
     public void clicked() {

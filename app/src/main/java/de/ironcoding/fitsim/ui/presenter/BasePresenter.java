@@ -37,10 +37,10 @@ public class BasePresenter extends MVPPresenter {
     @Override
     public void onStart() {
         super.onStart();
-        if (!isRestored()) {
+        if (athleteModel.get() == null) {
             doInBackground(0, () -> athleteRepository.loadAthlete())
                     .addOnSuccess(athlete -> {
-                        athleteModel.set(new AthleteViewModel(athlete));
+                        setAthlete(athlete);
                         onAthleteLoaded();
                     })
                     .execute();
@@ -52,6 +52,20 @@ public class BasePresenter extends MVPPresenter {
 
     protected Athlete getAthlete() {
         return athleteModel.get().getAthlete();
+    }
+
+    private void setAthlete(Athlete athlete) {
+        athleteModel.set(new AthleteViewModel(athlete));
+    }
+
+    protected void updateAthlete(Athlete athlete) {
+        if (athlete != null) {
+            setAthlete(athlete);
+            doInBackground(1, () -> {
+                athleteRepository.updateAthlete(athlete);
+                return null;
+            }).execute();
+        }
     }
 
     protected FitSimApp getFitSimApp() {

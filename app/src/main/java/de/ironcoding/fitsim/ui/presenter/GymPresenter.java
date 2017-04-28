@@ -2,7 +2,6 @@ package de.ironcoding.fitsim.ui.presenter;
 
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -12,6 +11,7 @@ import javax.inject.Named;
 import de.ironcoding.fitsim.app.injection.MockRepositoryModule;
 import de.ironcoding.fitsim.events.ActivitySelectedEvent;
 import de.ironcoding.fitsim.logic.Activity;
+import de.ironcoding.fitsim.logic.Athlete;
 import de.ironcoding.fitsim.repository.ActivitiesRepository;
 import de.ironcoding.fitsim.ui.model.ActivityRecyclerItem;
 
@@ -52,6 +52,10 @@ public class GymPresenter extends BasePresenter implements ActivitySelectedEvent
         if (getContext() == null) {
             return;
         }
-        Toast.makeText(getContext(), "Selected " + activity.getName(), Toast.LENGTH_SHORT).show();
+        Athlete athlete = getAthlete();
+        if (athlete.isAbleToDo(activity)) {
+            athlete.doActivity(activity, false);
+            updateAthlete(athlete);
+        }
     }
 }

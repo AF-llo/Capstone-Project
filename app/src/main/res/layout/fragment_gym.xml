@@ -36,7 +36,6 @@
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/spacing_m"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:items="@{gymPresenter.activities}"/>
 
