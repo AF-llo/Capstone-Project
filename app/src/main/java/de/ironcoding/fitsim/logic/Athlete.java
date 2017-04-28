@@ -64,6 +64,9 @@ public class Athlete {
     // BEGIN all actions for athleteModel
 
     public void eat(Nutrition nutrition) {
+        if (!canEat()) {
+            return;
+        }
         if (nutrition == null) {
             return;
         }
@@ -77,6 +80,14 @@ public class Athlete {
         this.isBusy = isBusy;
         gainExperience(activity.getExperience());
         body.performActivity(activity);
+    }
+
+    public void goToRestRoom() {
+        body.defecate();
+    }
+
+    public boolean canEat() {
+        return body.canEat();
     }
 
     public void refreshBody() {

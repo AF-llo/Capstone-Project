@@ -243,11 +243,15 @@ public class AthleteUnitTest {
         Assert.assertEquals(7, activities.size());
 
         athlete.eat(new Meal("Food", 10, 30, 5, 1));
+        Assert.assertEquals(false, athlete.canEat());
+        athlete.goToRestRoom();
+        Assert.assertEquals(true, athlete.canEat());
         Activity exercise = new Exercise("Benchpress", 1.4F, 20, 50, 1, 1);
         athlete.doActivity(exercise, true);
         long duration = exercise.getDurationInMillis();
         athlete.setReady();
         athleteRepository.updateAthlete(athlete);
         athlete = athleteRepository.loadAthlete();
+
     }
 }

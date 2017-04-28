@@ -92,6 +92,10 @@ public class Body {
         return activity.getEffort() <= stats.getEnergy() && !activity.isToDemanding();
     }
 
+    boolean canEat() {
+        return !stats.isSaturated;
+    }
+
     void performActivity(Activity activity) {
         stats.consumeEnergy(activity.getEffort());
         calories.increaseRequiredEnergy(activity.getPal(), activity.getDurationInHours());
@@ -111,6 +115,10 @@ public class Body {
     void breakDown() {
         fitness.impairStrength();
         fitness.impairStamina();
+    }
+
+    void defecate() {
+        stats.setSaturated(false);
     }
 
     public Body copy() {
@@ -177,6 +185,8 @@ public class Body {
 
         private float weight;
 
+        private boolean isSaturated = false;
+
         public Stats(int energy, float weight) {
             if (energy < MIN_ENERGY) {
                 energy = MIN_ENERGY;
@@ -214,6 +224,10 @@ public class Body {
 
         public float getWeight() {
             return weight;
+        }
+
+        void setSaturated(boolean isSaturated) {
+            this.isSaturated = isSaturated;
         }
     }
 

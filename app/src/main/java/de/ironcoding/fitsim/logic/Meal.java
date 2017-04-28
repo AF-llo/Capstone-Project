@@ -15,6 +15,6 @@ public class Meal extends Nutrition {
     @Override
     protected void consume(Body.Stats stats, Body.Fitness fitness) {
         super.consume(stats, fitness);
-        // TODO: 28.04.2017 make athlete not hungry
+        stats.setSaturated(true);
     }
 }
