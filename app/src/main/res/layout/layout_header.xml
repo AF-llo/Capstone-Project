@@ -6,7 +6,7 @@
     <data>
         <variable
             name="athleteModel"
-            type="de.ironcoding.fitsim.ui.model.AthleteViewModel"/>
+            type="de.ironcoding.fitsim.ui.model.AthleteHeaderViewModel"/>
     </data>
 
     <LinearLayout

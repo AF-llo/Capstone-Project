@@ -10,7 +10,7 @@ import de.ironcoding.fitsim.app.FitSimApp;
 import de.ironcoding.fitsim.app.injection.MockRepositoryModule;
 import de.ironcoding.fitsim.logic.Athlete;
 import de.ironcoding.fitsim.repository.AthleteRepository;
-import de.ironcoding.fitsim.ui.model.AthleteViewModel;
+import de.ironcoding.fitsim.ui.model.AthleteHeaderViewModel;
 import de.ironcoding.fitsim.util.AppSettings;
 
 /**
@@ -26,7 +26,16 @@ public class BasePresenter extends MVPPresenter {
     @Named(MockRepositoryModule.REPOSITORY_MOCKED)
     AthleteRepository athleteRepository;
 
-    public ObservableField<AthleteViewModel> athleteModel = new ObservableField<>();
+    private Callback callback;
+
+    public ObservableField<AthleteHeaderViewModel> athleteModel = new ObservableField<>();
+
+    public BasePresenter() {
+    }
+
+    public BasePresenter(Callback callback) {
+        this.callback = callback;
+    }
 
     @Override
     protected void onPresenterCreated() {
@@ -55,7 +64,7 @@ public class BasePresenter extends MVPPresenter {
     }
 
     private void setAthlete(Athlete athlete) {
-        athleteModel.set(new AthleteViewModel(athlete));
+        athleteModel.set(new AthleteHeaderViewModel(athlete));
     }
 
     protected void updateAthlete(Athlete athlete) {
@@ -70,5 +79,22 @@ public class BasePresenter extends MVPPresenter {
 
     protected FitSimApp getFitSimApp() {
         return (FitSimApp) getContext().getApplicationContext();
+    }
+
+    protected void notifyCallbackShowBottomSheet() {
+        if (callback != null) {
+            callback.showBottomSheet();
+        }
+    }
+
+    protected void notifyCallbackHideBottomSheet() {
+        if (callback != null) {
+            callback.hideBottomSheet();
+        }
+    }
+
+    public interface Callback {
+        void showBottomSheet();
+        void hideBottomSheet();
     }
 }

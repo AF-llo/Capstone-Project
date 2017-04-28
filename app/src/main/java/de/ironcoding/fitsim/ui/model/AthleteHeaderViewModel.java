@@ -6,11 +6,11 @@ import de.ironcoding.fitsim.logic.Athlete;
  * Created by larsl on 27.04.2017.
  */
 
-public class AthleteViewModel {
+public class AthleteHeaderViewModel {
 
     private Athlete athlete;
 
-    public AthleteViewModel(Athlete athlete) {
+    public AthleteHeaderViewModel(Athlete athlete) {
         this.athlete = athlete;
     }
 

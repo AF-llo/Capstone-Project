@@ -1,8 +1,8 @@
 package de.ironcoding.fitsim.ui.presenter;
 
 import android.databinding.ObservableArrayList;
+import android.databinding.ObservableField;
 import android.databinding.ObservableList;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -11,8 +11,10 @@ import javax.inject.Named;
 
 import de.ironcoding.fitsim.app.injection.MockRepositoryModule;
 import de.ironcoding.fitsim.events.NutritionSelectedEvent;
+import de.ironcoding.fitsim.logic.Athlete;
 import de.ironcoding.fitsim.logic.Nutrition;
 import de.ironcoding.fitsim.repository.NutritionRepository;
+import de.ironcoding.fitsim.ui.model.AthleteNutritionPreviewViewModel;
 import de.ironcoding.fitsim.ui.model.NutritionRecyclerItem;
 
 /**
@@ -26,6 +28,14 @@ public class NutritionPresenter extends BasePresenter implements NutritionSelect
     NutritionRepository nutritionRepository;
 
     public ObservableList<NutritionRecyclerItem> nutritions = new ObservableArrayList<>();
+
+    public ObservableField<AthleteNutritionPreviewViewModel> athletePreview = new ObservableField<>();
+
+    public ObservableField<NutritionRecyclerItem> selectedNutrition = new ObservableField<>();
+
+    public NutritionPresenter(Callback callback) {
+        super(callback);
+    }
 
     @Override
     protected void onPresenterCreated() {
@@ -52,6 +62,12 @@ public class NutritionPresenter extends BasePresenter implements NutritionSelect
         if (getContext() == null) {
             return;
         }
-        Toast.makeText(getContext(), "Selected " + nutrition.getName(), Toast.LENGTH_SHORT).show();
+        selectedNutrition.set(new NutritionRecyclerItem(nutrition));
+        updateAthletePreview(getAthlete().copy());
+        notifyCallbackShowBottomSheet();
+    }
+
+    private void updateAthletePreview(Athlete athlete) {
+        athletePreview.set(new AthleteNutritionPreviewViewModel(athlete));
     }
 }
