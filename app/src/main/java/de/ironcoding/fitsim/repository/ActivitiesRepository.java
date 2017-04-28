@@ -1,6 +1,5 @@
 package de.ironcoding.fitsim.repository;
 
-import java.util.Collections;
 import java.util.List;
 
 import de.ironcoding.fitsim.logic.Activity;
@@ -16,31 +15,18 @@ public class ActivitiesRepository extends BaseDaoRepository<List<Activity>, IAct
         super(activitiesDao);
     }
 
-    public List<Activity> loadAll() {
-        if (dao == null) {
-            return Collections.emptyList();
-        }
-        return dao.load();
-    }
-
     public List<Activity> loadForLevel(Level level) {
-        if (dao == null) {
-            return Collections.emptyList();
-        }
+        checkDao();
         return dao.loadForLevel(level);
     }
 
     public List<Activity> loadForTYpe(int typeId) {
-        if (dao == null) {
-            return Collections.emptyList();
-        }
+        checkDao();
         return dao.loadForType(new Type(typeId, ""));
     }
 
     public List<Activity> loadForLevelAndType(Level level, int typeId) {
-        if (dao == null) {
-            return Collections.emptyList();
-        }
+        checkDao();
         List<Activity> levelActivities = loadForLevel(level);
         return Filter.filterForType(levelActivities, new Type(typeId, ""));
     }

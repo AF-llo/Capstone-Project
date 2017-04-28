@@ -9,15 +9,21 @@ import android.view.ViewGroup;
 
 import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.databinding.FragmentMoreBinding;
+import de.ironcoding.fitsim.ui.presenter.MorePresenter;
 
 /**
  * Created by larsl on 27.04.2017.
  */
 
-public class MoreFragment extends BaseFragment {
+public class MoreFragment extends BaseFragment<MorePresenter> {
 
     public static MoreFragment getInstance() {
         return new MoreFragment();
+    }
+
+    @Override
+    public MorePresenter createPresenter() {
+        return new MorePresenter();
     }
 
     @Nullable
@@ -25,10 +31,5 @@ public class MoreFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentMoreBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_more, container, false);
         return binding.getRoot();
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
     }
 }

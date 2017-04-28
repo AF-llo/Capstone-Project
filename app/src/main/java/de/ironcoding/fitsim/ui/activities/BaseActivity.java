@@ -17,7 +17,6 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getFitSimApp().getAppComponent().injectBaseActivity(this);
     }
 
     public FitSimApp getFitSimApp() {
@@ -26,6 +25,7 @@ public class BaseActivity extends AppCompatActivity {
 
     protected void replaceContent(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                 .replace(R.id.content, fragment)
                 .commit();
     }

@@ -16,8 +16,12 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven {
+            url "http://s2.appsfactory.de/APPSfactory/Maven"
+        }
     }
 }
+
 
 task clean(type: Delete) {
     delete rootProject.buildDir

@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="profileFragment"
-            type="de.ironcoding.fitsim.ui.fragments.ProfileFragment"/>
+            name="profilePresenter"
+            type="de.ironcoding.fitsim.ui.presenter.ProfilePresenter"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -25,7 +25,7 @@
 
                 <include
                     layout="@layout/layout_header"
-                    bind:athleteModel="@{profileFragment.athleteModel}"/>
+                    bind:athleteModel="@{profilePresenter.athleteModel}"/>
 
             </android.support.v7.widget.Toolbar>
 

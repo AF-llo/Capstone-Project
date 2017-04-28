@@ -7,8 +7,8 @@
 
     <data>
         <variable
-            name="gymFragment"
-            type="de.ironcoding.fitsim.ui.fragments.GymFragment"/>
+            name="gymPresenter"
+            type="de.ironcoding.fitsim.ui.presenter.GymPresenter"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -27,31 +27,18 @@
 
                 <include
                     layout="@layout/layout_header"
-                    bind:athleteModel="@{gymFragment.athleteModel}"/>
+                    bind:athleteModel="@{gymPresenter.athleteModel}"/>
 
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.AppBarLayout>
 
-        <android.support.v4.widget.NestedScrollView
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_m"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/gym" />
-
-            </FrameLayout>
-
-        </android.support.v4.widget.NestedScrollView>
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/spacing_m"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:items="@{gymPresenter.activities}"/>
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>

@@ -1,6 +1,5 @@
 package de.ironcoding.fitsim.repository;
 
-import java.util.Collections;
 import java.util.List;
 
 import de.ironcoding.fitsim.logic.Level;
@@ -16,31 +15,18 @@ public class NutritionRepository extends BaseDaoRepository<List<Nutrition>, INut
         super(nutritionDao);
     }
 
-    public List<Nutrition> loadAll() {
-        if (dao == null) {
-            return Collections.emptyList();
-        }
-        return dao.load();
-    }
-
     public List<Nutrition> loadForLevel(Level level) {
-        if (dao == null) {
-            return Collections.emptyList();
-        }
+        checkDao();
         return dao.loadForLevel(level);
     }
 
     public List<Nutrition> loadForTYpe(int typeId) {
-        if (dao == null) {
-            return Collections.emptyList();
-        }
+        checkDao();
         return dao.loadForType(new Type(typeId, ""));
     }
 
     public List<Nutrition> loadForLevelAndType(Level level, int typeId) {
-        if (dao == null) {
-            return Collections.emptyList();
-        }
+        checkDao();
         List<Nutrition> levelNutrition = loadForLevel(level);
         return Filter.filterForType(levelNutrition, new Type(typeId, ""));
     }

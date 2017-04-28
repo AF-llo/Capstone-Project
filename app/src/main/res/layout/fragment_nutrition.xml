@@ -7,8 +7,8 @@
 
     <data>
         <variable
-            name="nutritionFragment"
-            type="de.ironcoding.fitsim.ui.fragments.NutritionFragment"/>
+            name="nutritionPresenter"
+            type="de.ironcoding.fitsim.ui.presenter.NutritionPresenter"/>
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -27,7 +27,7 @@
 
                 <include
                     layout="@layout/layout_header"
-                    bind:athleteModel="@{nutritionFragment.athleteModel}"/>
+                    bind:athleteModel="@{nutritionPresenter.athleteModel}"/>
 
             </android.support.v7.widget.Toolbar>
 

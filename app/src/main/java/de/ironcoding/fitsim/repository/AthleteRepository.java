@@ -16,12 +16,9 @@ public class AthleteRepository extends BaseDaoRepository<Athlete, IAthleteDao> {
 
     public Athlete loadAthlete() {
         if (athlete == null) {
-            if (dao == null) {
-                throw new IllegalStateException("No IDao<Athlete> specified to loadAthlete Athlete");
-            }
-            athlete = dao.load();
+            athlete = load();
         }
-        return athlete == null ? null : athlete.copy();
+        return athlete.copy();
     }
 
     public void updateAthlete(Athlete athlete) {
@@ -29,8 +26,7 @@ public class AthleteRepository extends BaseDaoRepository<Athlete, IAthleteDao> {
             return;
         }
         this.athlete = athlete.copy();
-        if (dao != null ) {
-            dao.storeAthlete(athlete);
-        }
+        checkDao();
+        dao.storeAthlete(athlete);
     }
 }

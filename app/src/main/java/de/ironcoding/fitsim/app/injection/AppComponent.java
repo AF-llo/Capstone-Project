@@ -5,9 +5,10 @@ import javax.inject.Singleton;
 import dagger.Component;
 import de.ironcoding.fitsim.ui.activities.BaseActivity;
 import de.ironcoding.fitsim.ui.activities.MainActivity;
-import de.ironcoding.fitsim.ui.fragments.BaseFragment;
-import de.ironcoding.fitsim.ui.fragments.GymFragment;
-import de.ironcoding.fitsim.ui.fragments.NutritionFragment;
+import de.ironcoding.fitsim.ui.presenter.BasePresenter;
+import de.ironcoding.fitsim.ui.presenter.GymPresenter;
+import de.ironcoding.fitsim.ui.presenter.NutritionPresenter;
+import de.ironcoding.fitsim.ui.presenter.ProfilePresenter;
 
 /**
  * Created by larsl on 25.04.2017.
@@ -20,9 +21,12 @@ public interface AppComponent {
 
     void injectMainActivity(MainActivity mainActivity);
 
-    void injectBaseFragment(BaseFragment baseFragment);
+    void injectBasePresenter(BasePresenter basePresenter);
 
-    void injectGymFragment(GymFragment gymFragment);
+    void injectGymPresenter(GymPresenter gymPresenter);
 
-    void injectNutritionFragment(NutritionFragment nutritionFragment);
+    void injectNutritionPresenter(NutritionPresenter nutritionPresenter);
+
+    void injectProfilePresenter(ProfilePresenter profilePresenter);
+
 }

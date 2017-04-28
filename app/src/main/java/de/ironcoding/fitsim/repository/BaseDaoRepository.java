@@ -12,4 +12,15 @@ public abstract class BaseDaoRepository<T, V extends IDao<T>> {
         this.dao = dao;
     }
 
+    protected T load() {
+        checkDao();
+        return dao.load();
+    }
+
+    protected void checkDao() {
+        if (dao == null) {
+            throw new IllegalStateException("You forgot to pass a valid " + IDao.class.getSimpleName());
+        }
+    }
+
 }
