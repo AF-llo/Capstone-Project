@@ -1,10 +1,12 @@
 package de.ironcoding.fitsim.logic;
 
+import de.ironcoding.fitsim.repository.ITypedItem;
+
 /**
  * Created by larsl on 12.04.2017.
  */
 
-public class Nutrition extends BaseLevelItem {
+public class Nutrition extends BaseLevelItem implements ITypedItem {
 
     private final String name;
 
@@ -14,7 +16,9 @@ public class Nutrition extends BaseLevelItem {
 
     private final float fat;
 
-    public Nutrition(String name, float proteine, float carbs, float fat, int minLevel) {
+    private final int typeId;
+
+    public Nutrition(String name, float proteine, float carbs, float fat, int minLevel, int type) {
         super(minLevel);
         if (name == null) {
             name = "";
@@ -23,6 +27,7 @@ public class Nutrition extends BaseLevelItem {
         this.proteine = proteine;
         this.carbs = carbs;
         this.fat = fat;
+        this.typeId = type;
     }
 
     public String getName() {
@@ -39,6 +44,10 @@ public class Nutrition extends BaseLevelItem {
 
     public float getFat() {
         return fat;
+    }
+
+    public Type getType() {
+        return new Type(typeId, name);
     }
 
     protected void consume(Body.Stats stats, Body.Fitness fitness) {}

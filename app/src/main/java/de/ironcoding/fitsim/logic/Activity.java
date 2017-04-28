@@ -1,10 +1,12 @@
 package de.ironcoding.fitsim.logic;
 
+import de.ironcoding.fitsim.repository.ITypedItem;
+
 /**
  * Created by larsl on 12.04.2017.
  */
 
-public abstract class Activity extends BaseLevelItem {
+public abstract class Activity extends BaseLevelItem implements ITypedItem {
 
     private static final float BASE_ATTRACTION_FROM_EFFORT = 0.1F;
 
@@ -29,7 +31,9 @@ public abstract class Activity extends BaseLevelItem {
 
     private final float duration;
 
-    Activity(String name, float pal, int effort, int experience, float duration, int minLevel) {
+    private final int typeId;
+
+    Activity(String name, float pal, int effort, int experience, float duration, int minLevel, int typeId) {
         super(minLevel);
         if (pal < 0) {
             pal = 0;
@@ -54,10 +58,11 @@ public abstract class Activity extends BaseLevelItem {
         this.effort = effort;
         this.experience = experience;
         this.duration = duration;
+        this.typeId = typeId;
     }
 
-    Activity(String name, float pal, int effort, int experience, int minLevel) {
-        this(name, pal, effort, experience, DEFAULT_DURATION, minLevel);
+    Activity(String name, float pal, int effort, int experience, int minLevel, int type) {
+        this(name, pal, effort, experience, DEFAULT_DURATION, minLevel, type);
     }
 
     public String getName() {
@@ -82,6 +87,10 @@ public abstract class Activity extends BaseLevelItem {
 
     public long getDurationInMillis() {
         return (long) (duration * MILLIS_PER_HOUR);
+    }
+
+    public Type getType() {
+        return new Type(typeId, name);
     }
 
     public int getAttraction(float buildUp) {

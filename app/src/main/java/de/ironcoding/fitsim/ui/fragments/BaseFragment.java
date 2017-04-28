@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import de.ironcoding.fitsim.app.FitSimApp;
-import de.ironcoding.fitsim.app.injection.RepositoryModule;
+import de.ironcoding.fitsim.app.injection.MockRepositoryModule;
 import de.ironcoding.fitsim.logic.Athlete;
 import de.ironcoding.fitsim.repository.AthleteRepository;
 import de.ironcoding.fitsim.ui.activities.BaseActivity;
@@ -28,7 +28,7 @@ public class BaseFragment extends Fragment {
     AppSettings appSettings;
 
     @Inject
-    @Named(RepositoryModule.REPOSITORY_MOCKED)
+    @Named(MockRepositoryModule.REPOSITORY_MOCKED)
     AthleteRepository athleteRepository;
 
     public ObservableField<AthleteViewModel> athleteModel = new ObservableField<>();
@@ -49,7 +49,7 @@ public class BaseFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        setAthlete(athleteRepository.load(null));
+        setAthlete(athleteRepository.loadAthlete());
     }
 
     protected FitSimApp getFitSimApp() {

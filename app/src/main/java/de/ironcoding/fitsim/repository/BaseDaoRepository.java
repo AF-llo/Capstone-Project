@@ -4,14 +4,12 @@ package de.ironcoding.fitsim.repository;
  * Created by larsl on 18.04.2017.
  */
 
-public abstract class BaseDaoRepository<T> implements IRepository<T> {
+public abstract class BaseDaoRepository<T, V extends IDao<T>> {
 
-    protected final IDao<T> dao;
+    protected final V dao;
 
-    protected BaseDaoRepository(IDao<T> dao) {
+    protected BaseDaoRepository(V dao) {
         this.dao = dao;
     }
-
-
 
 }

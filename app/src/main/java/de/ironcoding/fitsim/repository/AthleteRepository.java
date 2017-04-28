@@ -6,23 +6,20 @@ import de.ironcoding.fitsim.logic.Athlete;
  * Created by larsl on 18.04.2017.
  */
 
-public class AthleteRepository implements IAthleteRepository {
-
-    private IAthleteDao athleteDao;
+public class AthleteRepository extends BaseDaoRepository<Athlete, IAthleteDao> {
 
     private Athlete athlete;
 
-    public AthleteRepository(IAthleteDao athleteDao){
-        this.athleteDao = athleteDao;
+    public AthleteRepository(IAthleteDao athleteDao) {
+        super(athleteDao);
     }
 
-    @Override
-    public Athlete load(ISpecification specification) {
+    public Athlete loadAthlete() {
         if (athlete == null) {
-            if (athleteDao == null) {
-                throw new IllegalStateException("No IDao<Athlete> specified to load Athlete");
+            if (dao == null) {
+                throw new IllegalStateException("No IDao<Athlete> specified to loadAthlete Athlete");
             }
-            athlete = athleteDao.load();
+            athlete = dao.load();
         }
         return athlete == null ? null : athlete.copy();
     }
@@ -32,8 +29,8 @@ public class AthleteRepository implements IAthleteRepository {
             return;
         }
         this.athlete = athlete.copy();
-        if (athleteDao != null ) {
-            athleteDao.storeAthlete(athlete);
+        if (dao != null ) {
+            dao.storeAthlete(athlete);
         }
     }
 }

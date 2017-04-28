@@ -6,10 +6,12 @@ package de.ironcoding.fitsim.logic;
 
 public class EnergyBooster extends Nutrition {
 
+    private static final int TYPE_INT = 2;
+
     private final int energy;
 
     public EnergyBooster(String name, int energy, int minLevel) {
-        super(name, 0, 0, 0, minLevel);
+        super(name, 0, 0, 0, minLevel, TYPE_INT);
         if (energy < 0) {
             energy = 0;
         }

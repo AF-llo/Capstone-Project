@@ -39,60 +39,17 @@
             android:layout_margin="@dimen/spacing_m"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/gym" />
-                
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Train Chest"
-                    android:onClick="@{() -> gymFragment.trainChest()}"/>
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Train Back"
-                    android:onClick="@{() -> gymFragment.trainBack()}"/>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Train Biceps"
-                    android:onClick="@{() -> gymFragment.trainBiceps()}"/>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Train Triceps"
-                    android:onClick="@{() -> gymFragment.trainTriceps()}"/>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Cycling"
-                    android:onClick="@{() -> gymFragment.cycle()}"/>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Rest"
-                    android:onClick="@{() -> gymFragment.rest()}"/>
-
-            </LinearLayout>
+            </FrameLayout>
 
         </android.support.v4.widget.NestedScrollView>
 

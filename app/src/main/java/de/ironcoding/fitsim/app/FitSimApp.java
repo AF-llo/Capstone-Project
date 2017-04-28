@@ -5,7 +5,7 @@ import android.app.Application;
 import de.ironcoding.fitsim.app.injection.AppComponent;
 import de.ironcoding.fitsim.app.injection.AppModule;
 import de.ironcoding.fitsim.app.injection.DaggerAppComponent;
-import de.ironcoding.fitsim.app.injection.RepositoryModule;
+import de.ironcoding.fitsim.app.injection.MockRepositoryModule;
 
 /**
  * Created by larsl on 20.04.2017.
@@ -25,7 +25,7 @@ public class FitSimApp extends Application {
     private void initInjection() {
         appComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
-                .repositoryModule(new RepositoryModule())
+                .mockRepositoryModule(new MockRepositoryModule())
                 .build();
     }
 

@@ -14,13 +14,13 @@ import de.ironcoding.fitsim.logic.BodyType;
 import de.ironcoding.fitsim.logic.Calories;
 import de.ironcoding.fitsim.logic.Exercise;
 import de.ironcoding.fitsim.logic.Level;
+import de.ironcoding.fitsim.logic.Meal;
 import de.ironcoding.fitsim.logic.Muscle;
 import de.ironcoding.fitsim.logic.Nutrition;
 import de.ironcoding.fitsim.logic.Skill;
+import de.ironcoding.fitsim.repository.ActivitiesRepository;
 import de.ironcoding.fitsim.repository.AthleteRepository;
-import de.ironcoding.fitsim.repository.IRepository;
-import de.ironcoding.fitsim.repository.LevelListRepository;
-import de.ironcoding.fitsim.repository.LevelSpecification;
+import de.ironcoding.fitsim.repository.NutritionRepository;
 import de.ironcoding.fitsim.repository.mock.ActivitiesMockDao;
 import de.ironcoding.fitsim.repository.mock.AthleteMockDao;
 import de.ironcoding.fitsim.repository.mock.MusclesMockDao;
@@ -213,7 +213,7 @@ public class AthleteUnitTest {
         Athlete athlete = Athlete.buildNew(Body.warmUpAverageMale(BodyType.ENDOMORPH), Collections.<Muscle>emptyList());
         for (int j = 0; j < 7; j++) {
             for (int i = 0; i <= 4; i++) {
-                athlete.eat(new Nutrition("Food", 30, 60, 10, 1));
+                athlete.eat(new Meal("Food", 30, 60, 10, 1));
             }
             athlete.refreshBody();
         }
@@ -221,42 +221,33 @@ public class AthleteUnitTest {
 
     @Test
     public void repository_test() throws Exception {
-        IRepository<List<Muscle>> muscleRepository = new LevelListRepository<>(new MusclesMockDao());
-        IRepository<List<Nutrition>> nutritionRepository = new LevelListRepository<>(new NutritionMockDao());
-        IRepository<List<Activity>> activitiesRepository = new LevelListRepository<>(new ActivitiesMockDao());
+        AthleteRepository athleteRepository = new AthleteRepository(new AthleteMockDao(new MusclesMockDao()));
+        Athlete athlete = athleteRepository.loadAthlete();
+        Level level = athlete.getLevel();
 
-        Level level = Level.create(0);
-        LevelSpecification levelSpecification = new LevelSpecification(level);
+        NutritionRepository nutritionRepository = new NutritionRepository(new NutritionMockDao());
+        ActivitiesRepository activitiesRepository = new ActivitiesRepository(new ActivitiesMockDao());
 
-        List<Muscle> muscles = muscleRepository.load(levelSpecification);
-        Assert.assertEquals(4, muscles.size());
-
-        List<Nutrition> nutritions = nutritionRepository.load(levelSpecification);
+        List<Nutrition> nutritions = nutritionRepository.loadForLevel(level);
         Assert.assertEquals(4, nutritions.size());
 
-        List<Activity> activities = activitiesRepository.load(levelSpecification);
+        List<Activity> activities = activitiesRepository.loadForLevel(level);
         Assert.assertEquals(5, activities.size());
 
         level.gainExperience(5000);
-        levelSpecification.setLevel(level);
 
-        muscles = muscleRepository.load(levelSpecification);
-        Assert.assertEquals(5, muscles.size());
-
-        nutritions = nutritionRepository.load(levelSpecification);
+        nutritions = nutritionRepository.loadForLevel(level);
         Assert.assertEquals(5, nutritions.size());
 
-        activities = activitiesRepository.load(levelSpecification);
+        activities = activitiesRepository.loadForLevel(level);
         Assert.assertEquals(7, activities.size());
 
-        AthleteRepository repository = new AthleteRepository(new AthleteMockDao(new MusclesMockDao()));
-        Athlete athlete = repository.load(null);
-        athlete.eat(new Nutrition("Food", 10, 30, 5, 1));
+        athlete.eat(new Meal("Food", 10, 30, 5, 1));
         Activity exercise = new Exercise("Benchpress", 1.4F, 20, 50, 1, 1);
         athlete.doActivity(exercise, true);
         long duration = exercise.getDurationInMillis();
         athlete.setReady();
-        repository.updateAthlete(athlete);
-        athlete = repository.load(null);
+        athleteRepository.updateAthlete(athlete);
+        athlete = athleteRepository.loadAthlete();
     }
 }
