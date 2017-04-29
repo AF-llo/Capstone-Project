@@ -1,12 +1,13 @@
 package de.ironcoding.fitsim.logic;
 
 import de.ironcoding.fitsim.repository.ITypedItem;
+import de.ironcoding.fitsim.util.GameTimeUtil;
 
 /**
  * Created by larsl on 12.04.2017.
  */
 
-public class Nutrition extends BaseLevelItem implements ITypedItem {
+public abstract class Nutrition extends BaseLevelItem implements ITypedItem {
 
     private final String name;
 
@@ -18,16 +19,26 @@ public class Nutrition extends BaseLevelItem implements ITypedItem {
 
     private final int typeId;
 
-    public Nutrition(String name, float proteine, float carbs, float fat, int minLevel, int type) {
+    private final float duration;
+
+    public Nutrition(String name, float proteine, float carbs, float fat, int minLevel, int type, float duration) {
         super(minLevel);
         if (name == null) {
             name = "";
+        }
+
+        if (duration < 0) {
+            duration = 0;
+        }
+        if (duration > GameTimeUtil.MAX_DURATION) {
+            duration = GameTimeUtil.MAX_DURATION;
         }
         this.name = name;
         this.proteine = proteine;
         this.carbs = carbs;
         this.fat = fat;
         this.typeId = type;
+        this.duration = duration;
     }
 
     public String getName() {
@@ -50,6 +61,16 @@ public class Nutrition extends BaseLevelItem implements ITypedItem {
         return new Type(typeId, name);
     }
 
-    protected void consume(Body.Stats stats, Body.Fitness fitness) {}
+    public long getDuration() {
+        return GameTimeUtil.durationInMillis(duration);
+    }
+
+    protected void consume(Body.Stats stats, Body.Fitness fitness) {
+        if (duration > 0) {
+            stats.setSaturated(true);
+        }
+    }
+
+    protected abstract boolean isAccepted(Body body);
 
 }

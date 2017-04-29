@@ -242,10 +242,11 @@ public class AthleteUnitTest {
         activities = activitiesRepository.loadForLevel(level);
         Assert.assertEquals(7, activities.size());
 
-        athlete.eat(new Meal("Food", 10, 30, 5, 1));
-        Assert.assertEquals(false, athlete.canEat());
+        Nutrition meal = new Meal("Food", 10, 30, 5, 1);
+        athlete.eat(meal);
+        Assert.assertEquals(false, athlete.canEat(meal));
         athlete.goToRestRoom();
-        Assert.assertEquals(true, athlete.canEat());
+        Assert.assertEquals(true, athlete.canEat(meal));
         Activity exercise = new Exercise("Benchpress", 1.4F, 20, 50, 1, 1);
         athlete.doActivity(exercise, true);
         long duration = exercise.getDurationInMillis();

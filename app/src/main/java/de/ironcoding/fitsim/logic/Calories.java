@@ -1,12 +1,14 @@
 package de.ironcoding.fitsim.logic;
 
+import de.ironcoding.fitsim.util.GameTimeUtil;
+
 /**
  * Created by larsl on 14.04.2017.
  */
 
 public class Calories {
 
-    private static final float KG_PER_KCAL_PER_DAY = 0.001F  /  Activity.DAYS_PER_WEEK;
+    private static final float KG_PER_KCAL_PER_DAY = 0.001F  /  GameTimeUtil.DAYS_PER_WEEK;
 
     public static final float KCAL_PER_G_PROTEINE = 4.1F;
     public static final float KCAL_PER_G_CARBS = 4.1F;
@@ -90,8 +92,8 @@ public class Calories {
         if (hours < 0) {
             hours = 0;
         }
-        if (hours > Activity.MAX_DURATION) {
-            hours = Activity.MAX_DURATION;
+        if (hours > GameTimeUtil.MAX_DURATION) {
+            hours = GameTimeUtil.MAX_DURATION;
         }
         requiredEnergy += energyMetabolismForPal(metabolicRate, pal, hours);
     }
@@ -263,10 +265,10 @@ public class Calories {
             hours = 0;
         }
 
-        if (hours > Activity.MAX_DURATION) {
-            hours = Activity.MAX_DURATION;
+        if (hours > GameTimeUtil.MAX_DURATION) {
+            hours = GameTimeUtil.MAX_DURATION;
         }
-        return metabolicRate * pal * hours / Activity.MAX_DURATION;
+        return metabolicRate * pal * hours / GameTimeUtil.MAX_DURATION;
     }
 
 }

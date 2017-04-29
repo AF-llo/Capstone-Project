@@ -1,6 +1,7 @@
 package de.ironcoding.fitsim.logic;
 
 import de.ironcoding.fitsim.repository.ITypedItem;
+import de.ironcoding.fitsim.util.GameTimeUtil;
 
 /**
  * Created by larsl on 12.04.2017.
@@ -10,16 +11,7 @@ public abstract class Activity extends BaseLevelItem implements ITypedItem {
 
     private static final float BASE_ATTRACTION_FROM_EFFORT = 0.1F;
 
-    /**
-     * Default duration of an activity: 0.05h = 3min
-     */
-    public static final float DEFAULT_DURATION = 0.1F;
-
-    public static final float MAX_DURATION = 24.0F;
-
-    private static final long MILLIS_PER_HOUR = 60 * 60 * 1000;
-
-    public static final float DAYS_PER_WEEK = 7.0F;
+    public static final float DEFAULT_ACTIVITY_DURATION_HOURS = 0.5F;
 
     private final float pal;
 
@@ -50,8 +42,8 @@ public abstract class Activity extends BaseLevelItem implements ITypedItem {
         if (duration < 0) {
             duration = 0;
         }
-        if (duration > MAX_DURATION) {
-            duration = MAX_DURATION;
+        if (duration > GameTimeUtil.MAX_DURATION) {
+            duration = GameTimeUtil.MAX_DURATION;
         }
         this.name = name;
         this.pal = pal;
@@ -62,7 +54,7 @@ public abstract class Activity extends BaseLevelItem implements ITypedItem {
     }
 
     Activity(String name, float pal, int effort, int experience, int minLevel, int type) {
-        this(name, pal, effort, experience, DEFAULT_DURATION, minLevel, type);
+        this(name, pal, effort, experience, DEFAULT_ACTIVITY_DURATION_HOURS, minLevel, type);
     }
 
     public String getName() {
@@ -86,7 +78,7 @@ public abstract class Activity extends BaseLevelItem implements ITypedItem {
     }
 
     public long getDurationInMillis() {
-        return (long) (duration * MILLIS_PER_HOUR);
+        return GameTimeUtil.durationInMillis(duration);
     }
 
     public Type getType() {

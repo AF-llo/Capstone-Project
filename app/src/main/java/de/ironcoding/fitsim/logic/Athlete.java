@@ -63,8 +63,11 @@ public class Athlete {
 
     // BEGIN all actions for athleteModel
 
+    /**
+     * The athlete will eat only when he is able to. This can be checked by calling {@link #canEat(Nutrition)}
+     */
     public void eat(Nutrition nutrition) {
-        if (!canEat()) {
+        if (!canEat(nutrition)) {
             return;
         }
         if (nutrition == null) {
@@ -73,6 +76,13 @@ public class Athlete {
         body.digest(nutrition);
     }
 
+    /**
+     * The athle will only perform this activity when is able to. This can be checked by {@link #isAbleToDo(Activity)}
+     *
+     * @param isBusy
+     *                      When true is passed, the athlet will be busy an not able to perfom further
+     *                      Activities. Than {@link #setReady()} must be called to release this state
+     */
     public void doActivity(Activity activity, boolean isBusy) {
         if (!isAbleToDo(activity)) {
             return;
@@ -82,27 +92,42 @@ public class Athlete {
         body.performActivity(activity);
     }
 
+    /**
+     * This will release from beeing saturated which will force that the Athlete can eat new {@link Meal}.
+     */
     public void goToRestRoom() {
         body.defecate();
     }
 
-    public boolean canEat() {
-        return body.canEat();
+    /**
+     * This will check if the ahtletes body can process this nutrition.
+     */
+    public boolean canEat(Nutrition nutrition) {
+        return nutrition.isAccepted(body);
     }
 
     public void refreshBody() {
         body.refresh();
     }
 
+    /**
+     * This will improve every muscles state by one step.
+     */
     public void relaxMuscles() {
         Muscles.get().relaxAll();
     }
 
+    /**
+     * This will force all muscles to shrink. Also the bodies fitness will impair.
+     */
     public void muscleBreakDown() {
         Muscles.get().breakDown();
         body.breakDown();
     }
 
+    /**
+     * This will enable the athlete to do activities again.
+     */
     public void setReady() {
         isBusy = false;
     }
