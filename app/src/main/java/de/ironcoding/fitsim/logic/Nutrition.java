@@ -19,26 +19,26 @@ public abstract class Nutrition extends BaseLevelItem implements ITypedItem {
 
     private final int typeId;
 
-    private final float duration;
+    private final float saturationDuration;
 
-    public Nutrition(String name, float proteine, float carbs, float fat, int minLevel, int type, float duration) {
+    public Nutrition(String name, float proteine, float carbs, float fat, int minLevel, int type, float saturationDuration) {
         super(minLevel);
         if (name == null) {
             name = "";
         }
 
-        if (duration < 0) {
-            duration = 0;
+        if (saturationDuration < 0) {
+            saturationDuration = 0;
         }
-        if (duration > GameTimeUtil.MAX_DURATION) {
-            duration = GameTimeUtil.MAX_DURATION;
+        if (saturationDuration > GameTimeUtil.MAX_DURATION) {
+            saturationDuration = GameTimeUtil.MAX_DURATION;
         }
         this.name = name;
         this.proteine = proteine;
         this.carbs = carbs;
         this.fat = fat;
         this.typeId = type;
-        this.duration = duration;
+        this.saturationDuration = saturationDuration;
     }
 
     public String getName() {
@@ -61,12 +61,12 @@ public abstract class Nutrition extends BaseLevelItem implements ITypedItem {
         return new Type(typeId, name);
     }
 
-    public long getDuration() {
-        return GameTimeUtil.durationInMillis(duration);
+    public long getSaturationDuration() {
+        return GameTimeUtil.durationInMillis(saturationDuration);
     }
 
     protected void consume(Body.Stats stats, Body.Fitness fitness) {
-        if (duration > 0) {
+        if (saturationDuration > 0) {
             stats.setSaturated(true);
         }
     }
