@@ -24,7 +24,7 @@ public class ActivitiesMockDao implements IActivitiesDao {
         activities.add(new Exercise("Scottcurls", 1.25F, 10, 30, MockMuscles.BICEPS, 1));
         activities.add(new Exercise("Pulldowns", 1.2F, 10, 30, MockMuscles.TRICEPS, 1));
         activities.add(new Exercise("Farmers Walk", 1.3F, 15, 35, MockMuscles.FOREARMS, 5));
-        activities.add(new Cardio("Cycling", 1.5F, 20, 40, 1));
+        activities.add(new Cardio("Cycling", 1.5F, 20, 500, 1));
         activities.add(new Cardio("Rowing Machine", 1.6F, 25, 40, 5));
         return activities;
     }

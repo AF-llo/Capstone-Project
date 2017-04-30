@@ -49,9 +49,10 @@
             app:behavior_peekHeight ="0dp"
             tools:visibility="visible">
 
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/bottom_sheet_height">
+                android:layout_height="@dimen/bottom_sheet_height"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -61,7 +62,15 @@
                     android:text="@{nutritionPresenter.selectedNutrition.name}"
                     tools:text="text" />
 
-            </FrameLayout>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/spacing_m"
+                    android:text="@string/consume_nutrition"
+                    android:onClick="@{() -> nutritionPresenter.eatNutrition()}"/>
+
+            </LinearLayout>
 
         </android.support.v4.widget.NestedScrollView>
 

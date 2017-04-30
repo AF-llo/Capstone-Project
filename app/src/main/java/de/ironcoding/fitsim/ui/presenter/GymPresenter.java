@@ -50,18 +50,34 @@ public class GymPresenter extends BasePresenter implements ActivityItemEvent {
     @Override
     protected void onAthleteLoaded() {
         super.onAthleteLoaded();
-        doInBackground(1, () -> activitiesRepository.loadForLevel(getAthlete().getLevel()))
-                .addOnSuccess(this::updateItems)
+        loadActivities();
+    }
+
+    private void loadActivities() {
+        doInBackground(loaderId, () -> activitiesRepository.loadForLevel(getAthlete().getLevel()))
+                .addOnSuccess(loadedActivities -> {
+                    loaderId++;
+                    updateItems(loadedActivities);
+                } )
                 .execute();
     }
 
     private void updateItems(List<Activity> items) {
         Body body = getAthlete().getBody();
+        if (activities.size() > 0) {
+            activities.clear();
+        }
         for (Activity item : items) {
             activities.add(new ActivityRecyclerItem(item, body.getMuscles()));
         }
     }
 
+    /**
+     * This will only force all activities to update its muscles to show new state e.g. when
+     * muscle is now to demanding.
+     * @param muscles
+     *                      Changed muscles
+     */
     private void musclesChanged(Muscles muscles) {
         for (ActivityRecyclerItem activity : activities) {
             activity.setMuscles(muscles);
@@ -93,15 +109,24 @@ public class GymPresenter extends BasePresenter implements ActivityItemEvent {
     }
 
     public void startActivity() {
+        if (getContext() == null) {
+            return;
+        }
         if (selectedActivity == null) {
             return;
         }
+        Athlete currentAthlete = getAthlete();
         Athlete updatedAthlete = athletePreview.get().getAthlete();
+        boolean leveledUp = currentAthlete.getLevel().getValue() < updatedAthlete.getLevel().getValue();
         athletePreview.set(null);
         athleteRepository.updateAthlete(updatedAthlete);
         musclesChanged(updatedAthlete.getBody().getMuscles());
         updateAthlete(updatedAthlete);
         notifyCallbackHideBottomSheet();
+        if (leveledUp) {
+            loadActivities();
+            notifyCallbackShowInterstitial();
+        }
     }
 
     private void updateAthletePreview(Athlete athlete) {

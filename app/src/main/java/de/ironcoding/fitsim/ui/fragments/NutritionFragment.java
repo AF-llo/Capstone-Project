@@ -7,6 +7,7 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.databinding.FragmentNutritionBinding;
@@ -17,7 +18,7 @@ import de.ironcoding.fitsim.ui.presenter.NutritionPresenter;
  * Created by larsl on 27.04.2017.
  */
 
-public class NutritionFragment extends BaseFragment<NutritionPresenter> implements BasePresenter.Callback{
+public class NutritionFragment extends BaseFragment<NutritionPresenter> implements BasePresenter.Callback {
 
     public static NutritionFragment getInstance() {
         return new NutritionFragment();
@@ -48,5 +49,11 @@ public class NutritionFragment extends BaseFragment<NutritionPresenter> implemen
     @Override
     public void hideBottomSheet() {
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+    }
+
+    @Override
+    public void showInterstitial() {
+        // TODO: 30.04.2017
+        Toast.makeText(getContext(), "Show interstitial", Toast.LENGTH_SHORT).show();
     }
 }

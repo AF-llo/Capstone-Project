@@ -7,4 +7,6 @@
     <string name="to_tired">I am to tired right now.</string>
     <string name="train">Start exercise</string>
     <string name="activity_to_demanding">%s is to demanding right now.</string>
+    <string name="consume_nutrition">Consume</string>
+    <string name="to_satured">I am satured.</string>
 </resources>

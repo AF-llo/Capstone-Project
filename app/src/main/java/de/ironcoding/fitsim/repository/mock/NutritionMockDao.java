@@ -23,8 +23,8 @@ public class NutritionMockDao implements INutritionDao {
         mockedNutrition.add(new Meal("Proteineshake", 20, 5, 3, 1));
         mockedNutrition.add(new Meal("Spaghetti", 20, 60, 15, 1));
         mockedNutrition.add(new Meal("Cereals", 30, 50, 10, 1));
-        mockedNutrition.add(new EnergyBooster("Coffee", 10, 1));
-        mockedNutrition.add(new EnergyBooster("Energydrink", 10, 5));
+        mockedNutrition.add(new EnergyBooster("Coffee", 100, 1));
+        mockedNutrition.add(new EnergyBooster("Energydrink", 100, 5));
         return mockedNutrition;
     }
 

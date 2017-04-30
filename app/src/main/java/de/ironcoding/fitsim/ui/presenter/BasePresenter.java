@@ -19,6 +19,8 @@ import de.ironcoding.fitsim.util.AppSettings;
 
 public class BasePresenter extends MVPPresenter {
 
+    protected int loaderId = 0;
+
     @Inject
     AppSettings appSettings;
 
@@ -47,8 +49,9 @@ public class BasePresenter extends MVPPresenter {
     public void onStart() {
         super.onStart();
         if (athleteModel.get() == null) {
-            doInBackground(0, () -> athleteRepository.loadAthlete())
+            doInBackground(loaderId, () -> athleteRepository.loadAthlete())
                     .addOnSuccess(athlete -> {
+                        loaderId++;
                         setAthlete(athlete);
                         onAthleteLoaded();
                     })
@@ -101,8 +104,15 @@ public class BasePresenter extends MVPPresenter {
         }
     }
 
+    protected void notifyCallbackShowInterstitial() {
+        if (callback != null) {
+            callback.showInterstitial();
+        }
+    }
+
     public interface Callback {
         void showBottomSheet();
         void hideBottomSheet();
+        void showInterstitial();
     }
 }
