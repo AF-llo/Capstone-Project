@@ -29,6 +29,10 @@ public class Muscles {
         return availableMuscles != null && availableMuscles.get(muscleId) != null;
     }
 
+    Muscle getMuscle(int muscleId) {
+        return availableMuscles.get(muscleId);
+    }
+
     void strain(int musleId, int attraction) {
         availableMuscles.get(musleId).strain(attraction);
     }

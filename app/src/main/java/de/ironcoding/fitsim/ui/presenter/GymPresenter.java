@@ -12,9 +12,11 @@ import javax.inject.Named;
 
 import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.app.injection.MockRepositoryModule;
-import de.ironcoding.fitsim.events.ActivitySelectedEvent;
+import de.ironcoding.fitsim.events.ActivityItemEvent;
 import de.ironcoding.fitsim.logic.Activity;
 import de.ironcoding.fitsim.logic.Athlete;
+import de.ironcoding.fitsim.logic.Body;
+import de.ironcoding.fitsim.logic.Muscles;
 import de.ironcoding.fitsim.repository.ActivitiesRepository;
 import de.ironcoding.fitsim.ui.model.ActivityRecyclerItem;
 import de.ironcoding.fitsim.ui.model.AthleteActivityPreviewViewModel;
@@ -23,7 +25,7 @@ import de.ironcoding.fitsim.ui.model.AthleteActivityPreviewViewModel;
  * Created by larsl on 28.04.2017.
  */
 
-public class GymPresenter extends BasePresenter implements ActivitySelectedEvent {
+public class GymPresenter extends BasePresenter implements ActivityItemEvent {
 
     @Inject
     @Named(MockRepositoryModule.REPOSITORY_MOCKED)
@@ -54,8 +56,15 @@ public class GymPresenter extends BasePresenter implements ActivitySelectedEvent
     }
 
     private void updateItems(List<Activity> items) {
+        Body body = getAthlete().getBody();
         for (Activity item : items) {
-            activities.add(new ActivityRecyclerItem(item));
+            activities.add(new ActivityRecyclerItem(item, body.getMuscles()));
+        }
+    }
+
+    private void musclesChanged(Muscles muscles) {
+        for (ActivityRecyclerItem activity : activities) {
+            activity.setMuscles(muscles);
         }
     }
 
@@ -71,8 +80,16 @@ public class GymPresenter extends BasePresenter implements ActivitySelectedEvent
         }
         previewAthlete.doActivity(activity);
         updateAthletePreview(previewAthlete);
-        selectedActivity.set(new ActivityRecyclerItem(activity));
+        selectedActivity.set(new ActivityRecyclerItem(activity, previewAthlete.getBody().getMuscles()));
         notifyCallbackShowBottomSheet();
+    }
+
+    @Override
+    public void onActivityToDemanding(Activity activity) {
+        if (getContext() == null) {
+            return;
+        }
+        Toast.makeText(getContext(), getContext().getString(R.string.activity_to_demanding, activity.getName()), Toast.LENGTH_SHORT).show();
     }
 
     public void startActivity() {
@@ -82,8 +99,8 @@ public class GymPresenter extends BasePresenter implements ActivitySelectedEvent
         Athlete updatedAthlete = athletePreview.get().getAthlete();
         athletePreview.set(null);
         athleteRepository.updateAthlete(updatedAthlete);
+        musclesChanged(updatedAthlete.getBody().getMuscles());
         updateAthlete(updatedAthlete);
-        // TODO: 30.04.2017 update activity entries
         notifyCallbackHideBottomSheet();
     }
 

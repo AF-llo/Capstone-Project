@@ -128,6 +128,10 @@ public class Body {
         muscles.breakDown();
     }
 
+    public Muscle getMuscle(int muscleId) {
+        return muscles.getMuscle(muscleId);
+    }
+
     void defecate() {
         stats.setSaturated(false);
     }

@@ -4,6 +4,7 @@
     <string name="gym">Fitnessstudio</string>
     <string name="nutrition">Ernährung</string>
     <string name="more">Mehr</string>
-    <string name="to_tired">Ich bin zu geschafft.</string>
+    <string name="to_tired">Ich bin jetzt zu geschafft.</string>
     <string name="train">Starte Übung</string>
+    <string name="activity_to_demanding">%s ist mir gerade zu Anstrengend.</string>
 </resources>
