@@ -35,4 +35,8 @@ public class ActivityRecyclerItem extends MVPEventRecyclerItem<ActivitySelectedE
     public void clicked() {
         getEvents().onActivitySelected(activity);
     }
+
+    public Activity getActivity() {
+        return activity;
+    }
 }

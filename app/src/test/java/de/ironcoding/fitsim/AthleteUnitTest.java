@@ -248,7 +248,7 @@ public class AthleteUnitTest {
         athlete.goToRestRoom();
         Assert.assertEquals(true, athlete.canEat(meal));
         Activity exercise = new Exercise("Benchpress", 1.4F, 20, 50, 1, 1);
-        athlete.doActivity(exercise, true);
+        athlete.doActivity(exercise);
         long duration = exercise.getDurationInMillis();
         athlete.setReady();
         athleteRepository.updateAthlete(athlete);

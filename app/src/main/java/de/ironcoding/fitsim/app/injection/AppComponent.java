@@ -3,7 +3,6 @@ package de.ironcoding.fitsim.app.injection;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import de.ironcoding.fitsim.ui.activities.BaseActivity;
 import de.ironcoding.fitsim.ui.activities.MainActivity;
 import de.ironcoding.fitsim.ui.presenter.BasePresenter;
 import de.ironcoding.fitsim.ui.presenter.GymPresenter;
@@ -16,8 +15,6 @@ import de.ironcoding.fitsim.ui.presenter.ProfilePresenter;
 @Singleton
 @Component(modules = {AppModule.class, MockRepositoryModule.class})
 public interface AppComponent {
-
-    void injectBaseActivity(BaseActivity baseActivity);
 
     void injectMainActivity(MainActivity mainActivity);
 

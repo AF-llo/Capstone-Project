@@ -4,4 +4,6 @@
     <string name="gym">Gym</string>
     <string name="nutrition">Nutrition</string>
     <string name="more">More</string>
+    <string name="to_tired">I am to tired.</string>
+    <string name="train">Start exercise</string>
 </resources>

@@ -56,6 +56,14 @@ public class BasePresenter extends MVPPresenter {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (callback != null) {
+            callback = null;
+        }
+    }
+
     protected void onAthleteLoaded() {
     }
 

@@ -3,12 +3,14 @@ package de.ironcoding.fitsim.ui.presenter;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
 import android.databinding.ObservableList;
+import android.widget.Toast;
 
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.app.injection.MockRepositoryModule;
 import de.ironcoding.fitsim.events.ActivitySelectedEvent;
 import de.ironcoding.fitsim.logic.Activity;
@@ -62,9 +64,27 @@ public class GymPresenter extends BasePresenter implements ActivitySelectedEvent
         if (getContext() == null) {
             return;
         }
+        Athlete previewAthlete = getAthlete().copy();
+        if (!previewAthlete.isAbleToDo(activity)) {
+            Toast.makeText(getContext(), getContext().getString(R.string.to_tired), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        previewAthlete.doActivity(activity);
+        updateAthletePreview(previewAthlete);
         selectedActivity.set(new ActivityRecyclerItem(activity));
-        updateAthletePreview(getAthlete().copy());
         notifyCallbackShowBottomSheet();
+    }
+
+    public void startActivity() {
+        if (selectedActivity == null) {
+            return;
+        }
+        Athlete athlete = getAthlete();
+        athlete.doActivity(selectedActivity.get().getActivity());
+        athleteRepository.updateAthlete(athlete);
+        updateAthlete(athlete);
+        // TODO: 30.04.2017 update activity entries
+        notifyCallbackHideBottomSheet();
     }
 
     private void updateAthletePreview(Athlete athlete) {

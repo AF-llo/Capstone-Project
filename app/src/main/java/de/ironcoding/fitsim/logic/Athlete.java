@@ -77,17 +77,13 @@ public class Athlete {
     }
 
     /**
-     * The athle will only perform this activity when is able to. This can be checked by {@link #isAbleToDo(Activity)}
+     * The athlete will only perform this activity when is able to. This can be checked by {@link #isAbleToDo(Activity)}
      *
-     * @param isBusy
-     *                      When true is passed, the athlet will be busy an not able to perfom further
-     *                      Activities. Than {@link #setReady()} must be called to release this state
      */
-    public void doActivity(Activity activity, boolean isBusy) {
+    public void doActivity(Activity activity) {
         if (!isAbleToDo(activity)) {
             return;
         }
-        this.isBusy = isBusy;
         gainExperience(activity.getExperience());
         body.performActivity(activity);
     }
@@ -123,6 +119,14 @@ public class Athlete {
     public void muscleBreakDown() {
         Muscles.get().breakDown();
         body.breakDown();
+    }
+
+    /**
+     * When called, the athlet will be busy an not able to perfom further
+     * Activities. Than {@link #setReady()} must be called to release this state
+     */
+    public void setBusy() {
+        isBusy = true;
     }
 
     /**

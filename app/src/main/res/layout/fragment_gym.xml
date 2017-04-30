@@ -44,24 +44,32 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/bottom_sheet_height"
             android:clipToPadding="true"
-            android:background="@color/blue_light"
+            android:background="@color/white"
             app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
-            app:behavior_peekHeight ="0dp"
-            tools:visibility="visible">
+            app:behavior_peekHeight="0dp">
 
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/bottom_sheet_height">
+                android:layout_height="@dimen/bottom_sheet_height"
+                android:orientation="vertical">
 
                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:actionBarSize"
+                    android:gravity="center"
+                    android:text="@{gymPresenter.selectedActivity.name}"
+                    android:background="@color/blue_light"
+                    tools:text="Benchpress" />
+
+                <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_margin="@dimen/spacing_m"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@{gymPresenter.selectedActivity.name}"
-                    tools:text="text" />
+                    android:text="@string/train"
+                    android:onClick="@{() -> gymPresenter.startActivity()}"/>
 
-            </FrameLayout>
+            </LinearLayout>
 
         </android.support.v4.widget.NestedScrollView>
 
