@@ -4,7 +4,6 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import java.util.Collections;
 import java.util.List;
 
 import de.ironcoding.fitsim.logic.Activity;
@@ -15,7 +14,6 @@ import de.ironcoding.fitsim.logic.Calories;
 import de.ironcoding.fitsim.logic.Exercise;
 import de.ironcoding.fitsim.logic.Level;
 import de.ironcoding.fitsim.logic.Meal;
-import de.ironcoding.fitsim.logic.Muscle;
 import de.ironcoding.fitsim.logic.Nutrition;
 import de.ironcoding.fitsim.logic.Skill;
 import de.ironcoding.fitsim.repository.ActivitiesRepository;
@@ -79,7 +77,7 @@ public class AthleteUnitTest {
 
     @Test
     public void calories_proportional_calculations_test() throws Exception {
-        Body body = Body.warmUpAverageMale(BodyType.ENDOMORPH);
+        Body body = Body.warmUpAverageMale(BodyType.ENDOMORPH, new MusclesMockDao().load());
         Calories calories = body.getCalories();
         float totalCalories = 2200;
 
@@ -130,7 +128,7 @@ public class AthleteUnitTest {
 
         // increase energy
 
-        Body body = Body.warmUpAverageMale(BodyType.ENDOMORPH);
+        Body body = Body.warmUpAverageMale(BodyType.ENDOMORPH, new MusclesMockDao().load());
         Calories calories = body.getCalories();
         calories.increaseRequiredEnergy(1.4F, 8);
         Assert.assertEquals(2391.4756F, calories.getRequiredEnergy());
@@ -210,7 +208,7 @@ public class AthleteUnitTest {
     @Test
     public void athlete_test() throws Exception {
         // TODO: 15.04.2017
-        Athlete athlete = Athlete.buildNew(Body.warmUpAverageMale(BodyType.ENDOMORPH), Collections.<Muscle>emptyList());
+        Athlete athlete = Athlete.buildNew(Body.warmUpAverageMale(BodyType.ENDOMORPH, new MusclesMockDao().load()));
         for (int j = 0; j < 7; j++) {
             for (int i = 0; i <= 4; i++) {
                 athlete.eat(new Meal("Food", 30, 60, 10, 1));

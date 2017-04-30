@@ -4,7 +4,6 @@ import android.support.annotation.IntDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.util.List;
 
 /**
  * Created by larsl on 12.04.2017.
@@ -26,18 +25,17 @@ public class Athlete {
 
     private Athlete () {}
 
-    public static Athlete buildNew(Body body, List<Muscle> muscles) {
-        return build(0, body, muscles);
+    public static Athlete buildNew(Body body) {
+        return build(0, body);
     }
 
-    public static Athlete build(int experience, Body body, List<Muscle> muscles) {
+    public static Athlete build(int experience, Body body) {
         Athlete athlete = new Athlete();
         if (body == null) {
             throw new IllegalArgumentException("Your body was null. An athlets needs a body to train and do sport");
         }
         athlete.level = Level.create(experience);
         athlete.body = body;
-        Muscles.buildUpMuscles(muscles);
         return athlete;
     }
 
@@ -55,10 +53,6 @@ public class Athlete {
      */
     public Body getBody() {
         return body.copy();
-    }
-
-    public List<Muscle> getMuscles() {
-        return Muscles.get().getAll();
     }
 
     // BEGIN all actions for athleteModel
@@ -110,14 +104,13 @@ public class Athlete {
      * This will improve every muscles state by one step.
      */
     public void relaxMuscles() {
-        Muscles.get().relaxAll();
+        body.relaxAllMuscles();
     }
 
     /**
      * This will force all muscles to shrink. Also the bodies fitness will impair.
      */
     public void muscleBreakDown() {
-        Muscles.get().breakDown();
         body.breakDown();
     }
 

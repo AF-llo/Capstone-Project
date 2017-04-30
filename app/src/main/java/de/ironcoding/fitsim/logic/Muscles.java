@@ -11,26 +11,18 @@ import java.util.Map;
 
 public class Muscles {
 
-    private static Map<Integer, Muscle> availableMuscles = new HashMap<>();
+    private Map<Integer, Muscle> availableMuscles = new HashMap<>();
 
     private boolean areBuild = false;
 
-    static void buildUpMuscles(List<Muscle> newMuscles) {
-        Muscles muscles = InstanceHolder.INSTANCE;
-        muscles.areBuild = true;
+    public static Muscles buildUpMuscles(List<Muscle> newMuscles) {
+        Muscles muscles = new Muscles();
         for (Muscle newMuscle : newMuscles) {
             if (newMuscle != null && !muscles.has(newMuscle.getId())) {
-                availableMuscles.put(newMuscle.getId(), newMuscle);
+                muscles.availableMuscles.put(newMuscle.getId(), newMuscle);
             }
         }
-    }
-
-    static Muscles get() {
-        Muscles muscles = InstanceHolder.INSTANCE;
-        if (!muscles.areBuild) {
-            throw new IllegalArgumentException("Please build your Athlete first!");
-        }
-        return InstanceHolder.INSTANCE;
+        return muscles;
     }
 
     private boolean has(int muscleId) {
@@ -57,16 +49,20 @@ public class Muscles {
         }
     }
 
-    private static final class InstanceHolder {
-        static final Muscles INSTANCE = new Muscles();
-    }
-
     public List<Muscle> getAll() {
         List<Muscle> allMuscles = new ArrayList<>();
         for (Muscle muscle : availableMuscles.values()) {
             allMuscles.add(muscle);
         }
         return allMuscles;
+    }
+
+    public Muscles copy(){
+        Muscles muscles = new Muscles();
+        for (Map.Entry<Integer, Muscle> integerMuscleEntry : availableMuscles.entrySet()) {
+            muscles.availableMuscles.put(integerMuscleEntry.getKey(), integerMuscleEntry.getValue().copy());
+        }
+        return muscles;
     }
 
 }

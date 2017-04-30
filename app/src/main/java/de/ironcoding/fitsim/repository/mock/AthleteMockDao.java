@@ -1,13 +1,11 @@
 package de.ironcoding.fitsim.repository.mock;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import de.ironcoding.fitsim.logic.Athlete;
 import de.ironcoding.fitsim.logic.Body;
 import de.ironcoding.fitsim.logic.BodyType;
-import de.ironcoding.fitsim.logic.Muscle;
+import de.ironcoding.fitsim.logic.Muscles;
 import de.ironcoding.fitsim.repository.IAthleteDao;
 import de.ironcoding.fitsim.repository.IDao;
 
@@ -17,7 +15,7 @@ import de.ironcoding.fitsim.repository.IDao;
 
 public class AthleteMockDao implements IAthleteDao {
 
-    private IDao<List<Muscle>> muscleDao;
+    private IDao<Muscles> muscleDao;
 
     @Inject
     public AthleteMockDao(MusclesMockDao muscleDao) {
@@ -29,7 +27,7 @@ public class AthleteMockDao implements IAthleteDao {
         if (muscleDao == null) {
             return null;
         }
-        return Athlete.buildNew(Body.warmUpAverageMale(BodyType.ENDOMORPH), muscleDao.load());
+        return Athlete.buildNew(Body.warmUpAverageMale(BodyType.ENDOMORPH, muscleDao.load()));
     }
 
     @Override

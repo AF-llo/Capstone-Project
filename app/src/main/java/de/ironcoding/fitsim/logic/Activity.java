@@ -89,7 +89,7 @@ public abstract class Activity extends BaseLevelItem implements ITypedItem {
         return (int) (buildUp * effort * BASE_ATTRACTION_FROM_EFFORT + 1);
     }
 
-    public abstract void perform(Body.Fitness fitness, BodyType bodyType);
+    public abstract void perform(Body.Fitness fitness, BodyType bodyType, Muscles muscles);
 
-    public abstract boolean isToDemanding();
+    public abstract boolean isToDemanding(Muscles muscles);
 }

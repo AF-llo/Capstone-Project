@@ -13,12 +13,12 @@ public class Cardio extends Activity {
     }
 
     @Override
-    public void perform(Body.Fitness fitness, BodyType bodyType) {
+    public void perform(Body.Fitness fitness, BodyType bodyType, Muscles muscles) {
         fitness.improveStamina(bodyType.getEndurance());
     }
 
     @Override
-    public boolean isToDemanding() {
+    public boolean isToDemanding(Muscles muscles) {
         // cardio is always possible when enough energy is availables
         return false;
     }

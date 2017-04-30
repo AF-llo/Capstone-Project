@@ -79,10 +79,10 @@ public class GymPresenter extends BasePresenter implements ActivitySelectedEvent
         if (selectedActivity == null) {
             return;
         }
-        Athlete athlete = getAthlete();
-        athlete.doActivity(selectedActivity.get().getActivity());
-        athleteRepository.updateAthlete(athlete);
-        updateAthlete(athlete);
+        Athlete updatedAthlete = athletePreview.get().getAthlete();
+        athletePreview.set(null);
+        athleteRepository.updateAthlete(updatedAthlete);
+        updateAthlete(updatedAthlete);
         // TODO: 30.04.2017 update activity entries
         notifyCallbackHideBottomSheet();
     }

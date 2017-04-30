@@ -16,13 +16,13 @@ public class Exercise extends Activity {
     }
 
     @Override
-    public void perform(Body.Fitness fitness, BodyType bodyType) {
+    public void perform(Body.Fitness fitness, BodyType bodyType, Muscles muscles) {
         fitness.improveStrength(bodyType.getBuildUp());
-        Muscles.get().strain(strainedMuscle, getAttraction(bodyType.getBuildUp()));
+        muscles.strain(strainedMuscle, getAttraction(bodyType.getBuildUp()));
     }
 
     @Override
-    public boolean isToDemanding() {
-        return !Muscles.get().isDurable(strainedMuscle);
+    public boolean isToDemanding(Muscles muscles) {
+        return !muscles.isDurable(strainedMuscle);
     }
 }

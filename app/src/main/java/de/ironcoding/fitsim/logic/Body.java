@@ -43,27 +43,29 @@ public class Body {
 
     private Properties properties;
 
+    private Muscles muscles;
+
     private Body() {}
 
-    public static Body warmUpAverageMale(@BodyType.Name String type) {
+    public static Body warmUpAverageMale(@BodyType.Name String type, Muscles muscles) {
         Properties properties = new Properties(Athlete.MALE, DEFAULT_SIZE_MALE, DEFAULT_AGE);
         Stats stats = new Stats(MAX_ENERGY, INITIAL_WEIGHT_MALE);
         Fitness fitness = new Fitness(INITIAL_FITNESS, INITIAL_FITNESS);
         BodyType bodyType = BodyType.getType(type);
         Calories calories = Calories.createDefault(bodyType, properties, stats);
-        return warmUp(bodyType, properties, stats, fitness, calories);
+        return warmUp(bodyType, properties, stats, fitness, calories, muscles);
     }
 
-    public static Body warmUpAverageFemale(@BodyType.Name String type) {
+    public static Body warmUpAverageFemale(@BodyType.Name String type, Muscles muscles) {
         Properties properties = new Properties(Athlete.FEMALE, DEFAULT_SIZE_FEMALE, DEFAULT_AGE);
         Stats stats = new Stats(MAX_ENERGY, INITIAL_WEIGHT_FEMALE);
         Fitness fitness = new Fitness(INITIAL_FITNESS, INITIAL_FITNESS);
         BodyType bodyType = BodyType.getType(type);
         Calories calories = Calories.createDefault(bodyType, properties, stats);
-        return warmUp(bodyType, properties, stats, fitness, calories);
+        return warmUp(bodyType, properties, stats, fitness, calories, muscles);
     }
 
-    public static Body warmUp(BodyType type, Properties properties, Stats stats, Fitness fitness, Calories calories) {
+    public static Body warmUp(BodyType type, Properties properties, Stats stats, Fitness fitness, Calories calories, Muscles muscles) {
         if (type == null) {
             throw new IllegalArgumentException("Every body should have a valid type!");
         }
@@ -79,17 +81,21 @@ public class Body {
         if (calories == null) {
             throw new IllegalArgumentException("Without calories you will not be able to train and do activities!");
         }
+        if (muscles == null) {
+            throw new IllegalArgumentException("No Muscles? You are propably a skelleton?");
+        }
         Body body = new Body();
         body.type = type;
         body.stats = stats;
         body.fitness = fitness;
         body.calories = calories;
         body.properties = properties;
+        body.muscles = muscles;
         return body;
     }
 
     boolean isAbleToDo(Activity activity) {
-        return activity.getEffort() <= stats.getEnergy() && !activity.isToDemanding();
+        return activity.getEffort() <= stats.getEnergy() && !activity.isToDemanding(muscles);
     }
 
     boolean canEat() {
@@ -99,7 +105,7 @@ public class Body {
     void performActivity(Activity activity) {
         stats.consumeEnergy(activity.getEffort());
         calories.increaseRequiredEnergy(activity.getPal(), activity.getDurationInHours());
-        activity.perform(fitness, type);
+        activity.perform(fitness, type, muscles);
     }
 
     void digest(Nutrition nutrition) {
@@ -112,9 +118,14 @@ public class Body {
         calories.startNewConsumption();
     }
 
+    void relaxAllMuscles() {
+        muscles.relaxAll();
+    }
+
     void breakDown() {
         fitness.impairStrength();
         fitness.impairStamina();
+        muscles.breakDown();
     }
 
     void defecate() {
@@ -128,6 +139,7 @@ public class Body {
         body.type = BodyType.getType(type.getName());
         body.properties = getProperties();
         body.calories = getCalories();
+        body.muscles = getMuscles();
         return body;
     }
 
@@ -145,6 +157,10 @@ public class Body {
 
     public Properties getProperties() {
         return new Properties(properties.gender, properties.size, properties.age);
+    }
+
+    public Muscles getMuscles() {
+        return muscles.copy();
     }
 
     public static class Properties {
