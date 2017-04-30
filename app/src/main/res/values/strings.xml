@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FitSim</string>
+    <string name="app_name" translatable="false">FitSim</string>
     <string name="profile">Profile</string>
     <string name="gym">Gym</string>
     <string name="nutrition">Nutrition</string>

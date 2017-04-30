@@ -1,6 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 
+def BOOL = "bool"
+def TRUE = "true"
+def FALSE = "false"
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -12,10 +16,31 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        debug {
+            storeFile file("../debug.jks")
+            storePassword "123456"
+            keyAlias "fitsim_debug"
+            keyPassword "123456"
+        }
+        release {
+            storeFile file("../release.jks")
+            storePassword "AGjbVCVe"
+            keyAlias "fitsim_release"
+            keyPassword "UqU5s9mr"
+        }
+    }
+
     buildTypes {
+        debug {
+            minifyEnabled false
+            resValue BOOL, "DEBUG", TRUE
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue BOOL, "DEBUG", FALSE
         }
     }
 
