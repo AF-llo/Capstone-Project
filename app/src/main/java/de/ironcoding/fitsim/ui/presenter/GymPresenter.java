@@ -64,6 +64,9 @@ public class GymPresenter extends BasePresenter implements ActivityItemEvent {
 
     private void updateItems(List<Activity> items) {
         Body body = getAthlete().getBody();
+        if (items.size() == activities.size()) {
+            return;
+        }
         if (activities.size() > 0) {
             activities.clear();
         }

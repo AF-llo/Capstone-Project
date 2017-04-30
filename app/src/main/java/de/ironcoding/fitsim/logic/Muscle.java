@@ -9,7 +9,7 @@ import java.lang.annotation.RetentionPolicy;
  * Created by larsl on 12.04.2017.
  */
 
-public class Muscle extends BaseLevelItem {
+public class Muscle {
 
     public static final int INITIAL_VOLUME = 50;
 
@@ -32,8 +32,7 @@ public class Muscle extends BaseLevelItem {
 
     private @Muscle.Condition int condition;
 
-    Muscle(int id, String name, int volume, int limit, @Condition int condition, int minLevel) {
-        super(minLevel);
+    Muscle(int id, String name, int volume, int limit, @Condition int condition) {
         this.id = id;
         this.name = name;
         this.volume = volume;
@@ -41,11 +40,11 @@ public class Muscle extends BaseLevelItem {
         this.condition = condition;
     }
 
-    public static Muscle build(int id, String name, int limit, int minLevel) {
-        return reBuild(id, name, INITIAL_VOLUME, limit, RECOVERED, minLevel);
+    public static Muscle build(int id, String name, int limit) {
+        return reBuild(id, name, INITIAL_VOLUME, limit, RECOVERED);
     }
 
-    public static Muscle reBuild(int id, String name, int volume, int limit, @Condition int condition, int minLevel) {
+    public static Muscle reBuild(int id, String name, int volume, int limit, @Condition int condition) {
         if (name == null) {
             name = "";
         }
@@ -64,7 +63,7 @@ public class Muscle extends BaseLevelItem {
         if (condition > RECOVERED) {
             condition = RECOVERED;
         }
-        return new Muscle(id, name, volume, limit, condition, minLevel);
+        return new Muscle(id, name, volume, limit, condition);
     }
 
     public int getId() {
@@ -110,6 +109,6 @@ public class Muscle extends BaseLevelItem {
     }
 
     Muscle copy() {
-        return new Muscle(id, name, volume, limit, condition, getMinLevel());
+        return new Muscle(id, name, volume, limit, condition);
     }
 }

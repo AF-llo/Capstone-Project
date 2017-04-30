@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'org.greenrobot.greendao'
 
 def BOOL = "bool"
 def TRUE = "true"
@@ -58,6 +59,11 @@ android {
     }
 }
 
+greendao {
+    schemaVersion 1
+    daoPackage "de.ironcoding.fitsim.persistance"
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -78,5 +84,9 @@ dependencies {
     compile "com.google.firebase:firebase-core:$google_play_version"
     compile "com.google.firebase:firebase-database:$google_play_version"
     compile "com.google.firebase:firebase-ads:$google_play_version"
+
+    compile "org.greenrobot:greendao:$green_dao_version"
+
+    compile 'com.google.code.gson:gson:2.8.0'
 }
 apply plugin: 'com.google.gms.google-services'

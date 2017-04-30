@@ -40,7 +40,7 @@ public class Calories {
 
     Calories() {}
 
-    static Calories createDefault(BodyType type, Body.Properties properties, Body.Stats stats) {
+    public static Calories createDefault(BodyType type, Body.Properties properties, Body.Stats stats) {
         return createForMacros(type, properties, stats, Macros.getDefault());
     }
 

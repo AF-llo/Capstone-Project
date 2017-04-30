@@ -1,13 +1,9 @@
 package de.ironcoding.fitsim.repository.mock;
 
-import javax.inject.Inject;
-
 import de.ironcoding.fitsim.logic.Athlete;
 import de.ironcoding.fitsim.logic.Body;
 import de.ironcoding.fitsim.logic.BodyType;
-import de.ironcoding.fitsim.logic.Muscles;
 import de.ironcoding.fitsim.repository.IAthleteDao;
-import de.ironcoding.fitsim.repository.IDao;
 
 /**
  * Created by larsl on 18.04.2017.
@@ -15,9 +11,8 @@ import de.ironcoding.fitsim.repository.IDao;
 
 public class AthleteMockDao implements IAthleteDao {
 
-    private IDao<Muscles> muscleDao;
+    private MusclesMockDao muscleDao;
 
-    @Inject
     public AthleteMockDao(MusclesMockDao muscleDao) {
         this.muscleDao = muscleDao;
     }

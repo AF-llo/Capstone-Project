@@ -2,7 +2,10 @@ package de.ironcoding.fitsim.app.injection;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
 import android.preference.PreferenceManager;
+
+import java.util.Locale;
 
 import javax.inject.Singleton;
 
@@ -36,7 +39,18 @@ public class AppModule {
 
     @Provides
     @Singleton
-    AppSettings provideAppSettings() {
-        return new AppSettings();
+    AppSettings provideAppSettings(SharedPreferences sharedPreferences) {
+        return new AppSettings(sharedPreferences);
+    }
+
+    @Provides
+    @Singleton
+    AssetManager provideAssetManager(Context context) {
+        return context.getAssets();
+    }
+
+    @Provides
+    Locale providesLocale() {
+        return Locale.getDefault();
     }
 }
