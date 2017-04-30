@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "205356526550",
+    "firebase_url": "https://fitsim-92a12.firebaseio.com",
+    "project_id": "fitsim-92a12",
+    "storage_bucket": "fitsim-92a12.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:205356526550:android:d506a499468c1817",
+        "android_client_info": {
+          "package_name": "de.ironcoding.fitsim"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "205356526550-4mf7635n0rr7d9o0r6a8vjlkd489r0q2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD0jkGFobIllWwYMVfNKTQVR4eA8q-15s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
