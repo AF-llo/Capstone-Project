@@ -75,8 +75,8 @@ dependencies {
     compile "com.google.dagger:dagger-android-support:$dagger_version"
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
 
-//    compile 'com.google.firebase:firebase-core:10.2.4'
-//    compile "com.google.firebase:firebase-database:$google_play_version"
-//    compile "com.google.firebase:firebase-ads:$google_play_version"
+    compile "com.google.firebase:firebase-core:$google_play_version"
+    compile "com.google.firebase:firebase-database:$google_play_version"
+    compile "com.google.firebase:firebase-ads:$google_play_version"
 }
 apply plugin: 'com.google.gms.google-services'
