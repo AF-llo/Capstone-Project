@@ -6,12 +6,15 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 
+import javax.inject.Inject;
+
 import de.appsfactory.mvplib.annotations.MVPIncludeToState;
 import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.ui.fragments.GymFragment;
 import de.ironcoding.fitsim.ui.fragments.MoreFragment;
 import de.ironcoding.fitsim.ui.fragments.NutritionFragment;
 import de.ironcoding.fitsim.ui.fragments.ProfileFragment;
+import de.ironcoding.fitsim.util.Jobber;
 
 /**
  * Created by larsl on 30.04.2017.
@@ -21,12 +24,22 @@ public class MainPresenter extends BasePresenter implements BottomNavigationView
 
     private MainCallback mainCallback;
 
+    @Inject
+    Jobber jobber;
+
     @MVPIncludeToState
     private ObservableInt selectedId = new ObservableInt();
 
     public MainPresenter(MainCallback mainCallback) {
         this.mainCallback = mainCallback;
         selectedId.set(R.id.action_profile);
+    }
+
+    @Override
+    protected void onPresenterCreated() {
+        super.onPresenterCreated();
+        getFitSimApp().getAppComponent().injectMainPresenter(this);
+        jobber.scheduleRefreshBodyJobIfNotScheduled();
     }
 
     @Override

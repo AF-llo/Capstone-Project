@@ -84,6 +84,7 @@ dependencies {
     compile "com.google.firebase:firebase-core:$google_play_version"
     compile "com.google.firebase:firebase-database:$google_play_version"
     compile "com.google.firebase:firebase-ads:$google_play_version"
+    compile 'com.firebase:firebase-jobdispatcher:0.6.0'
 
     compile "org.greenrobot:greendao:$green_dao_version"
 

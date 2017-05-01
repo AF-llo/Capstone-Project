@@ -3,6 +3,7 @@ package de.ironcoding.fitsim.app.injection;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import de.ironcoding.fitsim.app.service.JobScheduledIntentService;
 import de.ironcoding.fitsim.ui.activities.MainActivity;
 import de.ironcoding.fitsim.ui.presenter.BasePresenter;
 import de.ironcoding.fitsim.ui.presenter.GymPresenter;
@@ -31,5 +32,7 @@ public interface AppComponent {
     void injectNutritionPresenter(NutritionPresenter nutritionPresenter);
 
     void injectProfilePresenter(ProfilePresenter profilePresenter);
+
+    void injectJobScheduledService(JobScheduledIntentService intentService);
 
 }

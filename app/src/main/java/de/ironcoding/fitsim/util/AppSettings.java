@@ -15,6 +15,7 @@ public class AppSettings {
     }
 
     private static final String PREF_ATHLETE_ID = "de.ironcoding.pref.athlete_id";
+    private static final String PREF_REFRESH_BODY_SCHEDULED = "de.ironcoding.pref.refresh_body_scheduled";
 
     /**
      * Receiceives the stored athlete id from preferences.
@@ -37,6 +38,16 @@ public class AppSettings {
         sharedPreferences.edit()
                 .putLong(PREF_ATHLETE_ID, athleteId)
                 .apply();
+    }
+
+    public void writeRefreshJobScheduledToSettings(boolean isScheduled) {
+        sharedPreferences.edit()
+                .putBoolean(PREF_REFRESH_BODY_SCHEDULED, isScheduled)
+                .apply();
+    }
+
+    public boolean getRefreshJobScheduledFromSettings() {
+        return sharedPreferences.getBoolean(PREF_REFRESH_BODY_SCHEDULED, false);
     }
 
 }

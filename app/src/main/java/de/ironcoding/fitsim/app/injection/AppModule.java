@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.preference.PreferenceManager;
 
+import com.firebase.jobdispatcher.FirebaseJobDispatcher;
+import com.firebase.jobdispatcher.GooglePlayDriver;
+
 import java.util.Locale;
 
 import javax.inject.Singleton;
@@ -13,6 +16,7 @@ import dagger.Module;
 import dagger.Provides;
 import de.ironcoding.fitsim.app.FitSimApp;
 import de.ironcoding.fitsim.util.AppSettings;
+import de.ironcoding.fitsim.util.Jobber;
 
 /**
  * Created by larsl on 20.04.2017.
@@ -52,5 +56,22 @@ public class AppModule {
     @Provides
     Locale providesLocale() {
         return Locale.getDefault();
+    }
+
+    @Provides
+    GooglePlayDriver providesGooglePlayDriver(Context context) {
+        return new GooglePlayDriver(context);
+    }
+
+    @Provides
+    @Singleton
+    FirebaseJobDispatcher providesJobDispatcher(GooglePlayDriver driver) {
+        return new FirebaseJobDispatcher(driver);
+    }
+
+    @Provides
+    @Singleton
+    Jobber providesJobber(FirebaseJobDispatcher dispatcher, AppSettings appSettings) {
+        return new Jobber(dispatcher, appSettings);
     }
 }

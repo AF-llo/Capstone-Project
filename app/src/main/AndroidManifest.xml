@@ -18,6 +18,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activities.MainActivity"/>
+        <service
+            android:exported="false"
+            android:name=".app.service.EventJobService">
+            <intent-filter>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
