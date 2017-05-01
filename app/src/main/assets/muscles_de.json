@@ -7,66 +7,71 @@
     },
     {
       "muscleId":2,
-      "name":"Rücken",
+      "name":"Latissimus",
       "limit":100
     },
     {
       "muscleId":3,
+      "name":"Rücken",
+      "limit":100
+    },
+    {
+      "muscleId":4,
       "name":"Nacken",
       "limit":80
     },
     {
-      "muscleId":4,
+      "muscleId":5,
       "name":"Vordere Schulter",
       "limit":80
     },
     {
-      "muscleId":5,
+      "muscleId":6,
       "name":"Seitliche Schulter",
       "limit":80
     },
     {
-      "muscleId":6,
+      "muscleId":7,
       "name":"Hintere Schulter",
       "limit":80
     },
     {
-      "muscleId":7,
+      "muscleId":8,
       "name":"Bizeps",
       "limit":90
     },
     {
-      "muscleId":8,
+      "muscleId":9,
       "name":"Trizeps",
       "limit":90
     },
     {
-      "muscleId":9,
+      "muscleId":10,
       "name":"Unterarm",
       "limit":80
     },
     {
-      "muscleId":10,
+      "muscleId":11,
       "name":"Bauch",
       "limit":80
     },
     {
-      "muscleId":11,
+      "muscleId":12,
       "name":"Gesäß",
       "limit":75
     },
     {
-      "muscleId":12,
+      "muscleId":13,
       "name":"Quadrizeps",
       "limit":100
     },
     {
-      "muscleId":13,
+      "muscleId":14,
       "name":"Beinbizeps",
       "limit":100
     },
     {
-      "muscleId":14,
+      "muscleId":15,
       "name":"Waden",
       "limit":80
     }

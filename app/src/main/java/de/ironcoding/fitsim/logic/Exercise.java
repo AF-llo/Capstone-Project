@@ -6,7 +6,7 @@ package de.ironcoding.fitsim.logic;
 
 public class Exercise extends Activity {
 
-    private static final int TYPE_INT = 0;
+    public static final int TYPE_INT = 1;
 
     private final long strainedMuscle;
 

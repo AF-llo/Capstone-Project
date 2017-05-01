@@ -9,7 +9,9 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import de.ironcoding.fitsim.repository.ActivitiesRepository;
 import de.ironcoding.fitsim.repository.IAthleteDao;
+import de.ironcoding.fitsim.repository.local.LocalActivitiesDao;
 import de.ironcoding.fitsim.repository.local.LocalAthleteDao;
 import de.ironcoding.fitsim.repository.local.LocalAthleteRepository;
 import de.ironcoding.fitsim.repository.local.LocalMuscleDao;
@@ -20,17 +22,29 @@ import static de.ironcoding.fitsim.app.injection.DbRepositoryModule.REPOSITORY_D
  * Created by larsl on 30.04.2017.
  */
 @Module(includes = {AppModule.class, DbRepositoryModule.class})
-public class OnboardingModule {
+public class LocalModule {
 
-    public static final String REPOSITORY_ONBOARDING = "onboarding";
+    public static final String REPOSITORY_LOCAL = "local";
 
     @Provides
-    LocalMuscleDao providesInitialMuscleDao(AssetManager assetManager, Locale locale) {
+    LocalMuscleDao providesLocalMuscleDao(AssetManager assetManager, Locale locale) {
         return new LocalMuscleDao(assetManager, locale);
     }
 
     @Provides
-    LocalAthleteDao providesInitialAthleteDao(@Named(REPOSITORY_DB) IAthleteDao athleteDbDao, LocalMuscleDao initialMuscleDao) {
+    LocalActivitiesDao providesLocalActivitiesDao(AssetManager assetManager, Locale locale) {
+        return new LocalActivitiesDao(assetManager, locale);
+    }
+
+    @Provides
+    @Singleton
+    @Named(REPOSITORY_LOCAL)
+    ActivitiesRepository providesLocalActivitiesRepo(LocalActivitiesDao activitiesDao) {
+        return new ActivitiesRepository(activitiesDao);
+    }
+
+    @Provides
+    LocalAthleteDao providesLocalAthleteDao(@Named(REPOSITORY_DB) IAthleteDao athleteDbDao, LocalMuscleDao initialMuscleDao) {
         return new LocalAthleteDao(athleteDbDao, initialMuscleDao);
     }
 

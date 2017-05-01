@@ -42,7 +42,7 @@ public class LocalMuscleDao implements IMusclesDao {
     }
 
     private List<Muscle> readMusclesFromAssets() {
-        String fileName = Locale.GERMANY.getCountry().equals(locale.getCountry()) ? ASSETS_FILE_NAME_DE : ASSETS_FILE_NAME_EN;
+        String fileName = Locale.GERMANY.getLanguage().equals(locale.getLanguage()) ? ASSETS_FILE_NAME_DE : ASSETS_FILE_NAME_EN;
         List<Muscle> initialMuscles = new ArrayList<>();
         try {
             InputStreamReader inputStreamReader = new InputStreamReader(assetManager.open(fileName));

@@ -14,7 +14,7 @@ import de.ironcoding.fitsim.ui.presenter.ProfilePresenter;
  * Created by larsl on 25.04.2017.
  */
 @Singleton
-@Component(modules = {AppModule.class, MockRepositoryModule.class, DbRepositoryModule.class, OnboardingModule.class})
+@Component(modules = {AppModule.class, MockRepositoryModule.class, DbRepositoryModule.class, LocalModule.class})
 public interface AppComponent {
 
     void injectMainActivity(MainActivity mainActivity);

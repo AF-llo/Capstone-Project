@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import de.ironcoding.fitsim.R;
-import de.ironcoding.fitsim.app.injection.MockRepositoryModule;
+import de.ironcoding.fitsim.app.injection.LocalModule;
 import de.ironcoding.fitsim.events.ActivityItemEvent;
 import de.ironcoding.fitsim.logic.Activity;
 import de.ironcoding.fitsim.logic.Athlete;
@@ -28,7 +28,7 @@ import de.ironcoding.fitsim.ui.model.AthleteActivityPreviewViewModel;
 public class GymPresenter extends BasePresenter implements ActivityItemEvent {
 
     @Inject
-    @Named(MockRepositoryModule.REPOSITORY_MOCKED)
+    @Named(LocalModule.REPOSITORY_LOCAL)
     ActivitiesRepository activitiesRepository;
 
     public ObservableList<ActivityRecyclerItem> activities = new ObservableArrayList<>();

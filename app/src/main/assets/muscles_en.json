@@ -7,66 +7,71 @@
     },
     {
       "muscleId":2,
-      "name":"Back",
+      "name":"Latissimus",
       "limit":100
     },
     {
       "muscleId":3,
+      "name":"Back",
+      "limit":100
+    },
+    {
+      "muscleId":4,
       "name":"Trapezius",
       "limit":80
     },
     {
-      "muscleId":4,
+      "muscleId":5,
       "name":"Front Delts",
       "limit":80
     },
     {
-      "muscleId":5,
+      "muscleId":6,
       "name":"Side Delts",
       "limit":80
     },
     {
-      "muscleId":6,
+      "muscleId":7,
       "name":"Rear Delts",
       "limit":80
     },
     {
-      "muscleId":7,
+      "muscleId":8,
       "name":"Biceps",
       "limit":90
     },
     {
-      "muscleId":8,
+      "muscleId":9,
       "name":"Triceps",
       "limit":90
     },
     {
-      "muscleId":9,
+      "muscleId":10,
       "name":"Forearms",
       "limit":80
     },
     {
-      "muscleId":10,
+      "muscleId":11,
       "name":"Abs",
       "limit":80
     },
     {
-      "muscleId":11,
+      "muscleId":12,
       "name":"Glute",
       "limit":75
     },
     {
-      "muscleId":12,
+      "muscleId":13,
       "name":"Quadriceps",
       "limit":100
     },
     {
-      "muscleId":13,
+      "muscleId":14,
       "name":"Hamgstrings",
       "limit":100
     },
     {
-      "muscleId":14,
+      "muscleId":15,
       "name":"Calves",
       "limit":80
     }
