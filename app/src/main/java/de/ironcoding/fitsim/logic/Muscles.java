@@ -31,11 +31,11 @@ public class Muscles {
         return availableMuscles.get(muscleId);
     }
 
-    void strain(int musleId, int attraction) {
+    void strain(long musleId, int attraction) {
         availableMuscles.get(musleId).strain(attraction);
     }
 
-    boolean isDurable(int muscleId) {
+    boolean isDurable(long muscleId) {
         return availableMuscles.get(muscleId).isDurable();
     }
 

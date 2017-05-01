@@ -7,7 +7,7 @@ import javax.inject.Named;
 
 import de.appsfactory.mvplib.presenter.MVPPresenter;
 import de.ironcoding.fitsim.app.FitSimApp;
-import de.ironcoding.fitsim.app.injection.MockRepositoryModule;
+import de.ironcoding.fitsim.app.injection.DbRepositoryModule;
 import de.ironcoding.fitsim.logic.Athlete;
 import de.ironcoding.fitsim.repository.AthleteRepository;
 import de.ironcoding.fitsim.ui.model.AthleteHeaderViewModel;
@@ -25,7 +25,7 @@ public class BasePresenter extends MVPPresenter {
     AppSettings appSettings;
 
     @Inject
-    @Named(MockRepositoryModule.REPOSITORY_MOCKED)
+    @Named(DbRepositoryModule.REPOSITORY_DB)
     AthleteRepository athleteRepository;
 
     private Callback callback;
