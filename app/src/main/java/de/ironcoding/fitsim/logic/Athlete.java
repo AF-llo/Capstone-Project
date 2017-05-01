@@ -29,7 +29,7 @@ public class Athlete {
         return build(0, body);
     }
 
-    public static Athlete build(int experience, Body body) {
+    public static Athlete build(long experience, Body body) {
         Athlete athlete = new Athlete();
         if (body == null) {
             throw new IllegalArgumentException("Your body was null. An athlets needs a body to train and do sport");

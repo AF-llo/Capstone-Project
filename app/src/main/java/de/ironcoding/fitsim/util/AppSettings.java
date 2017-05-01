@@ -1,8 +1,6 @@
 package de.ironcoding.fitsim.util;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.provider.Settings;
 
 /**
  * Created by larsl on 25.04.2017.
@@ -16,17 +14,28 @@ public class AppSettings {
         this.sharedPreferences = sharedPreferences;
     }
 
-    private static final String PREF_KEY_ANDROID_ID = "de.ironcoding.pref.android_id";
+    private static final String PREF_ATHLETE_ID = "de.ironcoding.pref.athlete_id";
 
-    public String getAndroidIdFromSettings() {
-        return sharedPreferences.getString(PREF_KEY_ANDROID_ID, "");
+    /**
+     * Receiceives the stored athlete id from preferences.
+     *
+     * @return
+     *                  Id of athlete which is stored in DB. Returns -1 when no athlete is stored in
+     *                  DB.
+     */
+    public long getAthleteIdFromSettings() {
+        return sharedPreferences.getLong(PREF_ATHLETE_ID, -1);
     }
 
-    public void writeAndroidIdToSettings(Context context) {
-        String androidId = Settings.Secure.getString(context.getContentResolver(),
-                Settings.Secure.ANDROID_ID);
+    /**
+     * Writehs the athletes id to preferences. Should only be called when there has benn an athlete
+     * stored in DB!
+     * @param athleteId
+     *                      related id of the athlete which is stored in DB.
+     */
+    public void writeAthleteIdToSettings(long athleteId) {
         sharedPreferences.edit()
-                .putString(PREF_KEY_ANDROID_ID, "")
+                .putLong(PREF_ATHLETE_ID, athleteId)
                 .apply();
     }
 

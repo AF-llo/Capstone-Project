@@ -11,9 +11,7 @@ import java.util.Map;
 
 public class Muscles {
 
-    private Map<Integer, Muscle> availableMuscles = new HashMap<>();
-
-    private boolean areBuild = false;
+    private Map<Long, Muscle> availableMuscles = new HashMap<>();
 
     public static Muscles buildUpMuscles(List<Muscle> newMuscles) {
         Muscles muscles = new Muscles();
@@ -25,11 +23,11 @@ public class Muscles {
         return muscles;
     }
 
-    private boolean has(int muscleId) {
+    private boolean has(long muscleId) {
         return availableMuscles != null && availableMuscles.get(muscleId) != null;
     }
 
-    Muscle getMuscle(int muscleId) {
+    public Muscle getMuscle(long muscleId) {
         return availableMuscles.get(muscleId);
     }
 
@@ -63,7 +61,7 @@ public class Muscles {
 
     public Muscles copy(){
         Muscles muscles = new Muscles();
-        for (Map.Entry<Integer, Muscle> integerMuscleEntry : availableMuscles.entrySet()) {
+        for (Map.Entry<Long, Muscle> integerMuscleEntry : availableMuscles.entrySet()) {
             muscles.availableMuscles.put(integerMuscleEntry.getKey(), integerMuscleEntry.getValue().copy());
         }
         return muscles;

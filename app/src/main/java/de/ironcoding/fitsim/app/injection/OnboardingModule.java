@@ -10,9 +10,11 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import de.ironcoding.fitsim.repository.IAthleteDao;
-import de.ironcoding.fitsim.repository.InitialAthleteRepository;
-import de.ironcoding.fitsim.repository.initial.InitialAthleteDao;
-import de.ironcoding.fitsim.repository.initial.InitialMuscleDao;
+import de.ironcoding.fitsim.repository.local.LocalAthleteDao;
+import de.ironcoding.fitsim.repository.local.LocalAthleteRepository;
+import de.ironcoding.fitsim.repository.local.LocalMuscleDao;
+
+import static de.ironcoding.fitsim.app.injection.DbRepositoryModule.REPOSITORY_DB;
 
 /**
  * Created by larsl on 30.04.2017.
@@ -23,19 +25,18 @@ public class OnboardingModule {
     public static final String REPOSITORY_ONBOARDING = "onboarding";
 
     @Provides
-    @Named(REPOSITORY_ONBOARDING)
-    InitialMuscleDao providesInitialMuscleDao(AssetManager assetManager, Locale locale) {
-        return new InitialMuscleDao(assetManager, locale);
+    LocalMuscleDao providesInitialMuscleDao(AssetManager assetManager, Locale locale) {
+        return new LocalMuscleDao(assetManager, locale);
     }
 
     @Provides
-    InitialAthleteDao providesInitialAthleteDao(@Named(DbRepositoryModule.REPOSITORY_DB) IAthleteDao athleteDbDao, @Named(REPOSITORY_ONBOARDING) InitialMuscleDao initialMuscleDao) {
-        return new InitialAthleteDao(athleteDbDao, initialMuscleDao);
+    LocalAthleteDao providesInitialAthleteDao(@Named(REPOSITORY_DB) IAthleteDao athleteDbDao, LocalMuscleDao initialMuscleDao) {
+        return new LocalAthleteDao(athleteDbDao, initialMuscleDao);
     }
 
     @Provides
     @Singleton
-    InitialAthleteRepository providesInitialAthleteRepository(InitialAthleteDao initialAthleteDao) {
-        return new InitialAthleteRepository(initialAthleteDao);
+    LocalAthleteRepository providesLocalAthleteRepository(LocalAthleteDao initialAthleteDao) {
+        return new LocalAthleteRepository(initialAthleteDao);
     }
 }

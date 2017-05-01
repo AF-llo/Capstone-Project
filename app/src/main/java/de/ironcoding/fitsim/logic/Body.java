@@ -140,7 +140,7 @@ public class Body {
         Body body = new Body();
         body.stats = getStats();
         body.fitness = getFitness();
-        body.type = BodyType.getType(type.getName());
+        body.type = getType();
         body.properties = getProperties();
         body.calories = getCalories();
         body.muscles = getMuscles();
@@ -161,6 +161,10 @@ public class Body {
 
     public Properties getProperties() {
         return new Properties(properties.gender, properties.size, properties.age);
+    }
+
+    public BodyType getType() {
+        return BodyType.getType(type.getName());
     }
 
     public Muscles getMuscles() {

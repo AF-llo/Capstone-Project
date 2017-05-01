@@ -22,7 +22,7 @@ public class Muscle {
     public static final int DURABLE = 2;
     public static final int RECOVERED = 3;
 
-    private final int id;
+    private final long id;
 
     private final String name;
 
@@ -32,7 +32,7 @@ public class Muscle {
 
     private @Muscle.Condition int condition;
 
-    Muscle(int id, String name, int volume, int limit, @Condition int condition) {
+    Muscle(long id, String name, int volume, int limit, @Condition int condition) {
         this.id = id;
         this.name = name;
         this.volume = volume;
@@ -40,11 +40,11 @@ public class Muscle {
         this.condition = condition;
     }
 
-    public static Muscle build(int id, String name, int limit) {
+    public static Muscle build(long id, String name, int limit) {
         return reBuild(id, name, INITIAL_VOLUME, limit, RECOVERED);
     }
 
-    public static Muscle reBuild(int id, String name, int volume, int limit, @Condition int condition) {
+    public static Muscle reBuild(long id, String name, int volume, int limit, @Condition int condition) {
         if (name == null) {
             name = "";
         }
@@ -66,8 +66,20 @@ public class Muscle {
         return new Muscle(id, name, volume, limit, condition);
     }
 
-    public int getId() {
+    public long getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public int getVolume() {
+        return volume;
     }
 
     public boolean isDurable() {

@@ -24,7 +24,7 @@ public class Level {
 
     Level() {}
 
-    public static Level create(int experience) {
+    public static Level create(long experience) {
         Level level = new Level();
         level.skill = Skill.achieve(level.getValue());
         level.gainExperience(experience);
@@ -38,7 +38,7 @@ public class Level {
      * @param experience
      *                      gained experience
      */
-    public void gainExperience(int experience) {
+    public void gainExperience(long experience) {
         if (experience < 0) {
             experience = 0;
         }

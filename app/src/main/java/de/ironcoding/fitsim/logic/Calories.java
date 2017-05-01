@@ -54,11 +54,11 @@ public class Calories {
      * @throws
      *                  IllegalArgumentException when sum of passed macros is not equal to one
      */
-    static Calories createForMacros(BodyType type, Body.Properties properties, Body.Stats stats, Macros macros) {
+    public static Calories createForMacros(BodyType type, Body.Properties properties, Body.Stats stats, Macros macros) {
         return create(type, properties, stats, macros, 0);
     }
 
-    static Calories create(BodyType type, Body.Properties properties, Body.Stats stats, Macros macros, float requiredEnergy) {
+    public static Calories create(BodyType type, Body.Properties properties, Body.Stats stats, Macros macros, float requiredEnergy) {
         if (macros == null) {
             macros = Macros.getDefault();
         }
@@ -139,9 +139,13 @@ public class Calories {
         return proportionalFatKalories(totalCalories) / KCAL_PER_G_FAT;
     }
 
+    public Macros getMacros() {
+        return macros.copy();
+    }
+
     Calories copy() {
         Calories calories = new Calories();
-        calories.macros = macros.copy();
+        calories.macros = getMacros();
         calories.requiredEnergy = requiredEnergy;
         calories.metabolicRate = metabolicRate;
         return calories;

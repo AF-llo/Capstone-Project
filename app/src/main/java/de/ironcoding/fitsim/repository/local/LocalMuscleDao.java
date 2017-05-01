@@ -1,4 +1,4 @@
-package de.ironcoding.fitsim.repository.initial;
+package de.ironcoding.fitsim.repository.local;
 
 import android.content.res.AssetManager;
 
@@ -13,15 +13,15 @@ import java.util.Locale;
 
 import de.ironcoding.fitsim.logic.Muscle;
 import de.ironcoding.fitsim.logic.Muscles;
-import de.ironcoding.fitsim.persistance.model.JsonMuscle;
-import de.ironcoding.fitsim.persistance.model.JsonMuscles;
+import de.ironcoding.fitsim.persistance.json.JsonMuscle;
+import de.ironcoding.fitsim.persistance.json.JsonMuscles;
 import de.ironcoding.fitsim.repository.IMusclesDao;
 
 /**
  * Created by larsl on 30.04.2017.
  */
 
-public class InitialMuscleDao implements IMusclesDao {
+public class LocalMuscleDao implements IMusclesDao {
 
     private static final String ASSETS_FILE_NAME_DE = "muscles_de.json";
 
@@ -31,7 +31,7 @@ public class InitialMuscleDao implements IMusclesDao {
 
     private Locale locale;
 
-    public InitialMuscleDao(AssetManager assetManager, Locale locale) {
+    public LocalMuscleDao(AssetManager assetManager, Locale locale) {
         this.assetManager = assetManager;
         this.locale = locale;
     }

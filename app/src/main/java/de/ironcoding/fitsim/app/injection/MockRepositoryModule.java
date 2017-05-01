@@ -7,9 +7,6 @@ import dagger.Module;
 import dagger.Provides;
 import de.ironcoding.fitsim.repository.ActivitiesRepository;
 import de.ironcoding.fitsim.repository.AthleteRepository;
-import de.ironcoding.fitsim.repository.IActivitiesDao;
-import de.ironcoding.fitsim.repository.IAthleteDao;
-import de.ironcoding.fitsim.repository.INutritionDao;
 import de.ironcoding.fitsim.repository.NutritionRepository;
 import de.ironcoding.fitsim.repository.mock.ActivitiesMockDao;
 import de.ironcoding.fitsim.repository.mock.AthleteMockDao;
@@ -30,41 +27,38 @@ public class MockRepositoryModule {
     }
 
     @Provides
-    @Named(REPOSITORY_MOCKED)
-    IAthleteDao providesAthleteMockDao(MusclesMockDao musclesMockDao) {
+    AthleteMockDao providesAthleteMockDao(MusclesMockDao musclesMockDao) {
         return new AthleteMockDao(musclesMockDao);
     }
 
     @Provides
-    @Named(REPOSITORY_MOCKED)
-    IActivitiesDao providesActivitiesMockDao() {
+    ActivitiesMockDao providesActivitiesMockDao() {
         return new ActivitiesMockDao();
     }
 
     @Provides
-    @Named(REPOSITORY_MOCKED)
-    INutritionDao providesNutritionMockDao() {
+    NutritionMockDao providesNutritionMockDao() {
         return new NutritionMockDao();
     }
 
     @Provides
     @Singleton
     @Named(REPOSITORY_MOCKED)
-    ActivitiesRepository provideMockedActivitiesRepo(@Named(REPOSITORY_MOCKED) IActivitiesDao activitiesDao) {
+    ActivitiesRepository provideMockedActivitiesRepo(ActivitiesMockDao activitiesDao) {
         return new ActivitiesRepository(activitiesDao);
     }
 
     @Provides
     @Singleton
     @Named(REPOSITORY_MOCKED)
-    NutritionRepository provideMockedNutritionRepo(@Named(REPOSITORY_MOCKED) INutritionDao nutritionDao) {
+    NutritionRepository provideMockedNutritionRepo(NutritionMockDao nutritionDao) {
         return new NutritionRepository(nutritionDao);
     }
 
     @Provides
     @Singleton
     @Named(REPOSITORY_MOCKED)
-    AthleteRepository provideMockedAthleteRepo(@Named(REPOSITORY_MOCKED) IAthleteDao athleteDao) {
+    AthleteRepository provideMockedAthleteRepo(AthleteMockDao athleteDao) {
         return new AthleteRepository(athleteDao);
     }
 

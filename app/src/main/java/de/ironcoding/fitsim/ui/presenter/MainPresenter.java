@@ -6,8 +6,13 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import de.appsfactory.mvplib.annotations.MVPIncludeToState;
 import de.ironcoding.fitsim.R;
+import de.ironcoding.fitsim.app.injection.DbRepositoryModule;
+import de.ironcoding.fitsim.repository.AthleteRepository;
 import de.ironcoding.fitsim.ui.fragments.GymFragment;
 import de.ironcoding.fitsim.ui.fragments.MoreFragment;
 import de.ironcoding.fitsim.ui.fragments.NutritionFragment;
@@ -21,12 +26,29 @@ public class MainPresenter extends BasePresenter implements BottomNavigationView
 
     private MainCallback mainCallback;
 
+    @Inject
+    @Named(DbRepositoryModule.REPOSITORY_DB)
+    AthleteRepository athleteRepository;
+
     @MVPIncludeToState
     private ObservableInt selectedId = new ObservableInt();
 
     public MainPresenter(MainCallback mainCallback) {
         this.mainCallback = mainCallback;
         selectedId.set(R.id.action_profile);
+    }
+
+    @Override
+    protected void onPresenterCreated() {
+        super.onPresenterCreated();
+        getFitSimApp().getAppComponent().injectMainPresenter(this);
+        doInBackground(loaderId, () -> athleteRepository.loadAthlete())
+                .addOnSuccess(athlete -> loaderId++).execute();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
     }
 
     public interface MainCallback {

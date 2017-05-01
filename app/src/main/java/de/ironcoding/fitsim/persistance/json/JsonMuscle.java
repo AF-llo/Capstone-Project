@@ -1,4 +1,4 @@
-package de.ironcoding.fitsim.persistance.model;
+package de.ironcoding.fitsim.persistance.json;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -1,4 +1,4 @@
-package de.ironcoding.fitsim.repository.initial;
+package de.ironcoding.fitsim.repository.local;
 
 import de.ironcoding.fitsim.logic.Athlete;
 import de.ironcoding.fitsim.logic.Body;
@@ -10,11 +10,11 @@ import de.ironcoding.fitsim.repository.IAthleteDao;
  * Created by larsl on 30.04.2017.
  */
 
-public class InitialAthleteDao implements IAthleteDao {
+public class LocalAthleteDao implements IAthleteDao {
 
     private IAthleteDao athlelteDbDao;
 
-    private InitialMuscleDao initialMuscleDao;
+    private LocalMuscleDao initialMuscleDao;
 
     private int gender;
 
@@ -24,7 +24,7 @@ public class InitialAthleteDao implements IAthleteDao {
 
     private String bodyType;
 
-    public InitialAthleteDao(IAthleteDao athlelteDbDao, InitialMuscleDao initialMuscleDao) {
+    public LocalAthleteDao(IAthleteDao athlelteDbDao, LocalMuscleDao initialMuscleDao) {
         this.athlelteDbDao = athlelteDbDao;
         this.initialMuscleDao = initialMuscleDao;
     }
