@@ -8,6 +8,7 @@ import de.ironcoding.fitsim.ui.presenter.BasePresenter;
 import de.ironcoding.fitsim.ui.presenter.GymPresenter;
 import de.ironcoding.fitsim.ui.presenter.MainPresenter;
 import de.ironcoding.fitsim.ui.presenter.NutritionPresenter;
+import de.ironcoding.fitsim.ui.presenter.OnboardingPresenter;
 import de.ironcoding.fitsim.ui.presenter.ProfilePresenter;
 
 /**
@@ -22,6 +23,8 @@ public interface AppComponent {
     void injectBasePresenter(BasePresenter basePresenter);
 
     void injectMainPresenter(MainPresenter mainActivity);
+
+    void injectOnboardingPresenter(OnboardingPresenter onboardingPresenter);
 
     void injectGymPresenter(GymPresenter gymPresenter);
 
