@@ -21,6 +21,8 @@ import de.ironcoding.fitsim.repository.AthleteRepository;
 
 public class JobScheduledIntentService extends IntentService {
 
+    public static final String ACTION_JOB_SCHEDULED = "de.ironcoding.action.job_scheduled";
+
     @Inject
     @Named(DbRepositoryModule.REPOSITORY_DB)
     AthleteRepository athleteRepository;
@@ -54,9 +56,15 @@ public class JobScheduledIntentService extends IntentService {
                 Athlete athlete = athleteRepository.loadAthlete();
                 athlete.refreshBody();
                 athleteRepository.updateAthlete(athlete);
-                // TODO: 01.05.2017 send broadcast that athlete has changed
+                sendChangedBroadcast(event);
                 break;
 
         }
+    }
+
+    private void sendChangedBroadcast(@EventJobService.Event String event) {
+        Intent intent = new Intent(ACTION_JOB_SCHEDULED);
+        intent.putExtra(EventJobService.EXTRA_JOB_EVENT, event);
+        sendBroadcast(intent);
     }
 }
