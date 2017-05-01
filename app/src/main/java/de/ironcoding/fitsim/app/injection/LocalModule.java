@@ -11,10 +11,12 @@ import dagger.Module;
 import dagger.Provides;
 import de.ironcoding.fitsim.repository.ActivitiesRepository;
 import de.ironcoding.fitsim.repository.IAthleteDao;
+import de.ironcoding.fitsim.repository.NutritionRepository;
 import de.ironcoding.fitsim.repository.local.LocalActivitiesDao;
 import de.ironcoding.fitsim.repository.local.LocalAthleteDao;
 import de.ironcoding.fitsim.repository.local.LocalAthleteRepository;
 import de.ironcoding.fitsim.repository.local.LocalMuscleDao;
+import de.ironcoding.fitsim.repository.local.LocalNutritionDao;
 
 import static de.ironcoding.fitsim.app.injection.DbRepositoryModule.REPOSITORY_DB;
 
@@ -37,10 +39,22 @@ public class LocalModule {
     }
 
     @Provides
+    LocalNutritionDao providesLocalNutritionsDao(AssetManager assetManager, Locale locale) {
+        return new LocalNutritionDao(assetManager, locale);
+    }
+
+    @Provides
     @Singleton
     @Named(REPOSITORY_LOCAL)
     ActivitiesRepository providesLocalActivitiesRepo(LocalActivitiesDao activitiesDao) {
         return new ActivitiesRepository(activitiesDao);
+    }
+
+    @Provides
+    @Singleton
+    @Named(REPOSITORY_LOCAL)
+    NutritionRepository providesLocalNutritionRepo(LocalNutritionDao nutritionDao) {
+        return new NutritionRepository(nutritionDao);
     }
 
     @Provides

@@ -50,7 +50,7 @@ public class LocalAthleteDao implements IAthleteDao {
         BodyType type = BodyType.getType(bodyType);
         Body.Stats stats = new Body.Stats(
                 Body.MAX_ENERGY,
-                gender == Athlete.MALE ? Body.INITIAL_WEIGHT_MALE : Body.INITIAL_WEIGHT_FEMALE);
+                gender == Athlete.MALE ? Body.INITIAL_WEIGHT_MALE : Body.INITIAL_WEIGHT_FEMALE, false);
         Body.Properties properties = new Body.Properties(gender, size, age);
         return Athlete.build(0, Body.warmUp(
                 type,

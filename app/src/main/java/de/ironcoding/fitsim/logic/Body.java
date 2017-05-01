@@ -49,7 +49,7 @@ public class Body {
 
     public static Body warmUpAverageMale(@BodyType.Name String type, Muscles muscles) {
         Properties properties = new Properties(Athlete.MALE, DEFAULT_SIZE_MALE, DEFAULT_AGE);
-        Stats stats = new Stats(MAX_ENERGY, INITIAL_WEIGHT_MALE);
+        Stats stats = new Stats(MAX_ENERGY, INITIAL_WEIGHT_MALE, false);
         Fitness fitness = new Fitness(INITIAL_FITNESS, INITIAL_FITNESS);
         BodyType bodyType = BodyType.getType(type);
         Calories calories = Calories.createDefault(bodyType, properties, stats);
@@ -58,7 +58,7 @@ public class Body {
 
     public static Body warmUpAverageFemale(@BodyType.Name String type, Muscles muscles) {
         Properties properties = new Properties(Athlete.FEMALE, DEFAULT_SIZE_FEMALE, DEFAULT_AGE);
-        Stats stats = new Stats(MAX_ENERGY, INITIAL_WEIGHT_FEMALE);
+        Stats stats = new Stats(MAX_ENERGY, INITIAL_WEIGHT_FEMALE, false);
         Fitness fitness = new Fitness(INITIAL_FITNESS, INITIAL_FITNESS);
         BodyType bodyType = BodyType.getType(type);
         Calories calories = Calories.createDefault(bodyType, properties, stats);
@@ -148,7 +148,7 @@ public class Body {
     }
 
     public Stats getStats() {
-        return new Stats(stats.energy, stats.weight);
+        return new Stats(stats.energy, stats.weight, stats.isSaturated);
     }
 
     public Fitness getFitness() {
@@ -211,7 +211,7 @@ public class Body {
 
         private boolean isSaturated = false;
 
-        public Stats(int energy, float weight) {
+        public Stats(int energy, float weight, boolean isSaturated) {
             if (energy < MIN_ENERGY) {
                 energy = MIN_ENERGY;
             }
@@ -220,6 +220,7 @@ public class Body {
             }
             this.energy = energy;
             this.weight = weight < MIN_WEIGHT ? MIN_WEIGHT : weight;
+            this.isSaturated = isSaturated;
         }
 
         public void consumeEnergy(int consumedEnergy) {
@@ -252,6 +253,10 @@ public class Body {
 
         void setSaturated(boolean isSaturated) {
             this.isSaturated = isSaturated;
+        }
+
+        public boolean isSaturated() {
+            return isSaturated;
         }
     }
 

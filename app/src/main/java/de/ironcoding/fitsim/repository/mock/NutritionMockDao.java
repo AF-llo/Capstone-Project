@@ -20,11 +20,11 @@ public class NutritionMockDao implements INutritionDao {
     @Override
     public List<Nutrition> load() {
         List<Nutrition> mockedNutrition = new ArrayList<>();
-        mockedNutrition.add(new Meal("Proteineshake", 20, 5, 3, 1));
-        mockedNutrition.add(new Meal("Spaghetti", 20, 60, 15, 1));
-        mockedNutrition.add(new Meal("Cereals", 30, 50, 10, 1));
-        mockedNutrition.add(new EnergyBooster("Coffee", 100, 1));
-        mockedNutrition.add(new EnergyBooster("Energydrink", 100, 5));
+        mockedNutrition.add(new Meal("Proteineshake", 20, 5, 3, 1, 1));
+        mockedNutrition.add(new Meal("Spaghetti", 20, 60, 15, 1, 4));
+        mockedNutrition.add(new Meal("Cereals", 30, 50, 10, 1, 3));
+        mockedNutrition.add(new EnergyBooster("Coffee", 100, 1, 1));
+        mockedNutrition.add(new EnergyBooster("Energydrink", 100, 1, 0));
         return mockedNutrition;
     }
 

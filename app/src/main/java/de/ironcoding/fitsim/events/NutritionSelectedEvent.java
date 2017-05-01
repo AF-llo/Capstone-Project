@@ -9,4 +9,5 @@ import de.ironcoding.fitsim.logic.Nutrition;
 
 public interface NutritionSelectedEvent extends MVPEvents {
     void onNutritionSelected(Nutrition nutrition);
+    void onCanNotEat(Nutrition nutrition);
 }

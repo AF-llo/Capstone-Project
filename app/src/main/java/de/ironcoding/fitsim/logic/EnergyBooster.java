@@ -6,12 +6,12 @@ package de.ironcoding.fitsim.logic;
 
 public class EnergyBooster extends Nutrition {
 
-    private static final int TYPE_INT = 2;
+    public static final int TYPE_INT = 3;
 
     private final int energy;
 
-    public EnergyBooster(String name, int energy, int minLevel) {
-        super(name, 0, 0, 0, minLevel, TYPE_INT, 0);
+    public EnergyBooster(String name, int energy, int minLevel, float saturationDuration) {
+        super(name, 0, 0, 0, minLevel, TYPE_INT, saturationDuration);
         if (energy < 0) {
             energy = 0;
         }
@@ -25,7 +25,7 @@ public class EnergyBooster extends Nutrition {
     }
 
     @Override
-    protected boolean isAccepted(Body body) {
+    public boolean isAccepted(Body body) {
         return true;
     }
 }

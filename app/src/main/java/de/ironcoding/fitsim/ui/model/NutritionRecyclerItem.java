@@ -4,6 +4,7 @@ import de.appsfactory.mvplib.presenter.MVPEventRecyclerItem;
 import de.ironcoding.fitsim.BR;
 import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.events.NutritionSelectedEvent;
+import de.ironcoding.fitsim.logic.Body;
 import de.ironcoding.fitsim.logic.Nutrition;
 
 /**
@@ -14,8 +15,11 @@ public class NutritionRecyclerItem extends MVPEventRecyclerItem<NutritionSelecte
 
     private final Nutrition nutrition;
 
-    public NutritionRecyclerItem(Nutrition nutrition) {
+    private Body body;
+
+    public NutritionRecyclerItem(Nutrition nutrition, Body body) {
         this.nutrition = nutrition;
+        this.body = body;
     }
 
     @Override
@@ -32,7 +36,23 @@ public class NutritionRecyclerItem extends MVPEventRecyclerItem<NutritionSelecte
         return nutrition.getName();
     }
 
+    public boolean getCanEat() {
+        return nutrition.isAccepted(body);
+    }
+
+    public void setBody(Body body) {
+        if (body == null) {
+            return;
+        }
+        this.body = body;
+        notifyChange();
+    }
+
     public void clicked() {
-        getEvents().onNutritionSelected(nutrition);
+        if (getCanEat()) {
+            getEvents().onNutritionSelected(nutrition);
+        } else {
+            getEvents().onCanNotEat(nutrition);
+        }
     }
 }

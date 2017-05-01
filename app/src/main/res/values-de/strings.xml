@@ -9,4 +9,5 @@
     <string name="activity_to_demanding">%s ist mir gerade zu Anstrengend.</string>
     <string name="consume_nutrition">Konsumiere</string>
     <string name="to_satured">Ich bin satt</string>
+    <string name="cant_eat_nutrition">%s hatte ich schon genug.</string>
 </resources>

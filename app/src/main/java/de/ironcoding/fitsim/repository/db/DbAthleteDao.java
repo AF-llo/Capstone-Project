@@ -43,7 +43,7 @@ public class DbAthleteDao implements IAthleteDao {
         @BodyType.Name String bodyType = dbAthlete.getBodyType();
         BodyType type = BodyType.getType(bodyType);
         Body.Properties properties = new Body.Properties(dbAthlete.getGender(), dbAthlete.getSize(), dbAthlete.getAge());
-        Body.Stats stats = new Body.Stats(dbAthlete.getEnergy(), dbAthlete.getWeight());
+        Body.Stats stats = new Body.Stats(dbAthlete.getEnergy(), dbAthlete.getWeight(), dbAthlete.getIsSaturated());
         Body body = Body.warmUp(
                 type,
                 properties,
@@ -103,6 +103,7 @@ public class DbAthleteDao implements IAthleteDao {
         dbAthlete.setConsumedProteine(macros.getConsumedProteine());
         dbAthlete.setConsumedCarbs(macros.getConsumedCarbs());
         dbAthlete.setConsumedFat(macros.getConsumedFat());
+        dbAthlete.setIsSaturated(stats.isSaturated());
 
         Muscles muscles = body.getMuscles();
         for (Muscle muscle : muscles.getAll()) {

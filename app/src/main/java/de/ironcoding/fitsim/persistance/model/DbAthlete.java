@@ -53,6 +53,8 @@ public class DbAthlete {
 
     private float consumedFat;
 
+    private boolean isSaturated;
+
     @ToMany(referencedJoinProperty = "athleteId")
     private List<DbMuscle> muscles;
 
@@ -64,12 +66,11 @@ public class DbAthlete {
     @Generated(hash = 1634423584)
     private transient DbAthleteDao myDao;
 
-    @Generated(hash = 889961082)
-    public DbAthlete(long id, long experience, String bodyType, int gender,
-            float size, int age, int energy, float weight, float strength,
-            float stamina, float requiredEnergy, float proteinProportion,
-            float carbsProportion, float fatProportion, float consumedProteine,
-            float consumedCarbs, float consumedFat) {
+    @Generated(hash = 1024263767)
+    public DbAthlete(long id, long experience, String bodyType, int gender, float size, int age,
+            int energy, float weight, float strength, float stamina, float requiredEnergy,
+            float proteinProportion, float carbsProportion, float fatProportion, float consumedProteine,
+            float consumedCarbs, float consumedFat, boolean isSaturated) {
         this.id = id;
         this.experience = experience;
         this.bodyType = bodyType;
@@ -87,6 +88,7 @@ public class DbAthlete {
         this.consumedProteine = consumedProteine;
         this.consumedCarbs = consumedCarbs;
         this.consumedFat = consumedFat;
+        this.isSaturated = isSaturated;
     }
 
     @Generated(hash = 481205737)
@@ -298,5 +300,13 @@ public class DbAthlete {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getDbAthleteDao() : null;
+    }
+
+    public boolean getIsSaturated() {
+        return this.isSaturated;
+    }
+
+    public void setIsSaturated(boolean isSaturated) {
+        this.isSaturated = isSaturated;
     }
 }

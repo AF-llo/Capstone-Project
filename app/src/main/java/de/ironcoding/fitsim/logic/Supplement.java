@@ -6,16 +6,14 @@ package de.ironcoding.fitsim.logic;
 
 public class Supplement extends Nutrition {
 
-    private static final int TYPE_INT = 1;
+    public static final int TYPE_INT = 2;
 
-    private static final float SUPP_DURATION = 1.0F;
-
-    public Supplement(String name, float proteine, float carbs, float fat, int minLevel) {
-        super(name, proteine, carbs, fat, minLevel, TYPE_INT, SUPP_DURATION);
+    public Supplement(String name, float proteine, float carbs, float fat, int minLevel, float saturationDuration) {
+        super(name, proteine, carbs, fat, minLevel, TYPE_INT, saturationDuration);
     }
 
     @Override
-    protected boolean isAccepted(Body body) {
+    public boolean isAccepted(Body body) {
         return body.canEat();
     }
 }

@@ -71,6 +71,6 @@ public abstract class Nutrition extends BaseLevelItem implements ITypedItem {
         }
     }
 
-    protected abstract boolean isAccepted(Body body);
+    public abstract boolean isAccepted(Body body);
 
 }

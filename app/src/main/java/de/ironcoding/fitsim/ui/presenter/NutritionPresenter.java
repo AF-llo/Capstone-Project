@@ -11,9 +11,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import de.ironcoding.fitsim.R;
-import de.ironcoding.fitsim.app.injection.MockRepositoryModule;
+import de.ironcoding.fitsim.app.injection.LocalModule;
 import de.ironcoding.fitsim.events.NutritionSelectedEvent;
 import de.ironcoding.fitsim.logic.Athlete;
+import de.ironcoding.fitsim.logic.Body;
 import de.ironcoding.fitsim.logic.Nutrition;
 import de.ironcoding.fitsim.repository.NutritionRepository;
 import de.ironcoding.fitsim.ui.model.AthleteNutritionPreviewViewModel;
@@ -26,7 +27,7 @@ import de.ironcoding.fitsim.ui.model.NutritionRecyclerItem;
 public class NutritionPresenter extends BasePresenter implements NutritionSelectedEvent {
 
     @Inject
-    @Named(MockRepositoryModule.REPOSITORY_MOCKED)
+    @Named(LocalModule.REPOSITORY_LOCAL)
     NutritionRepository nutritionRepository;
 
     public ObservableList<NutritionRecyclerItem> nutritions = new ObservableArrayList<>();
@@ -61,7 +62,7 @@ public class NutritionPresenter extends BasePresenter implements NutritionSelect
             nutritions.clear();
         }
         for (Nutrition item : items) {
-            nutritions.add(new NutritionRecyclerItem(item));
+            nutritions.add(new NutritionRecyclerItem(item, getAthlete().getBody()));
         }
     }
 
@@ -77,8 +78,28 @@ public class NutritionPresenter extends BasePresenter implements NutritionSelect
         }
         previewAthlete.eat(nutrition);
         updateAthletePreview(previewAthlete);
-        selectedNutrition.set(new NutritionRecyclerItem(nutrition));
+        selectedNutrition.set(new NutritionRecyclerItem(nutrition, previewAthlete.getBody()));
         notifyCallbackShowBottomSheet();
+    }
+
+    /**
+     * This will only force all nutrition to update its body to show new state e.g. when
+     * body is now to saturated.
+     * @param body
+     *                     Changed body
+     */
+    private void bodyChanged(Body body) {
+        for (NutritionRecyclerItem nutrition : nutritions) {
+            nutrition.setBody(body);
+        }
+    }
+
+    @Override
+    public void onCanNotEat(Nutrition nutrition) {
+        if (getContext() == null) {
+            return;
+        }
+        Toast.makeText(getContext(), getContext().getString(R.string.cant_eat_nutrition, nutrition.getName()), Toast.LENGTH_SHORT).show();
     }
 
     public void eatNutrition() {
@@ -88,6 +109,7 @@ public class NutritionPresenter extends BasePresenter implements NutritionSelect
         Athlete updatedAthlete = athletePreview.get().getAthlete();
         athletePreview.set(null);
         athleteRepository.updateAthlete(updatedAthlete);
+        bodyChanged(updatedAthlete.getBody());
         updateAthlete(updatedAthlete);
         notifyCallbackHideBottomSheet();
     }

@@ -147,7 +147,7 @@ public class AthleteUnitTest {
     @Test
     public void body_stats_test() throws Exception {
         // energy
-        Body.Stats stats = new Body.Stats(50, Body.INITIAL_WEIGHT_MALE);
+        Body.Stats stats = new Body.Stats(50, Body.INITIAL_WEIGHT_MALE, false);
         stats.consumeEnergy(10);
         Assert.assertEquals(40, stats.getEnergy());
 
@@ -211,7 +211,7 @@ public class AthleteUnitTest {
         Athlete athlete = Athlete.buildNew(Body.warmUpAverageMale(BodyType.ENDOMORPH, new MusclesMockDao().load()));
         for (int j = 0; j < 7; j++) {
             for (int i = 0; i <= 4; i++) {
-                athlete.eat(new Meal("Food", 30, 60, 10, 1));
+                athlete.eat(new Meal("Food", 30, 60, 10, 1, 1));
             }
             athlete.refreshBody();
         }
@@ -240,7 +240,7 @@ public class AthleteUnitTest {
         activities = activitiesRepository.loadForLevel(level);
         Assert.assertEquals(7, activities.size());
 
-        Nutrition meal = new Meal("Food", 10, 30, 5, 1);
+        Nutrition meal = new Meal("Food", 10, 30, 5, 1, 4);
         athlete.eat(meal);
         Assert.assertEquals(false, athlete.canEat(meal));
         athlete.goToRestRoom();
