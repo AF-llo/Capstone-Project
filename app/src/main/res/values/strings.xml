@@ -14,4 +14,6 @@
     <string name="size">Size</string>
     <string name="onboarding">Onboarding</string>
     <string name="create">Create athlete</string>
+    <string name="anonymous">Anonymous</string>
+    <string name="login">Login</string>
 </resources>
