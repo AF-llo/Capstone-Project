@@ -6,7 +6,7 @@
       "proteine":75,
       "carbs":100,
       "fat":10,
-      "saturationDuration":4.0,
+      "saturationDuration":0.0,
       "level":1
     },
     {
@@ -15,7 +15,7 @@
       "proteine":60,
       "carbs":90,
       "fat":15,
-      "saturationDuration":3.0,
+      "saturationDuration":0.0,
       "level":1
     },
     {
@@ -24,14 +24,14 @@
       "proteine":25,
       "carbs":10,
       "fat":5,
-      "saturationDuration":1.5,
+      "saturationDuration":0.0,
       "level":1
     },
     {
       "typeid":3,
       "name":"Kaffee",
       "energy":25,
-      "saturationDuration":1.0,
+      "saturationDuration":0.0,
       "level":1
     },
     {

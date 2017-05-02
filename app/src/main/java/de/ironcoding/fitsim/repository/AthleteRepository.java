@@ -14,6 +14,11 @@ public class AthleteRepository extends BaseDaoRepository<Athlete, IAthleteDao> {
         super(athleteDao);
     }
 
+    public Athlete reloadAthlete() {
+        athlete = null;
+        return loadAthlete();
+    }
+
     public Athlete loadAthlete() {
         if (athlete == null) {
             athlete = load();

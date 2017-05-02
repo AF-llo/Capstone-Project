@@ -2,12 +2,14 @@ package de.ironcoding.fitsim.app;
 
 import android.app.Application;
 
+import de.ironcoding.fitsim.BuildConfig;
 import de.ironcoding.fitsim.app.injection.AppComponent;
 import de.ironcoding.fitsim.app.injection.AppModule;
 import de.ironcoding.fitsim.app.injection.DaggerAppComponent;
 import de.ironcoding.fitsim.app.injection.DbRepositoryModule;
 import de.ironcoding.fitsim.app.injection.LocalModule;
 import de.ironcoding.fitsim.app.injection.MockRepositoryModule;
+import timber.log.Timber;
 
 /**
  * Created by larsl on 20.04.2017.
@@ -21,6 +23,9 @@ public class FitSimApp extends Application {
     public void onCreate() {
         super.onCreate();
         initInjection();
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
     }
 
     private void initInjection() {

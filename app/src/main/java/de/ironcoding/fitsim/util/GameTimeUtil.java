@@ -28,4 +28,8 @@ public class GameTimeUtil {
     public static long durationInSeconds(float durationInRealHours) {
         return (long) (durationInRealHours * SCALED_GAME_TIME * SECONDS_PER_HOUR);
     }
+
+    public static int millisInSeconds(long millis) {
+        return (int) (millis / (float) MILLIS_PER_SECOND);
+    }
 }

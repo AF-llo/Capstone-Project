@@ -40,6 +40,7 @@ public class MainPresenter extends BasePresenter implements BottomNavigationView
         super.onPresenterCreated();
         getFitSimApp().getAppComponent().injectMainPresenter(this);
         jobber.scheduleRefreshBodyJobIfNotScheduled();
+        jobber.scheduleRelaxMusclesJobIfNotScheduled();
     }
 
     @Override

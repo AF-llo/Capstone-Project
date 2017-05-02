@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import de.ironcoding.fitsim.app.service.JobScheduledIntentService;
+import de.ironcoding.fitsim.app.service.JobStoppedIntentService;
 import de.ironcoding.fitsim.ui.activities.MainActivity;
 import de.ironcoding.fitsim.ui.presenter.BasePresenter;
 import de.ironcoding.fitsim.ui.presenter.GymPresenter;
@@ -34,5 +35,7 @@ public interface AppComponent {
     void injectProfilePresenter(ProfilePresenter profilePresenter);
 
     void injectJobScheduledService(JobScheduledIntentService intentService);
+
+    void injectJobStoppedIntentService(JobStoppedIntentService intentService);
 
 }

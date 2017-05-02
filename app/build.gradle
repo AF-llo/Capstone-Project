@@ -87,7 +87,7 @@ dependencies {
     compile 'com.firebase:firebase-jobdispatcher:0.6.0'
 
     compile "org.greenrobot:greendao:$green_dao_version"
-
+    compile 'com.jakewharton.timber:timber:4.5.1'
     compile 'com.google.code.gson:gson:2.8.0'
 }
 apply plugin: 'com.google.gms.google-services'
