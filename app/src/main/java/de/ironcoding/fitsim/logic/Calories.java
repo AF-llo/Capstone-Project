@@ -211,8 +211,7 @@ public class Calories {
      * @param gender
      *                  male or female
      * @param weight
-     *                  weight in kg. {@link Body#INITIAL_WEIGHT_MALE}/{@link Body#INITIAL_WEIGHT_FEMALE} is
-     *                  used when negative weight is passed.
+     *                  weight in kg. {@link Body#INITIAL_WEIGHT} is used when negative weight is passed.
      * @param size
      *                  size in cm. {@link Body#DEFAULT_SIZE_MALE}/{@link Body#DEFAULT_SIZE_FEMALE} is used
      *                  when negative size is passed.
@@ -222,7 +221,7 @@ public class Calories {
      */
     public static float metabolicRatePerDay(@Athlete.Gender int gender, float weight, float size, int age) {
         if (weight < 0) {
-            weight = gender == Athlete.MALE ? Body.INITIAL_WEIGHT_MALE : Body.INITIAL_WEIGHT_FEMALE;
+            weight = Body.INITIAL_WEIGHT;
         }
         if (size < 0) {
             size = gender == Athlete.MALE ? Body.DEFAULT_SIZE_MALE : Body.DEFAULT_SIZE_FEMALE;

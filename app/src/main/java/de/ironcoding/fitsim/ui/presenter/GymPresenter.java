@@ -16,10 +16,12 @@ import de.ironcoding.fitsim.events.ActivityItemEvent;
 import de.ironcoding.fitsim.logic.Activity;
 import de.ironcoding.fitsim.logic.Athlete;
 import de.ironcoding.fitsim.logic.Body;
+import de.ironcoding.fitsim.logic.Highscore;
 import de.ironcoding.fitsim.logic.Muscles;
 import de.ironcoding.fitsim.repository.ActivitiesRepository;
 import de.ironcoding.fitsim.ui.model.ActivityRecyclerItem;
 import de.ironcoding.fitsim.ui.model.AthleteActivityPreviewViewModel;
+import timber.log.Timber;
 
 /**
  * Created by larsl on 28.04.2017.
@@ -130,6 +132,8 @@ public class GymPresenter extends BasePresenter implements ActivityItemEvent {
             loadActivities();
             notifyCallbackShowInterstitial();
         }
+        Highscore highscore = new Highscore(updatedAthlete);
+        Timber.d("%s highscore points", highscore.getPoints());
     }
 
     private void updateAthletePreview(Athlete athlete) {

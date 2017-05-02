@@ -86,6 +86,10 @@ public class Muscle {
         return condition != OVERLOADED;
     }
 
+    public float getPercentualGrowing() {
+        return (float) volume / (float) INITIAL_VOLUME;
+    }
+
     public void strain(int attraction) {
         if (condition != OVERLOADED) {
             condition--;

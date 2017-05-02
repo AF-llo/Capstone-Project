@@ -51,6 +51,19 @@ public class Muscles {
         }
     }
 
+    public float getAveragePercentualGrowing() {
+        float summedGrowing = 0.0F;
+        int count = 0;
+        for (Muscle muscle : getAll()) {
+            summedGrowing += muscle.getPercentualGrowing();
+            count++;
+        }
+        if (count == 0) {
+            return 0.0F;
+        }
+        return summedGrowing / count;
+    }
+
     public List<Muscle> getAll() {
         List<Muscle> allMuscles = new ArrayList<>();
         for (Muscle muscle : availableMuscles.values()) {

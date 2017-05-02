@@ -27,8 +27,7 @@ public class Body {
 
     public static final float INITIAL_FITNESS = 60.0F;
 
-    public static final float INITIAL_WEIGHT_MALE = 75.0F;
-    public static final float INITIAL_WEIGHT_FEMALE = 65.0F;
+    public static final float INITIAL_WEIGHT = 70.0F;
     public static final float DEFAULT_SIZE_MALE = 175.0F;
     public static final float DEFAULT_SIZE_FEMALE = 170.0F;
     public static final int DEFAULT_AGE = 25;
@@ -49,7 +48,7 @@ public class Body {
 
     public static Body warmUpAverageMale(@BodyType.Name String type, Muscles muscles) {
         Properties properties = new Properties(Athlete.MALE, DEFAULT_SIZE_MALE, DEFAULT_AGE);
-        Stats stats = new Stats(MAX_ENERGY, INITIAL_WEIGHT_MALE, false);
+        Stats stats = new Stats(MAX_ENERGY, INITIAL_WEIGHT, false);
         Fitness fitness = new Fitness(INITIAL_FITNESS, INITIAL_FITNESS);
         BodyType bodyType = BodyType.getType(type);
         Calories calories = Calories.createDefault(bodyType, properties, stats);
@@ -58,7 +57,7 @@ public class Body {
 
     public static Body warmUpAverageFemale(@BodyType.Name String type, Muscles muscles) {
         Properties properties = new Properties(Athlete.FEMALE, DEFAULT_SIZE_FEMALE, DEFAULT_AGE);
-        Stats stats = new Stats(MAX_ENERGY, INITIAL_WEIGHT_FEMALE, false);
+        Stats stats = new Stats(MAX_ENERGY, INITIAL_WEIGHT, false);
         Fitness fitness = new Fitness(INITIAL_FITNESS, INITIAL_FITNESS);
         BodyType bodyType = BodyType.getType(type);
         Calories calories = Calories.createDefault(bodyType, properties, stats);
@@ -258,6 +257,10 @@ public class Body {
         public boolean isSaturated() {
             return isSaturated;
         }
+
+        public float getPercentualWeightDiff() {
+            return (weight - INITIAL_WEIGHT) / INITIAL_WEIGHT;
+        }
     }
 
     public static class Fitness {
@@ -322,6 +325,14 @@ public class Body {
 
         public float getStamina() {
             return stamina;
+        }
+
+        public float getGrownStrength() {
+            return strength - INITIAL_FITNESS;
+        }
+
+        public float getGrownStamina() {
+            return stamina - INITIAL_FITNESS;
         }
     }
 

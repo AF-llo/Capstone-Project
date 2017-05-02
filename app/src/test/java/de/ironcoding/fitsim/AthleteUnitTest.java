@@ -147,7 +147,7 @@ public class AthleteUnitTest {
     @Test
     public void body_stats_test() throws Exception {
         // energy
-        Body.Stats stats = new Body.Stats(50, Body.INITIAL_WEIGHT_MALE, false);
+        Body.Stats stats = new Body.Stats(50, Body.INITIAL_WEIGHT, false);
         stats.consumeEnergy(10);
         Assert.assertEquals(40, stats.getEnergy());
 
