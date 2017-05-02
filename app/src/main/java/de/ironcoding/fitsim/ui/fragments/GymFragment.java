@@ -7,7 +7,6 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.databinding.FragmentGymBinding;
@@ -31,6 +30,11 @@ public class GymFragment extends BaseFragment<GymPresenter> implements BasePrese
 
     private BottomSheetBehavior bottomSheetBehavior;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,7 +57,6 @@ public class GymFragment extends BaseFragment<GymPresenter> implements BasePrese
 
     @Override
     public void showInterstitial() {
-        // TODO: 30.04.2017
-        Toast.makeText(getContext(), "Show interstitial", Toast.LENGTH_SHORT).show();
+        showInterstitialAd();
     }
 }

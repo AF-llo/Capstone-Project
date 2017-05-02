@@ -19,4 +19,8 @@ public abstract class BaseFragment<T extends MVPPresenter> extends MVPFragment<T
             throw new IllegalStateException("Your Host-Activity is no " + BaseActivity.class.getSimpleName());
         }
     }
+
+    protected void showInterstitialAd() {
+        ((BaseActivity)getContext()).showInterstitial();
+    }
 }

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">FitSim</string>
+    <string name="admob_test_addunitid" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    
     <string name="profile">Profile</string>
     <string name="gym">Gym</string>
     <string name="nutrition">Nutrition</string>
