@@ -60,6 +60,15 @@
                     android:onClick="@{() -> profilePresenter.login()}"
                     android:visibility="@{profilePresenter.loggedin ? View.GONE : View.VISIBLE}"/>
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/logout"
+                    android:layout_margin="@dimen/spacing_m"
+                    android:layout_gravity="center"
+                    android:onClick="@{() -> profilePresenter.logout()}"
+                    android:visibility="@{profilePresenter.loggedin ? View.VISIBLE : View.GONE}"/>
+
             </LinearLayout>
 
         </android.support.v4.widget.NestedScrollView>

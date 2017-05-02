@@ -16,4 +16,5 @@
     <string name="create">Erstelle Sportler</string>
     <string name="anonymous">Anonymous</string>
     <string name="login">Anmelden</string>
+    <string name="logout">Abmelden</string>
 </resources>

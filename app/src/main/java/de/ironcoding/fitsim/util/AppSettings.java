@@ -1,5 +1,6 @@
 package de.ironcoding.fitsim.util;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
@@ -10,8 +11,11 @@ public class AppSettings {
 
     private SharedPreferences sharedPreferences;
 
-    public AppSettings(SharedPreferences sharedPreferences) {
+    private Context context;
+
+    public AppSettings(SharedPreferences sharedPreferences, Context context) {
         this.sharedPreferences = sharedPreferences;
+        this.context = context;
     }
 
     private static final String PREF_ATHLETE_ID = "de.ironcoding.pref.athlete_id";

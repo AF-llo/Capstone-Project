@@ -43,8 +43,8 @@ public class AppModule {
 
     @Provides
     @Singleton
-    AppSettings provideAppSettings(SharedPreferences sharedPreferences) {
-        return new AppSettings(sharedPreferences);
+    AppSettings provideAppSettings(SharedPreferences sharedPreferences, Context context) {
+        return new AppSettings(sharedPreferences, context);
     }
 
     @Provides
