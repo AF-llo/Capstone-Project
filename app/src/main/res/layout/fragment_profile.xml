@@ -36,7 +36,8 @@
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_m"
+            android:layout_marginTop="@dimen/spacing_m"
+            android:layout_marginBottom="@dimen/spacing_m"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
@@ -67,6 +68,13 @@
                     android:layout_margin="@dimen/spacing_m"
                     android:layout_gravity="center"
                     android:onClick="@{() -> profilePresenter.logout()}"
+                    android:visibility="@{profilePresenter.loggedin ? View.VISIBLE : View.GONE}"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/highscore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:items="@{profilePresenter.higscoreItems}"
                     android:visibility="@{profilePresenter.loggedin ? View.VISIBLE : View.GONE}"/>
 
             </LinearLayout>

@@ -17,6 +17,8 @@ public class FirebaseModule {
 
     public static final String CHILD_HIGHSCORE = "highscore";
 
+    public static final String CHILD_POINTS = "points";
+
     @Provides
     FirebaseDatabase providesFirebaseDatabase() {
         return FirebaseDatabase.getInstance();

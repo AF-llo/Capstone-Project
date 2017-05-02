@@ -1,5 +1,10 @@
 package de.ironcoding.fitsim.logic;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
+
+import de.ironcoding.fitsim.app.injection.FirebaseModule;
+
 /**
  * Created by larsl on 02.05.2017.
  */
@@ -10,6 +15,8 @@ public class Highscore {
     private static final float SCALE_WEIGHT = 1000F;
     private static final float SCALE_MUSCLES = 1000F;
     private static final float SCALE_FITNESS = 10F;
+
+    public static final int NUMBER_OF_HIGHSCORE_ENTRIES = 10;
 
     private Level level;
 
@@ -38,5 +45,10 @@ public class Highscore {
             points = 0;
         }
         return points;
+    }
+
+    public static Query topTenQuery(DatabaseReference highscoreReference) {
+        return highscoreReference.orderByChild(FirebaseModule.CHILD_POINTS)
+                .limitToFirst(NUMBER_OF_HIGHSCORE_ENTRIES);
     }
 }

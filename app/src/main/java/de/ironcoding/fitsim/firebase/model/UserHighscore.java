@@ -10,6 +10,9 @@ public class UserHighscore {
 
     private String name;
 
+    public UserHighscore() {
+    }
+
     public UserHighscore(long points, String name) {
         this.points = points;
         this.name = name;

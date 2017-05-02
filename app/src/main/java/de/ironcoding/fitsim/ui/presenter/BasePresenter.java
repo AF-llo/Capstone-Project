@@ -1,6 +1,8 @@
 package de.ironcoding.fitsim.ui.presenter;
 
+import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.support.annotation.CallSuper;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -47,6 +49,8 @@ public class BasePresenter extends MVPPresenter {
 
     public ObservableField<AthleteHeaderViewModel> athleteModel = new ObservableField<>();
 
+    public ObservableBoolean athleteLoaded = new ObservableBoolean(false);
+
     public BasePresenter() {
     }
 
@@ -82,11 +86,17 @@ public class BasePresenter extends MVPPresenter {
         }
     }
 
+    @CallSuper
     protected void onAthleteLoaded() {
+        athleteLoaded.set(true);
     }
 
     protected Athlete getAthlete() {
         return athleteModel.get().getAthlete();
+    }
+
+    protected boolean isAthletLoaded() {
+        return athleteLoaded.get();
     }
 
     private void setAthlete(Athlete athlete) {
@@ -104,6 +114,9 @@ public class BasePresenter extends MVPPresenter {
     }
 
     protected void updateHighscoreIfLoggedIn() {
+        if (!isAthletLoaded()) {
+            return;
+        }
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user == null) {
             return;
