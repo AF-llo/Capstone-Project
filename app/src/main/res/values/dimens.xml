@@ -8,6 +8,13 @@
     <dimen name="spacing_xxl">48dp</dimen>
 
     <dimen name="header_height">150dp</dimen>
-
     <dimen name="bottom_sheet_height">400dp</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">8dp</dimen>
+    <dimen name="widget_width">250dp</dimen>
+    <dimen name="widget_height">180dp</dimen>
 </resources>

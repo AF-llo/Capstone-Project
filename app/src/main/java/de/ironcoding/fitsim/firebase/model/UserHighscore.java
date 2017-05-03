@@ -1,10 +1,12 @@
 package de.ironcoding.fitsim.firebase.model;
 
+import de.ironcoding.fitsim.logic.IHighscore;
+
 /**
  * Created by larsl on 02.05.2017.
  */
 
-public class UserHighscore {
+public class UserHighscore implements IHighscore {
 
     private long points;
 
@@ -26,11 +28,17 @@ public class UserHighscore {
         this.points = points;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public long getId() {
+        return 0;
     }
 }

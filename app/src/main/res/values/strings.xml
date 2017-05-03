@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">FitSim</string>
     <string name="admob_test_addunitid" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
-    
+
     <string name="profile">Profile</string>
     <string name="gym">Gym</string>
     <string name="nutrition">Nutrition</string>
@@ -19,4 +19,8 @@
     <string name="anonymous">Anonymous</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="highscore">Highscore</string>
+    <string name="no_data">No data available</string>
 </resources>

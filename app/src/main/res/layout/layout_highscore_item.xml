@@ -26,6 +26,7 @@
             android:layout_gravity="center_vertical">
 
             <TextView
+                android:id="@+id/highscore_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -33,6 +34,7 @@
                 tools:text="Lars Lokaizyk" />
 
             <TextView
+                android:id="@+id/highscore_points"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{item.points}"

@@ -16,6 +16,7 @@ public class Jobber {
 
     private static final float REFRESH_BODY_DURATION = GameTimeUtil.HOURS_PER_GAME_DAY;
     private static final float RELAX_MUSCLES_DURATION = GameTimeUtil.HOURS_PER_GAME_DAY / 2;
+    private static final long HIGHSCORE_UPDATE_INTERVAL = 60000; // 1800000
 
     private FirebaseJobDispatcher dispatcher;
 
@@ -30,7 +31,7 @@ public class Jobber {
         if(appSettings.getRefreshJobScheduledFromSettings()) {
             return;
         }
-        int duration = (int) GameTimeUtil.durationInSeconds(REFRESH_BODY_DURATION);
+        int duration = (int) GameTimeUtil.gameDurationInSeconds(REFRESH_BODY_DURATION);
         Job refreshJob = dispatcher.newJobBuilder()
                 .setService(EventJobService.class)
                 .setTag(EventJobService.EVENT_REFRESH_BODY)
@@ -48,7 +49,7 @@ public class Jobber {
         if (appSettings.getRelaxMusclesJobScheduledFromSettings()) {
             return;
         }
-        int duration = (int) GameTimeUtil.durationInSeconds(RELAX_MUSCLES_DURATION);
+        int duration = (int) GameTimeUtil.gameDurationInSeconds(RELAX_MUSCLES_DURATION);
         Job refreshJob = dispatcher.newJobBuilder()
                 .setService(EventJobService.class)
                 .setTag(EventJobService.EVENT_RELAXE_MUSCLES)
@@ -58,8 +59,23 @@ public class Jobber {
                 .setLifetime(Lifetime.FOREVER)
                 .build();
         dispatcher.mustSchedule(refreshJob);
-        appSettings.writeRefreshJobScheduledToSettings(true);
+        appSettings.writeRelaxMusclesJobScheduledToSettings(true);
         Timber.d("Schedule %s every %d sec", EventJobService.EVENT_RELAXE_MUSCLES, duration);
+    }
+
+    public void scheduleHighscoreJogEvent() {
+        dispatcher.cancel(EventJobService.EVENT_UPDATE_HIGHSCORE); // // TODO: 03.05.2017 remove
+        int duration = GameTimeUtil.millisInSeconds(HIGHSCORE_UPDATE_INTERVAL);
+        Job refreshJob = dispatcher.newJobBuilder()
+                .setService(EventJobService.class)
+                .setTag(EventJobService.EVENT_UPDATE_HIGHSCORE)
+                .setRecurring(true)
+                .setTrigger(Trigger.executionWindow(duration, duration))
+                .setReplaceCurrent(false)
+                .setLifetime(Lifetime.FOREVER)
+                .build();
+        dispatcher.mustSchedule(refreshJob);
+        Timber.d("Schedule %s every %d sec", EventJobService.EVENT_UPDATE_HIGHSCORE, duration);
     }
 
     public void scheduleAthleteReadyJob(long duration) {

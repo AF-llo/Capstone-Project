@@ -1,15 +1,19 @@
-package de.ironcoding.fitsim.logic;
+package de.ironcoding.fitsim.util;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 
 import de.ironcoding.fitsim.app.injection.FirebaseModule;
+import de.ironcoding.fitsim.logic.Athlete;
+import de.ironcoding.fitsim.logic.Body;
+import de.ironcoding.fitsim.logic.Level;
+import de.ironcoding.fitsim.logic.Muscles;
 
 /**
  * Created by larsl on 02.05.2017.
  */
 
-public class Highscore {
+public class HighscoreUtil {
 
     private static final float SCALE_EXPERTISE = 0.001F;
     private static final float SCALE_WEIGHT = 1000F;
@@ -18,23 +22,12 @@ public class Highscore {
 
     public static final int NUMBER_OF_HIGHSCORE_ENTRIES = 10;
 
-    private Level level;
-
-    private Body.Stats stats;
-
-    private Body.Fitness fitness;
-
-    private Muscles muscles;
-
-    public Highscore(Athlete athlete) {
-        level = athlete.getLevel();
+    public static long getPoints(Athlete athlete) {
+        Level level = athlete.getLevel();
         Body body = athlete.getBody();
-        stats = body.getStats();
-        fitness = body.getFitness();
-        muscles = body.getMuscles();
-    }
-
-    public long getPoints() {
+        Body.Stats stats = body.getStats();
+        Body.Fitness fitness = body.getFitness();
+        Muscles muscles = body.getMuscles();
         long experiencePoints = (long) (level.getTotalExperience() * SCALE_EXPERTISE);
         long weightPoints = (long) (stats.getPercentualWeightDiff() * SCALE_WEIGHT);
         long musclePoints = (long) (muscles.getAveragePercentualGrowing() * SCALE_MUSCLES);

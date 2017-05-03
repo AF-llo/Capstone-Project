@@ -1,5 +1,7 @@
 package de.ironcoding.fitsim.ui.activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +15,11 @@ import de.ironcoding.fitsim.ui.presenter.OnboardingPresenter;
  */
 
 public class OnboardingActivity extends BaseActivity<OnboardingPresenter> implements OnboardingPresenter.OnboardingCallback {
+
+    public static Intent getIntent(Context context) {
+        return new Intent(context, OnboardingActivity.class);
+    }
+
     @Override
     public OnboardingPresenter createPresenter() {
         return new OnboardingPresenter(this);

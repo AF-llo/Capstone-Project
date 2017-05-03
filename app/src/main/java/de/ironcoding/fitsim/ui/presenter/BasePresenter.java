@@ -17,7 +17,7 @@ import de.ironcoding.fitsim.app.injection.DbRepositoryModule;
 import de.ironcoding.fitsim.app.injection.FirebaseModule;
 import de.ironcoding.fitsim.firebase.model.UserHighscore;
 import de.ironcoding.fitsim.logic.Athlete;
-import de.ironcoding.fitsim.logic.Highscore;
+import de.ironcoding.fitsim.util.HighscoreUtil;
 import de.ironcoding.fitsim.repository.AthleteRepository;
 import de.ironcoding.fitsim.ui.model.AthleteHeaderViewModel;
 import de.ironcoding.fitsim.util.AppSettings;
@@ -122,9 +122,10 @@ public class BasePresenter extends MVPPresenter {
             return;
         }
         String userName = user.getDisplayName();
-        Highscore highscore = new Highscore(getAthlete());
-        UserHighscore userHighscore = new UserHighscore(highscore.getPoints(), userName);
-        Timber.d("%s has %d highscore points", userName, highscore.getPoints());
+        Athlete athlete = getAthlete();
+        long points = HighscoreUtil.getPoints(athlete);
+        UserHighscore userHighscore = new UserHighscore(points, userName);
+        Timber.d("%s has %d highscore points", userName, points);
         highscoreDatabaseReference.child(user.getUid()).setValue(userHighscore);
     }
 

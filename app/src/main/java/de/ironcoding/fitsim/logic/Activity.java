@@ -78,7 +78,7 @@ public abstract class Activity extends BaseLevelItem implements ITypedItem {
     }
 
     public long getDurationInMillis() {
-        return GameTimeUtil.durationInMillis(duration);
+        return GameTimeUtil.gameDurationInMillis(duration);
     }
 
     public Type getType() {

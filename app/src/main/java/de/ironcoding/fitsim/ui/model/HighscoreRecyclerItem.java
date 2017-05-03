@@ -3,7 +3,7 @@ package de.ironcoding.fitsim.ui.model;
 import de.appsfactory.mvplib.presenter.MVPRecyclerItem;
 import de.ironcoding.fitsim.BR;
 import de.ironcoding.fitsim.R;
-import de.ironcoding.fitsim.firebase.model.UserHighscore;
+import de.ironcoding.fitsim.logic.IHighscore;
 
 /**
  * Created by larsl on 02.05.2017.
@@ -11,10 +11,13 @@ import de.ironcoding.fitsim.firebase.model.UserHighscore;
 
 public class HighscoreRecyclerItem extends MVPRecyclerItem {
 
-    private UserHighscore highscore;
+    private final String name;
 
-    public HighscoreRecyclerItem(UserHighscore highscore) {
-        this.highscore = highscore;
+    private final long points;
+
+    public HighscoreRecyclerItem(IHighscore highscore) {
+        this.name = highscore.getName();
+        this.points = highscore.getPoints();
     }
 
     @Override
@@ -28,10 +31,10 @@ public class HighscoreRecyclerItem extends MVPRecyclerItem {
     }
 
     public String getName() {
-        return highscore.getName();
+        return name == null ? "" : name;
     }
 
     public String getPoints() {
-        return String.valueOf(highscore.getPoints());
+        return String.valueOf(points);
     }
 }

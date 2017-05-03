@@ -17,4 +17,7 @@
     <string name="anonymous">Anonymous</string>
     <string name="login">Anmelden</string>
     <string name="logout">Abmelden</string>
+    <string name="add_widget">Widget hinzufügen</string>
+    <string name="highscore">Highscore</string>
+    <string name="no_data">Keine Daten verfügbar</string>
 </resources>

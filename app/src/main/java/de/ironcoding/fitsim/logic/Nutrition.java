@@ -62,7 +62,7 @@ public abstract class Nutrition extends BaseLevelItem implements ITypedItem {
     }
 
     public long getSaturationDuration() {
-        return GameTimeUtil.durationInMillis(saturationDuration);
+        return GameTimeUtil.gameDurationInMillis(saturationDuration);
     }
 
     protected void consume(Body.Stats stats, Body.Fitness fitness) {

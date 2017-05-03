@@ -21,11 +21,11 @@ public class GameTimeUtil {
 
     public static final float DAYS_PER_WEEK = 7.0F;
 
-    public static long  durationInMillis(float durationInRealHours) {
+    public static long gameDurationInMillis(float durationInRealHours) {
         return (long) (durationInRealHours * SCALED_GAME_TIME * GameTimeUtil.MILLIS_PER_SECOND * SECONDS_PER_HOUR);
     }
 
-    public static long durationInSeconds(float durationInRealHours) {
+    public static long gameDurationInSeconds(float durationInRealHours) {
         return (long) (durationInRealHours * SCALED_GAME_TIME * SECONDS_PER_HOUR);
     }
 

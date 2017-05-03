@@ -14,7 +14,7 @@ import com.google.firebase.database.ValueEventListener;
 import de.appsfactory.mvplib.util.ObservableString;
 import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.firebase.model.UserHighscore;
-import de.ironcoding.fitsim.logic.Highscore;
+import de.ironcoding.fitsim.util.HighscoreUtil;
 import de.ironcoding.fitsim.ui.model.HighscoreRecyclerItem;
 
 /**
@@ -112,14 +112,14 @@ public class ProfilePresenter extends BasePresenter implements FirebaseAuth.Auth
 
                 }
             };
-            Highscore.topTenQuery(highscoreDatabaseReference).addValueEventListener(eventListener);
+            HighscoreUtil.topTenQuery(highscoreDatabaseReference).addValueEventListener(eventListener);
         }
     }
 
     private void detachhighscoreListener() {
         if (eventListener != null) {
-            eventListener = null;
             highscoreDatabaseReference.removeEventListener(eventListener);
+            eventListener = null;
         }
     }
 

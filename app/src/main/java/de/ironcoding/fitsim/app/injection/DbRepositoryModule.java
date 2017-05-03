@@ -11,8 +11,11 @@ import dagger.Provides;
 import de.ironcoding.fitsim.persistance.DaoMaster;
 import de.ironcoding.fitsim.persistance.FitSimOpenHelper;
 import de.ironcoding.fitsim.repository.AthleteRepository;
+import de.ironcoding.fitsim.repository.HighscoreRepository;
 import de.ironcoding.fitsim.repository.IAthleteDao;
+import de.ironcoding.fitsim.repository.IHighscoreDao;
 import de.ironcoding.fitsim.repository.db.DbAthleteDao;
+import de.ironcoding.fitsim.repository.db.DbHighscoreDao;
 import de.ironcoding.fitsim.repository.db.DbMuscleDao;
 import de.ironcoding.fitsim.repository.local.LocalMuscleDao;
 import de.ironcoding.fitsim.util.AppSettings;
@@ -54,6 +57,20 @@ public class DbRepositoryModule {
     @Named(REPOSITORY_DB)
     IAthleteDao providesDbAthleteDao(DbMuscleDao dbMuscleDao, DaoMaster daoMaster, AppSettings appSettings) {
         return new DbAthleteDao(dbMuscleDao, daoMaster, appSettings);
+    }
+
+    @Provides
+    @Singleton
+    @Named(REPOSITORY_DB)
+    IHighscoreDao providesDbHighscoreDao(DaoMaster daoMaster) {
+        return new DbHighscoreDao(daoMaster);
+    }
+
+    @Provides
+    @Singleton
+    @Named(REPOSITORY_DB)
+    HighscoreRepository providesDbHighscoreRepository(@Named(REPOSITORY_DB) IHighscoreDao highscoreDao) {
+        return new HighscoreRepository(highscoreDao);
     }
 
     @Provides

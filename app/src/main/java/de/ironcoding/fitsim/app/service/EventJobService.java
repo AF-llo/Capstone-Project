@@ -16,7 +16,7 @@ import timber.log.Timber;
 
 public class EventJobService extends JobService {
 
-    public static final String EXTRA_JOB_EVENT = "de.ironcoding.extra.job_event";
+    public static final String EXTRA_JOB_EVENT = "de.ironcoding.extra.ACTION_DATA_UPDATED";
 
     @Retention(RetentionPolicy.SOURCE)
     @StringDef({EVENT_REFRESH_BODY, EVENT_RELAXE_MUSCLES, EVENT_SHRINK_MUSCLES, EVENT_ATHLETE_READY, EVENT_ATHLETE_DIGESTED})
@@ -26,6 +26,8 @@ public class EventJobService extends JobService {
     public static final String EVENT_SHRINK_MUSCLES = "shrink_muscles";
     public static final String EVENT_ATHLETE_READY = "athlete_ready";
     public static final String EVENT_ATHLETE_DIGESTED = "athlete_digested";
+
+    public static final String EVENT_UPDATE_HIGHSCORE = "update_highscore";
 
     @Override
     public boolean onStartJob(JobParameters job) {
