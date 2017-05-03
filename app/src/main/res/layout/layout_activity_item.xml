@@ -17,7 +17,7 @@
         android:layout_height="?android:listPreferredItemHeightLarge"
         android:foreground="?android:selectableItemBackground"
         android:onClick="@{() -> item.clicked()}"
-        android:background="@{item.isAble ? @color/white : @color/blue_light}">
+        android:background="@{item.isAble ? @color/white : @color/grey_extra_light}">
         
         <ImageView
             android:id="@+id/icon"

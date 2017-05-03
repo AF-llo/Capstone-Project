@@ -8,8 +8,8 @@ public class Meal extends Nutrition {
 
     public static final int TYPE_INT = 1;
 
-    public Meal(String name, float proteine, float carbs, float fat, int minLevel, float saturationDuration) {
-        super(name, proteine, carbs, fat, minLevel, TYPE_INT, saturationDuration);
+    public Meal(int id, String name, float proteine, float carbs, float fat, int minLevel, float saturationDuration) {
+        super(id, name, proteine, carbs, fat, minLevel, TYPE_INT, saturationDuration);
     }
 
     @Override

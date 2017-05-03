@@ -10,8 +10,8 @@ public class EnergyBooster extends Nutrition {
 
     private final int energy;
 
-    public EnergyBooster(String name, int energy, int minLevel, float saturationDuration) {
-        super(name, 0, 0, 0, minLevel, TYPE_INT, saturationDuration);
+    public EnergyBooster(int id, String name, int energy, int minLevel, float saturationDuration) {
+        super(id, name, 0, 0, 0, minLevel, TYPE_INT, saturationDuration);
         if (energy < 0) {
             energy = 0;
         }

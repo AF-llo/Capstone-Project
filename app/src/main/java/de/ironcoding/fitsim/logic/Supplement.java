@@ -8,8 +8,8 @@ public class Supplement extends Nutrition {
 
     public static final int TYPE_INT = 2;
 
-    public Supplement(String name, float proteine, float carbs, float fat, int minLevel, float saturationDuration) {
-        super(name, proteine, carbs, fat, minLevel, TYPE_INT, saturationDuration);
+    public Supplement(int id, String name, float proteine, float carbs, float fat, int minLevel, float saturationDuration) {
+        super(id, name, proteine, carbs, fat, minLevel, TYPE_INT, saturationDuration);
     }
 
     @Override

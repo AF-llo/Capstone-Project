@@ -32,12 +32,28 @@ public class NutritionRecyclerItem extends MVPEventRecyclerItem<NutritionSelecte
         return BR.item;
     }
 
+    public int getId() {
+        return nutrition.getId();
+    }
+
     public String getName() {
         return nutrition.getName();
     }
 
     public boolean getCanEat() {
         return nutrition.isAccepted(body);
+    }
+
+    public String getProteine() {
+        return String.valueOf(nutrition.getProteine());
+    }
+
+    public String getCarbs() {
+        return String.valueOf(nutrition.getCarbs());
+    }
+
+    public String getFat() {
+        return String.valueOf(nutrition.getFat());
     }
 
     public void setBody(Body body) {

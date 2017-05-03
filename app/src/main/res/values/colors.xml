@@ -7,5 +7,5 @@
     <color name="grey_light">#546E7A</color>
     <color name="grey_dark">#29434e</color>
     <color name="orange">#FFC107</color>
-    <color name="grey_text">#FFB1BCC2</color>
+    <color name="grey_extra_light">#FFB1BCC2</color>
 </resources>

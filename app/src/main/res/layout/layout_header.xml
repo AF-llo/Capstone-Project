@@ -43,7 +43,7 @@
             android:layout_alignLeft="@id/experience"
             android:layout_alignStart="@id/experience"
             android:layout_below="@id/experience"
-            android:textColor="@color/grey_text"
+            android:textColor="@color/grey_extra_light"
             android:text="@{athleteModel.skill}"
             tools:text="BEGINNER"/>
 

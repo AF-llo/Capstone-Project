@@ -9,6 +9,8 @@ import de.ironcoding.fitsim.util.GameTimeUtil;
 
 public abstract class Nutrition extends BaseLevelItem implements ITypedItem {
 
+    private final int id;
+
     private final String name;
 
     private final float proteine;
@@ -21,7 +23,7 @@ public abstract class Nutrition extends BaseLevelItem implements ITypedItem {
 
     private final float saturationDuration;
 
-    public Nutrition(String name, float proteine, float carbs, float fat, int minLevel, int type, float saturationDuration) {
+    public Nutrition(int id, String name, float proteine, float carbs, float fat, int minLevel, int type, float saturationDuration) {
         super(minLevel);
         if (name == null) {
             name = "";
@@ -33,12 +35,17 @@ public abstract class Nutrition extends BaseLevelItem implements ITypedItem {
         if (saturationDuration > GameTimeUtil.MAX_DURATION) {
             saturationDuration = GameTimeUtil.MAX_DURATION;
         }
+        this.id = id;
         this.name = name;
         this.proteine = proteine;
         this.carbs = carbs;
         this.fat = fat;
         this.typeId = type;
         this.saturationDuration = saturationDuration;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {

@@ -76,6 +76,7 @@ public class LocalNutritionDao implements INutritionDao {
         Nutrition nutrition = null;
         if (typeId == Meal.TYPE_INT) {
             nutrition = new Meal(
+                    jsonNutrition.getId(),
                     jsonNutrition.getName(),
                     jsonNutrition.getProteine(),
                     jsonNutrition.getCarbs(),
@@ -84,6 +85,7 @@ public class LocalNutritionDao implements INutritionDao {
                     jsonNutrition.getSaturationDuration());
         } else if (typeId == Supplement.TYPE_INT) {
             nutrition = new Supplement(
+                    jsonNutrition.getId(),
                     jsonNutrition.getName(),
                     jsonNutrition.getProteine(),
                     jsonNutrition.getCarbs(),
@@ -92,6 +94,7 @@ public class LocalNutritionDao implements INutritionDao {
                     jsonNutrition.getSaturationDuration());
         } else if (typeId == EnergyBooster.TYPE_INT) {
             nutrition = new EnergyBooster(
+                    jsonNutrition.getId(),
                     jsonNutrition.getName(),
                     jsonNutrition.getEnergy(),
                     jsonNutrition.getLevel(),

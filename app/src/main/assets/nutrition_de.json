@@ -1,6 +1,7 @@
 {
   "nutritions":[
     {
+      "id":0,
       "typeid":1,
       "name":"Geflügel mit Pute und Reis",
       "proteine":75,
@@ -10,6 +11,7 @@
       "level":1
     },
     {
+      "id":1,
       "typeid":1,
       "name":"Müsli mit Quark",
       "proteine":60,
@@ -19,6 +21,7 @@
       "level":1
     },
     {
+      "id":2,
       "typeid":2,
       "name":"Eiweißshake",
       "proteine":25,
@@ -28,6 +31,7 @@
       "level":1
     },
     {
+      "id":3,
       "typeid":3,
       "name":"Kaffee",
       "energy":25,
@@ -35,6 +39,7 @@
       "level":1
     },
     {
+      "id":4,
       "typeid":3,
       "name":"Energydrink",
       "energy":100,

@@ -8,6 +8,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class JsonNutrition {
 
+    @SerializedName("id")
+    private Integer id;
+
     @SerializedName("typeid")
     private Integer typeid;
 
@@ -31,6 +34,10 @@ public class JsonNutrition {
 
     @SerializedName("energy")
     private Integer energy;
+
+    public Integer getId() {
+        return id;
+    }
 
     public Integer getTypeid() {
         return typeid;
