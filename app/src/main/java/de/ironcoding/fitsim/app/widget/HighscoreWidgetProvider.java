@@ -6,7 +6,6 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.widget.RemoteViews;
 
 import de.ironcoding.fitsim.R;
@@ -28,11 +27,16 @@ public class HighscoreWidgetProvider extends AppWidgetProvider {
         for (int appWidgetId : appWidgetIds) {
             // Construct the RemoteViews object
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.highscore_widget_layout);
+            views.setRemoteAdapter(R.id.widget_list, new Intent(context, HighscoreWidgetRemoteViewService.class));
+
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, OnboardingActivity.getIntent(context), 0);
             views.setOnClickPendingIntent(R.id.widget, pendingIntent);
 
-            setRemoteAdapter(context, views);
-            views.setEmptyView(R.id.widget_list, R.id.widget_empty);
+            PendingIntent appPendingIntent = PendingIntent.getActivity(context, 0, OnboardingActivity.getIntent(context), PendingIntent.FLAG_UPDATE_CURRENT);
+            views.setPendingIntentTemplate(R.id.widget_list, appPendingIntent);
+
+            views.setEmptyView(R.id.widget_list, R.id.empty_view);
+
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
     }
@@ -46,10 +50,6 @@ public class HighscoreWidgetProvider extends AppWidgetProvider {
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, getClass()));
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_list);
         }
-    }
-
-    private void setRemoteAdapter(Context context, @NonNull final RemoteViews views) {
-        views.setRemoteAdapter(R.id.widget_list, new Intent(context, HighscoreWidgetRemoteViewService.class));
     }
 
     @Override

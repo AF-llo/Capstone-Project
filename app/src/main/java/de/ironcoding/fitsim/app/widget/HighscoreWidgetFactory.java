@@ -17,6 +17,7 @@ import de.ironcoding.fitsim.app.FitSimApp;
 import de.ironcoding.fitsim.app.injection.DbRepositoryModule;
 import de.ironcoding.fitsim.logic.IHighscore;
 import de.ironcoding.fitsim.repository.HighscoreRepository;
+import de.ironcoding.fitsim.ui.activities.OnboardingActivity;
 import de.ironcoding.fitsim.ui.model.HighscoreListItemViewModel;
 import timber.log.Timber;
 
@@ -75,9 +76,10 @@ public class HighscoreWidgetFactory implements RemoteViewsService.RemoteViewsFac
         }
         Timber.d("getViewAt %d", position);
         HighscoreListItemViewModel item = items.get(position);
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.layout_highscore_item);
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.layout_widget_item);
         views.setTextViewText(R.id.highscore_name, item.getName());
         views.setTextViewText(R.id.highscore_points, item.getPoints());
+        views.setOnClickFillInIntent(R.id.highscore_list_item, OnboardingActivity.getIntent(context));
         return views;
     }
 
@@ -93,7 +95,9 @@ public class HighscoreWidgetFactory implements RemoteViewsService.RemoteViewsFac
 
     @Override
     public long getItemId(int position) {
-        return items.get(position).getId();
+        long id = items.get(position).getId();
+        Timber.d("getItemId: %d", id);
+        return id;
     }
 
     @Override

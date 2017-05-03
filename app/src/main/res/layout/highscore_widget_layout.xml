@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <FrameLayout
@@ -38,10 +38,10 @@
                 android:layout_height="match_parent"
                 android:divider="@null"
                 android:dividerHeight="0dp"
-                tools:listitem="@layout/layout_highscore_item"/>
+                tools:listitem="@layout/layout_widget_item"/>
 
             <TextView
-                android:id="@+id/widget_empty"
+                android:id="@+id/empty_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/spacing_m"
