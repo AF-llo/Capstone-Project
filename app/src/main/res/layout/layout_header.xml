@@ -9,62 +9,73 @@
             type="de.ironcoding.fitsim.ui.model.AthleteHeaderViewModel"/>
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/header"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/spacing_m"
+        tools:background="@color/grey_light">
 
-        <FrameLayout
+        <android.support.v4.widget.Space
+            android:id="@+id/center"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="0dp"
+            android:layout_marginRight="@dimen/spacing_m"
+            android:layout_marginEnd="@dimen/spacing_m"
+            android:layout_centerInParent="true"/>
+
+        <TextView
+            android:id="@+id/experience"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/center"
+            android:layout_toRightOf="@id/center"
+            android:layout_toEndOf="@id/center"
+            android:textColor="@color/white"
+            android:text="@{String.format(@string/experience, athleteModel.experience, athleteModel.maxExperience)}"
+            tools:text="2350/500 EP"/>
+
+        <TextView
+            android:id="@+id/skill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_alignLeft="@id/experience"
+            android:layout_alignStart="@id/experience"
+            android:layout_below="@id/experience"
+            android:textColor="@color/grey_text"
+            android:text="@{athleteModel.skill}"
+            tools:text="BEGINNER"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/center"
+            android:layout_toStartOf="@id/center"
+            android:layout_alignTop="@id/experience">
 
             <TextView
                 android:id="@+id/energy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@{athleteModel.energy}"
-                tools:text="100"/>
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:text="@{String.format(@string/energy, athleteModel.energy)}"
+                tools:text="100 EP"/>
 
-        </FrameLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_gravity="center">
-
-            <TextView
-                android:id="@+id/level"
+            <ImageView
+                android:id="@+id/icon_health"
+                android:src="@drawable/ico_health_points"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:text="@{athleteModel.level}"
-                tools:text="1" />
+                android:layout_alignBottom="@+id/energy"
+                android:layout_marginRight="@dimen/spacing_s"
+                android:layout_marginEnd="@dimen/spacing_s"
+                android:layout_toLeftOf="@+id/energy"
+                android:layout_toStartOf="@+id/energy" />
 
-            <TextView
-                android:id="@+id/skill"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:text="@{athleteModel.skill}"
-                tools:text="BEGINNER"/>
+        </RelativeLayout>
 
-            <TextView
-            android:id="@+id/experience"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-                android:text='@{athleteModel.experience + "/" + athleteModel.maxExperience}'
-            tools:text="2500"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
+    </RelativeLayout>
 </layout>

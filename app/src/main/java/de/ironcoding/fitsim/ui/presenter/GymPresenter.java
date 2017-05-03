@@ -101,6 +101,7 @@ public class GymPresenter extends BasePresenter implements ActivityItemEvent {
         updateAthletePreview(previewAthlete);
         selectedActivity.set(new ActivityRecyclerItem(activity, previewAthlete.getBody().getMuscles()));
         notifyCallbackShowBottomSheet();
+        analyticsLogger.logActivityDone(activity.getName());
     }
 
     @Override

@@ -24,9 +24,9 @@
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="?android:actionBarSize"
-            app:itemBackground="@color/blue"
-            app:itemIconTint="@color/blue_light"
-            app:itemTextColor="@color/blue_light"
+            app:itemBackground="@color/grey_dark"
+            app:itemTextColor="@color/white"
+            app:itemIconTint="@color/bottom_icon_selector"
             app:menu="@menu/bottom_navigation" />
 
     </LinearLayout>

@@ -3,6 +3,9 @@
     <color name="white">@android:color/white</color>
     <color name="blue_light">#E0F7FA</color>
     <color name="blue">#26C6DA</color>
-    <color name="blue_dark">#028698</color>
-    <color name="orange_a400">#FF9100</color>
+
+    <color name="grey_light">#546E7A</color>
+    <color name="grey_dark">#29434e</color>
+    <color name="orange">#FFC107</color>
+    <color name="grey_text">#FFB1BCC2</color>
 </resources>

@@ -80,6 +80,7 @@ public class NutritionPresenter extends BasePresenter implements NutritionSelect
         updateAthletePreview(previewAthlete);
         selectedNutrition.set(new NutritionRecyclerItem(nutrition, previewAthlete.getBody()));
         notifyCallbackShowBottomSheet();
+        analyticsLogger.logNutritionEaten(nutrition.getName());
     }
 
     /**

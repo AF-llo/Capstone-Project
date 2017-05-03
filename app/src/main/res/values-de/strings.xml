@@ -20,4 +20,6 @@
     <string name="add_widget">Widget hinzufügen</string>
     <string name="highscore">Highscore</string>
     <string name="no_data">Keine Daten verfügbar</string>
+    <string name="energy">%s EP</string>
+    <string name="experience">%1$s/%2$s Exp.</string>
 </resources>

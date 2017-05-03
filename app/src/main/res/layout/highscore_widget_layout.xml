@@ -17,7 +17,7 @@
             android:id="@+id/widget"
             android:layout_width="match_parent"
             android:layout_height="?android:actionBarSize"
-            android:background="@color/blue_dark">
+            android:background="@color/grey_dark">
 
             <TextView
                 android:layout_width="wrap_content"

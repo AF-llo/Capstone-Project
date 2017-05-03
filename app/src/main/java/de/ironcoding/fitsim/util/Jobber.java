@@ -16,7 +16,7 @@ public class Jobber {
 
     private static final float REFRESH_BODY_DURATION = GameTimeUtil.HOURS_PER_GAME_DAY;
     private static final float RELAX_MUSCLES_DURATION = GameTimeUtil.HOURS_PER_GAME_DAY / 2;
-    private static final long HIGHSCORE_UPDATE_INTERVAL = 60000; // 1800000
+    private static final long HIGHSCORE_UPDATE_INTERVAL = 1800000;
 
     private FirebaseJobDispatcher dispatcher;
 
@@ -64,7 +64,6 @@ public class Jobber {
     }
 
     public void scheduleHighscoreJogEvent() {
-        dispatcher.cancel(EventJobService.EVENT_UPDATE_HIGHSCORE); // // TODO: 03.05.2017 remove
         int duration = GameTimeUtil.millisInSeconds(HIGHSCORE_UPDATE_INTERVAL);
         Job refreshJob = dispatcher.newJobBuilder()
                 .setService(EventJobService.class)

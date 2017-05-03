@@ -14,6 +14,7 @@ import de.ironcoding.fitsim.ui.fragments.GymFragment;
 import de.ironcoding.fitsim.ui.fragments.MoreFragment;
 import de.ironcoding.fitsim.ui.fragments.NutritionFragment;
 import de.ironcoding.fitsim.ui.fragments.ProfileFragment;
+import de.ironcoding.fitsim.util.AnalyticsLogger;
 import de.ironcoding.fitsim.util.Jobber;
 
 /**
@@ -49,10 +50,6 @@ public class MainPresenter extends BasePresenter implements BottomNavigationView
         super.onStart();
     }
 
-    public interface MainCallback {
-        void showFragment(Fragment fragment);
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -70,24 +67,32 @@ public class MainPresenter extends BasePresenter implements BottomNavigationView
         selectedId.set(newSelectedId);
         switch (item.getItemId()) {
             case R.id.action_profile:
-                notifyMainCallback(ProfileFragment.getInstance());
+                notifyMainCallback(ProfileFragment.getInstance(), item);
+                analyticsLogger.logScreen(AnalyticsLogger.SCREEN_PROFILE);
                 return true;
             case R.id.action_gym:
-                notifyMainCallback(GymFragment.getInstance());
+                notifyMainCallback(GymFragment.getInstance(), item);
+                analyticsLogger.logScreen(AnalyticsLogger.SCREEN_GYM);
                 return true;
             case R.id.action_nutrition:
-                notifyMainCallback(NutritionFragment.getInstance());
+                notifyMainCallback(NutritionFragment.getInstance(), item);
+                analyticsLogger.logScreen(AnalyticsLogger.SCREEN_NUTRITION);
                 return true;
             case R.id.action_more:
-                notifyMainCallback(MoreFragment.getInstance());
+                notifyMainCallback(MoreFragment.getInstance(), item);
+                analyticsLogger.logScreen(AnalyticsLogger.SCREEN_MORE);
                 return true;
         }
         return false;
     }
 
-    private void notifyMainCallback(Fragment fragment) {
+    private void notifyMainCallback(Fragment fragment, MenuItem item) {
         if (mainCallback != null) {
-            mainCallback.showFragment(fragment);
+            mainCallback.itemSelected(fragment, item);
         }
+    }
+
+    public interface MainCallback {
+        void itemSelected(Fragment fragment, MenuItem item);
     }
 }

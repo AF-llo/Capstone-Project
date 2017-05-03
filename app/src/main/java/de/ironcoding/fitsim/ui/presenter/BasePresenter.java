@@ -17,6 +17,7 @@ import de.ironcoding.fitsim.app.injection.DbRepositoryModule;
 import de.ironcoding.fitsim.app.injection.FirebaseModule;
 import de.ironcoding.fitsim.firebase.model.UserHighscore;
 import de.ironcoding.fitsim.logic.Athlete;
+import de.ironcoding.fitsim.util.AnalyticsLogger;
 import de.ironcoding.fitsim.util.HighscoreUtil;
 import de.ironcoding.fitsim.repository.AthleteRepository;
 import de.ironcoding.fitsim.ui.model.AthleteHeaderViewModel;
@@ -44,6 +45,9 @@ public class BasePresenter extends MVPPresenter {
     @Inject
     @Named(FirebaseModule.CHILD_HIGHSCORE)
     DatabaseReference highscoreDatabaseReference;
+
+    @Inject
+    AnalyticsLogger analyticsLogger;
 
     private Callback callback;
 
