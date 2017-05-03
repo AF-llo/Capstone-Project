@@ -13,6 +13,8 @@ public abstract class Activity extends BaseLevelItem implements ITypedItem {
 
     public static final float DEFAULT_ACTIVITY_DURATION_HOURS = 0.5F;
 
+    private final int id;
+
     private final float pal;
 
     private final int effort;
@@ -25,7 +27,7 @@ public abstract class Activity extends BaseLevelItem implements ITypedItem {
 
     private final int typeId;
 
-    Activity(String name, float pal, int effort, int experience, float duration, int minLevel, int typeId) {
+    Activity(int id, String name, float pal, int effort, int experience, float duration, int minLevel, int typeId) {
         super(minLevel);
         if (pal < 0) {
             pal = 0;
@@ -45,6 +47,7 @@ public abstract class Activity extends BaseLevelItem implements ITypedItem {
         if (duration > GameTimeUtil.MAX_DURATION) {
             duration = GameTimeUtil.MAX_DURATION;
         }
+        this.id = id;
         this.name = name;
         this.pal = pal;
         this.effort = effort;
@@ -53,8 +56,12 @@ public abstract class Activity extends BaseLevelItem implements ITypedItem {
         this.typeId = typeId;
     }
 
-    Activity(String name, float pal, int effort, int experience, int minLevel, int type) {
-        this(name, pal, effort, experience, DEFAULT_ACTIVITY_DURATION_HOURS, minLevel, type);
+    Activity(int id, String name, float pal, int effort, int experience, int minLevel, int type) {
+        this(id, name, pal, effort, experience, DEFAULT_ACTIVITY_DURATION_HOURS, minLevel, type);
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {

@@ -1,9 +1,10 @@
 {
   "activities":[
     {
+      "id":0,
       "typeid":1,
       "muscleid":1,
-      "name":"Backdrücken",
+      "name":"Bankdrücken",
       "effort":25,
       "experience":100,
       "pal":1.95,
@@ -11,26 +12,7 @@
       "level":1
     },
     {
-      "typeid":1,
-      "muscleid":1,
-      "name":"Brustpresse sitzend",
-      "effort":20,
-      "experience":80,
-      "pal":1.9,
-      "duration":0.5,
-      "level":1
-    },
-    {
-      "typeid":1,
-      "muscleid":1,
-      "name":"Fliegende",
-      "effort":20,
-      "experience":80,
-      "pal":1.9,
-      "duration":0.5,
-      "level":1
-    },
-    {
+      "id":1,
       "typeid":1,
       "muscleid":2,
       "name":"Klimmzüge",
@@ -41,6 +23,7 @@
       "level":1
     },
     {
+      "id":2,
       "typeid":1,
       "muscleid":8,
       "name":"Scottcurls",
@@ -51,16 +34,7 @@
       "level":1
     },
     {
-      "typeid":1,
-      "muscleid":9,
-      "name":"Dips",
-      "effort":15,
-      "experience":60,
-      "pal":1.9,
-      "duration":0.5,
-      "level":1
-    },
-    {
+      "id":3,
       "typeid":1,
       "muscleid":11,
       "name":"Crunches",
@@ -71,6 +45,7 @@
       "level":1
     },
     {
+      "id":4,
       "typeid":1,
       "muscleid":13,
       "name":"Kniebeuge",
@@ -81,6 +56,7 @@
       "level":1
     },
     {
+      "id":5,
       "typeid":1,
       "muscleid":13,
       "name":"Beinpresse",
@@ -91,6 +67,7 @@
       "level":1
     },
     {
+      "id":6,
       "typeid":2,
       "name":"Radfahren",
       "effort":20,
@@ -100,6 +77,7 @@
       "level":1
     },
     {
+      "id":7,
       "typeid":2,
       "name":"Rudern",
       "effort":25,

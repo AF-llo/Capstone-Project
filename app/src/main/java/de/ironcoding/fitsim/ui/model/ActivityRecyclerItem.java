@@ -25,6 +25,10 @@ public class ActivityRecyclerItem extends MVPEventRecyclerItem<ActivityItemEvent
         this.muscles = muscles;
     }
 
+    public int getId() {
+        return activity.getId();
+    }
+
     @Override
     public int getLayoutId() {
         return R.layout.layout_activity_item;
@@ -37,6 +41,14 @@ public class ActivityRecyclerItem extends MVPEventRecyclerItem<ActivityItemEvent
 
     public String getName() {
         return activity.getName();
+    }
+
+    public String getEffort() {
+        return String.valueOf(activity.getEffort());
+    }
+
+    public String getExperience() {
+        return String.valueOf(activity.getExperience());
     }
 
     public void clicked() {

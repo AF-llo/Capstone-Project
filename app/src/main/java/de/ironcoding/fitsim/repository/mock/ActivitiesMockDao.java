@@ -10,6 +10,7 @@ import de.ironcoding.fitsim.logic.Level;
 import de.ironcoding.fitsim.logic.Type;
 import de.ironcoding.fitsim.repository.Filter;
 import de.ironcoding.fitsim.repository.IActivitiesDao;
+import de.ironcoding.fitsim.util.IconUtil;
 
 /**
  * Created by larsl on 18.04.2017.
@@ -19,13 +20,11 @@ public class ActivitiesMockDao implements IActivitiesDao {
     @Override
     public List<Activity> load() {
         List<Activity> activities = new ArrayList<>();
-        activities.add(new Exercise("Chestpress", 1.4F, 20, 50, MockMuscles.CHEST, 1));
-        activities.add(new Exercise("Pulldowns", 1.4F, 20, 50, MockMuscles.BACK, 1));
-        activities.add(new Exercise("Scottcurls", 1.25F, 10, 30, MockMuscles.BICEPS, 1));
-        activities.add(new Exercise("Pulldowns", 1.2F, 10, 30, MockMuscles.TRICEPS, 1));
-        activities.add(new Exercise("Farmers Walk", 1.3F, 15, 35, MockMuscles.FOREARMS, 5));
-        activities.add(new Cardio("Cycling", 1.5F, 20, 500, 1));
-        activities.add(new Cardio("Rowing Machine", 1.6F, 25, 40, 5));
+        activities.add(new Exercise(IconUtil.ID_BENCHPRESS, "Chestpress", 1.4F, 20, 50, MockMuscles.CHEST, 1));
+        activities.add(new Exercise(IconUtil.ID_PULLDOWNS, "Pulldowns", 1.4F, 20, 50, MockMuscles.BACK, 1));
+        activities.add(new Exercise(IconUtil.ID_SCOTTCURLS, "Scottcurls", 1.25F, 10, 30, MockMuscles.BICEPS, 1));
+        activities.add(new Cardio(IconUtil.ID_CYCLING, "Cycling", 1.5F, 20, 500, 1));
+        activities.add(new Cardio(IconUtil.ID_ROWING, "Rowing Machine", 1.6F, 25, 40, 5));
         return activities;
     }
 

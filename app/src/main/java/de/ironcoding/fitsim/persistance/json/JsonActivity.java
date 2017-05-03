@@ -8,6 +8,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class JsonActivity {
 
+    @SerializedName("id")
+    private int id;
+
     @SerializedName("pal")
     private Float pal;
 
@@ -31,6 +34,10 @@ public class JsonActivity {
 
     @SerializedName("level")
     private Integer minLevel;
+
+    public int getId() {
+        return id;
+    }
 
     public float getPal() {
         return pal;

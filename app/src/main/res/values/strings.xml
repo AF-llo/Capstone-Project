@@ -25,4 +25,5 @@
     <string name="no_data">No data available</string>
     <string name="energy">%s EP</string>
     <string name="experience">%1$s/%2$s Exp.</string>
+    <string name="ep_exp">%1$s EP, %2$s Exp.</string>
 </resources>

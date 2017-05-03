@@ -18,4 +18,6 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="widget_width">250dp</dimen>
     <dimen name="widget_height">180dp</dimen>
     <dimen name="header_image_height">250dp</dimen>
+    <dimen name="left_item_space">72dp</dimen>
+    <dimen name="divider_height">0.5dp</dimen>
 </resources>

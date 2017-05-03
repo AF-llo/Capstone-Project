@@ -76,6 +76,7 @@ public class LocalActivitiesDao implements IActivitiesDao {
         Activity activity = null;
         if (typeId == Exercise.TYPE_INT) {
             activity = new Exercise(
+                    jsonActivity.getId(),
                     jsonActivity.getName(),
                     jsonActivity.getPal(),
                     jsonActivity.getEffort(),
@@ -84,6 +85,7 @@ public class LocalActivitiesDao implements IActivitiesDao {
                     jsonActivity.getMinLevel());
         } else if (typeId == Cardio.TYPE_INT) {
             activity = new Cardio(
+                    jsonActivity.getId(),
                     jsonActivity.getName(),
                     jsonActivity.getPal(),
                     jsonActivity.getEffort(),

@@ -8,8 +8,8 @@ public class Cardio extends Activity {
 
     public static final int TYPE_INT = 2;
 
-    public Cardio(String name, float pal, int effort, int experience, int minLevel) {
-        super(name, pal, effort, experience, minLevel, TYPE_INT);
+    public Cardio(int id, String name, float pal, int effort, int experience, int minLevel) {
+        super(id, name, pal, effort, experience, minLevel, TYPE_INT);
     }
 
     @Override
