@@ -19,7 +19,6 @@ import de.ironcoding.fitsim.logic.IHighscore;
 import de.ironcoding.fitsim.repository.HighscoreRepository;
 import de.ironcoding.fitsim.ui.activities.OnboardingActivity;
 import de.ironcoding.fitsim.ui.model.HighscoreListItemViewModel;
-import timber.log.Timber;
 
 /**
  * Created by larsl on 03.05.2017.
@@ -50,11 +49,9 @@ public class HighscoreWidgetFactory implements RemoteViewsService.RemoteViewsFac
         items.clear();
         final long identityToken = Binder.clearCallingIdentity();
         List<IHighscore> highscores = highscoreRepository.loadHighscore();
-        Timber.d("loaded %d highscoreItems", highscores.size());
-        for (IHighscore highscore : highscores) {
-            if (highscore != null) {
-                items.add(new HighscoreListItemViewModel(highscore));
-            }
+        for (int i = 0; i < highscores.size(); i++) {
+            IHighscore highscore = highscores.get(i);
+            items.add(new HighscoreListItemViewModel(highscore, i));
         }
         Binder.restoreCallingIdentity(identityToken);
     }
@@ -74,7 +71,6 @@ public class HighscoreWidgetFactory implements RemoteViewsService.RemoteViewsFac
         if (position == AdapterView.INVALID_POSITION || items == null || items.get(position) == null) {
             return null;
         }
-        Timber.d("getViewAt %d", position);
         HighscoreListItemViewModel item = items.get(position);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.layout_widget_item);
         views.setTextViewText(R.id.highscore_name, item.getName());
@@ -95,9 +91,7 @@ public class HighscoreWidgetFactory implements RemoteViewsService.RemoteViewsFac
 
     @Override
     public long getItemId(int position) {
-        long id = items.get(position).getId();
-        Timber.d("getItemId: %d", id);
-        return id;
+        return items.get(position).getId();
     }
 
     @Override

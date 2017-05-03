@@ -6,6 +6,13 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +28,7 @@ import de.ironcoding.fitsim.logic.Athlete;
 import de.ironcoding.fitsim.logic.IHighscore;
 import de.ironcoding.fitsim.repository.AthleteRepository;
 import de.ironcoding.fitsim.repository.HighscoreRepository;
+import de.ironcoding.fitsim.util.HighscoreUtil;
 import timber.log.Timber;
 
 /**
@@ -31,8 +39,6 @@ public class JobScheduledIntentService extends IntentService {
 
     public static final String ACTION_JOB_SCHEDULED = "de.ironcoding.action.job_scheduled";
 
-    private static final String FIREBASE_HIGSCORE_URL = "https://fitsim-92a12.firebaseio.com/" + FirebaseModule.CHILD_HIGHSCORE + "/.json";
-
     @Inject
     @Named(DbRepositoryModule.REPOSITORY_DB)
     AthleteRepository athleteRepository;
@@ -40,6 +46,13 @@ public class JobScheduledIntentService extends IntentService {
     @Inject
     @Named(DbRepositoryModule.REPOSITORY_DB)
     HighscoreRepository highscoreRepository;
+
+    @Inject
+    FirebaseAuth firebaseAuth;
+
+    @Inject
+    @Named(FirebaseModule.CHILD_HIGHSCORE)
+    DatabaseReference highscoreDatabaseReference;
 
     public static Intent getIntent(Context context, @EventJobService.Event String event) {
         Intent intent = new Intent(context, JobScheduledIntentService.class);
@@ -117,11 +130,22 @@ public class JobScheduledIntentService extends IntentService {
     }
 
     private void updateHighscore() {
-        // TODO: 03.05.2017 load from api and update
-        List<IHighscore> highscores = new ArrayList<>();
-        highscores.add(new UserHighscore(2000, "Blablub"));
-        highscores.add(new UserHighscore(2500, "blalala"));
-        highscoreRepository.replaceHighscores(highscores);
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null) {
+            HighscoreUtil.topTenQuery(highscoreDatabaseReference).addListenerForSingleValueEvent(new DataChangedValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    List<IHighscore> highscores = new ArrayList<>();
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        UserHighscore userHighscore = snapshot.getValue(UserHighscore.class);
+                        if (userHighscore != null) {
+                            highscores.add(userHighscore);
+                        }
+                    }
+                    highscoreRepository.replaceHighscores(highscores);
+                }
+            });
+        }
     }
 
     private void sendChangedBroadcast(@EventJobService.Event String event) {
@@ -133,5 +157,12 @@ public class JobScheduledIntentService extends IntentService {
     private void sendHighscoreChangedBroadcast() {
         Intent intent = new Intent(HighscoreWidgetProvider.ACTION_UPDATE).setPackage(getPackageName());
         sendBroadcast(intent);
+    }
+
+    private abstract class DataChangedValueEventListener implements ValueEventListener {
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+            Timber.d("onCancelled: %s", databaseError.getMessage());
+        }
     }
 }

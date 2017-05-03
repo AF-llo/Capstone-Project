@@ -28,7 +28,6 @@ public class UserHighscore implements IHighscore {
         this.points = points;
     }
 
-    @Override
     public String getName() {
         return name;
     }
@@ -37,8 +36,4 @@ public class UserHighscore implements IHighscore {
         this.name = name;
     }
 
-    @Override
-    public long getId() {
-        return 0;
-    }
 }

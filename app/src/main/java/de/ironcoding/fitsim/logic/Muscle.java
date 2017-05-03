@@ -87,7 +87,7 @@ public class Muscle {
     }
 
     public float getPercentualGrowing() {
-        return (float) volume / (float) INITIAL_VOLUME;
+        return (float) (volume - INITIAL_VOLUME) / (float) INITIAL_VOLUME;
     }
 
     public void strain(int attraction) {

@@ -10,8 +10,11 @@ public class HighscoreListItemViewModel {
 
     private IHighscore highscore;
 
-    public HighscoreListItemViewModel(IHighscore highscore) {
+    private long id;
+
+    public HighscoreListItemViewModel(IHighscore highscore, long id) {
         this.highscore = highscore;
+        this.id = id;
     }
 
     public String getName() {
@@ -23,6 +26,6 @@ public class HighscoreListItemViewModel {
     }
 
     public long getId() {
-        return highscore.getId();
+        return id;
     }
 }

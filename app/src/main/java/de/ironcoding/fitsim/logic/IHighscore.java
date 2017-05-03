@@ -6,8 +6,6 @@ package de.ironcoding.fitsim.logic;
 
 public interface IHighscore {
 
-    long getId();
-
     String getName();
 
     long getPoints();
