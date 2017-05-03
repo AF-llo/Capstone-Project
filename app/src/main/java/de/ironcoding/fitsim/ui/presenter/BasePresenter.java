@@ -155,9 +155,16 @@ public class BasePresenter extends MVPPresenter {
         }
     }
 
+    protected void notifyCallbackShowProfile() {
+        if (callback != null) {
+            callback.showProfile();
+        }
+    }
+
     public interface Callback {
         void showBottomSheet();
         void hideBottomSheet();
         void showInterstitial();
+        void showProfile();
     }
 }

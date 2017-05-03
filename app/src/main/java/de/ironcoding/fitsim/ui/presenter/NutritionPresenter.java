@@ -2,6 +2,7 @@ package de.ironcoding.fitsim.ui.presenter;
 
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableField;
+import android.databinding.ObservableFloat;
 import android.databinding.ObservableList;
 import android.widget.Toast;
 
@@ -29,6 +30,8 @@ public class NutritionPresenter extends BasePresenter implements NutritionSelect
     @Inject
     @Named(LocalModule.REPOSITORY_LOCAL)
     NutritionRepository nutritionRepository;
+
+    public ObservableFloat alpha = new ObservableFloat();
 
     public ObservableList<NutritionRecyclerItem> nutritions = new ObservableArrayList<>();
 
@@ -113,6 +116,20 @@ public class NutritionPresenter extends BasePresenter implements NutritionSelect
         bodyChanged(updatedAthlete.getBody());
         updateAthlete(updatedAthlete);
         notifyCallbackHideBottomSheet();
+    }
+
+    public void showProfile() {
+        notifyCallbackShowProfile();
+    }
+
+    public void setAlpha(float alpha) {
+        if (alpha < 0) {
+            alpha = 0;
+        }
+        if (alpha > 1) {
+            alpha = 1;
+        }
+        this.alpha.set(alpha);
     }
 
     private void updateAthletePreview(Athlete athlete) {

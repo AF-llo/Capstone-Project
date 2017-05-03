@@ -3,7 +3,10 @@ package de.ironcoding.fitsim.ui.fragments;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,16 +33,24 @@ public class GymFragment extends BaseFragment<GymPresenter> implements BasePrese
 
     private BottomSheetBehavior bottomSheetBehavior;
 
+    private FragmentGymBinding binding;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        FragmentGymBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_gym, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_gym, container, false);
         binding.setGymPresenter(mPresenter);
+        binding.appbar.addOnOffsetChangedListener(this::onOffsetChanged);
+        ((AppCompatActivity)getContext()).setSupportActionBar(binding.toolbar);
+        ActionBar actionBar = ((AppCompatActivity)getContext()).getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
+        binding.activityList.setNestedScrollingEnabled(true);
         bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         return binding.getRoot();
@@ -58,5 +69,23 @@ public class GymFragment extends BaseFragment<GymPresenter> implements BasePrese
     @Override
     public void showInterstitial() {
         showInterstitialAd();
+    }
+
+    @Override
+    public void showProfile() {
+        // TODO: 03.05.2017
+    }
+
+    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+        int maxOffset = binding.appbar.getMeasuredHeight() - binding.toolbar.getMeasuredHeight() - binding.header.getMeasuredHeight();
+        int absOffset = Math.abs(verticalOffset);
+        float perOffset = absOffset / (float) maxOffset;
+        mPresenter.setAlpha(perOffset);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }
