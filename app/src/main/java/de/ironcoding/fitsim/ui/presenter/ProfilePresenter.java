@@ -35,8 +35,12 @@ public class ProfilePresenter extends BasePresenter implements TabLayout.OnTabSe
         if (items.size() == 0) {
             String highscoreTitle = getContext().getString(R.string.highscore);
             String bodyTitle = getContext().getString(R.string.body);
+            String muscleTitle = getContext().getString(R.string.muscles);
+            String nutrition = getContext().getString(R.string.nutrition);
             items.add(() -> highscoreTitle);
             items.add(() -> bodyTitle);
+            items.add(() -> muscleTitle);
+            items.add(() -> nutrition);
         }
     }
 

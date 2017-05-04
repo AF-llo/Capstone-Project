@@ -24,8 +24,22 @@
     <string name="highscore">Highscore</string>
     <string name="no_data">No data available</string>
     <string name="energy">%s EP</string>
-    <string name="experience">%1$s/%2$s Exp.</string>
+    <string name="experience">%1$s / %2$s Exp.</string>
     <string name="ep_exp">%1$s EP, %2$s Exp.</string>
     <string name="prot_carbs_fat">P: %1$sg, C: %2$sg, F: %3$sg</string>
     <string name="body">Body</string>
+    <string name="level_skill">L: %1$s - %2$s</string>
+    <string name="points">%s Points</string>
+    <string name="muscles">Muscles</string>
+    <string name="weight">Weight</string>
+    <string name="weight_unit">%s kg</string>
+    <string name="strength">Strength</string>
+    <string name="simple_max_string">%1$s / %2$s</string>
+    <string name="stamina">Stamina</string>
+    <string name="calories">Required Calories</string>
+    <string name="required_calories">%1$s / %2$s kcal</string>
+    <string name="consumed_gram">%s g</string>
+    <string name="proteine">Proteine</string>
+    <string name="fat">Fat</string>
+    <string name="carbs">Carbohydrates</string>
 </resources>

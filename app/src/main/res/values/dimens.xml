@@ -9,6 +9,11 @@
 
     <dimen name="header_height">100dp</dimen>
     <dimen name="bottom_sheet_height">300dp</dimen>
+    
+    <dimen name="text_size_large">34sp</dimen>
+    <dimen name="text_size_headline">24sp</dimen>
+    <dimen name="text_size_title">20sp</dimen>
+    <dimen name="text_size_subheading">16sp</dimen>
 
     <!--
 Refer to App Widget Documentation for margin information

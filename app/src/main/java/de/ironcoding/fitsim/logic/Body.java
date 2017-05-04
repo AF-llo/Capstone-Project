@@ -6,6 +6,8 @@ package de.ironcoding.fitsim.logic;
 
 public class Body {
 
+    public static final String FLOAT_FORMAT_PATTERN = "0.00";
+
     /**
      * Min energy -> Less than zero is not possible
      */
@@ -25,7 +27,7 @@ public class Body {
 
     public static final float MAX_FITNESS = 100.0F;
 
-    public static final float INITIAL_FITNESS = 60.0F;
+    public static final float INITIAL_FITNESS = 50.0F;
 
     public static final float INITIAL_WEIGHT = 70.0F;
     public static final float DEFAULT_SIZE_MALE = 175.0F;

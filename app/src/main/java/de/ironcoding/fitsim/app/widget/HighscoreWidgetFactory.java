@@ -81,7 +81,7 @@ public class HighscoreWidgetFactory implements RemoteViewsService.RemoteViewsFac
 
     @Override
     public RemoteViews getLoadingView() {
-        return new RemoteViews(context.getPackageName(), R.layout.layout_highscore_item);
+        return new RemoteViews(context.getPackageName(), R.layout.layout_info_item);
     }
 
     @Override

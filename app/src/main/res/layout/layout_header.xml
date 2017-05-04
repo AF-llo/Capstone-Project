@@ -33,7 +33,7 @@
             android:layout_toEndOf="@id/center"
             android:textColor="@color/white"
             android:text="@{String.format(@string/experience, athleteModel.experience, athleteModel.maxExperience)}"
-            tools:text="2350/500 EP"/>
+            tools:text="350/500 Exp"/>
 
         <TextView
             android:id="@+id/skill"
@@ -44,7 +44,7 @@
             android:layout_alignStart="@id/experience"
             android:layout_below="@id/experience"
             android:textColor="@color/grey_extra_light"
-            android:text="@{athleteModel.skill}"
+            android:text="@{String.format(@string/level_skill, athleteModel.level, athleteModel.skill)}"
             tools:text="BEGINNER"/>
 
         <RelativeLayout
