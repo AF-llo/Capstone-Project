@@ -9,7 +9,7 @@ import android.view.MenuItem;
 
 import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.databinding.ActivityMainBinding;
-import de.ironcoding.fitsim.ui.fragments.ProfileFragment;
+import de.ironcoding.fitsim.ui.fragments.GymFragment;
 import de.ironcoding.fitsim.ui.presenter.MainPresenter;
 
 public class MainActivity extends BaseActivity<MainPresenter> implements MainPresenter.MainCallback {
@@ -31,7 +31,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainPre
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.bottomNavigation.setOnNavigationItemSelectedListener(mPresenter);
         if (savedInstanceState == null) {
-            replaceContent(ProfileFragment.getInstance());
+            replaceContent(GymFragment.getInstance());
         }
     }
 

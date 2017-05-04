@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="highscorePresenter"
+            type="de.ironcoding.fitsim.ui.presenter.HighscorePresenter"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@{highscorePresenter.username}"
+            tools:text="@string/anonymous" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:layout_margin="@dimen/spacing_m"
+            android:layout_gravity="center"
+            android:onClick="@{() -> highscorePresenter.login()}"
+            android:visibility="@{highscorePresenter.loggedin ? View.GONE : View.VISIBLE}"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/logout"
+            android:layout_margin="@dimen/spacing_m"
+            android:layout_gravity="center"
+            android:onClick="@{() -> highscorePresenter.logout()}"
+            android:visibility="@{highscorePresenter.loggedin ? View.VISIBLE : View.GONE}"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/highscore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:items="@{highscorePresenter.higscoreItems}"
+            android:visibility="@{highscorePresenter.loggedin ? View.VISIBLE : View.GONE}"/>
+
+    </LinearLayout>
+</layout>

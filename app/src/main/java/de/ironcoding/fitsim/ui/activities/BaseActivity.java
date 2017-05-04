@@ -1,5 +1,6 @@
 package de.ironcoding.fitsim.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -43,7 +44,7 @@ public abstract class BaseActivity<T extends MVPPresenter> extends MVPActivity<T
         interstitialAd.loadAd(adRequest);
     }
 
-    public FitSimApp getFitSimApp() {
+    protected FitSimApp getFitSimApp() {
         return (FitSimApp) getApplication();
     }
 
@@ -58,6 +59,12 @@ public abstract class BaseActivity<T extends MVPPresenter> extends MVPActivity<T
         if (interstitialAd != null && interstitialAd.isLoaded()) {
             interstitialAd.show();
         }
+    }
+
+    public void showProfile() {
+        Intent intent = ProfileActivity.getIntent(this);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
 }

@@ -211,7 +211,7 @@ public class AthleteUnitTest {
         Athlete athlete = Athlete.buildNew(Body.warmUpAverageMale(BodyType.ENDOMORPH, new MusclesMockDao().load()));
         for (int j = 0; j < 7; j++) {
             for (int i = 0; i <= 4; i++) {
-                athlete.eat(new Meal(, "Food", 30, 60, 10, 1, 1));
+                athlete.eat(new Meal(1, "Food", 30, 60, 10, 1, 1));
             }
             athlete.refreshBody();
         }
@@ -240,12 +240,12 @@ public class AthleteUnitTest {
         activities = activitiesRepository.loadForLevel(level);
         Assert.assertEquals(7, activities.size());
 
-        Nutrition meal = new Meal(, "Food", 10, 30, 5, 1, 4);
+        Nutrition meal = new Meal(1, "Food", 10, 30, 5, 1, 4);
         athlete.eat(meal);
         Assert.assertEquals(false, athlete.canEat(meal));
         athlete.goToRestRoom();
         Assert.assertEquals(true, athlete.canEat(meal));
-        Activity exercise = new Exercise("Benchpress", 1.4F, 20, 50, 1, 1);
+        Activity exercise = new Exercise(1,"Benchpress", 1.4F, 20, 50, 1, 1);
         athlete.doActivity(exercise);
         long duration = exercise.getDurationInMillis();
         athlete.setReady();

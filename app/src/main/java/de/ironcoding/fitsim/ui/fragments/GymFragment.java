@@ -73,7 +73,7 @@ public class GymFragment extends BaseFragment<GymPresenter> implements BasePrese
 
     @Override
     public void showProfile() {
-        // TODO: 03.05.2017
+        showProfileScreen();
     }
 
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {

@@ -10,31 +10,31 @@ import android.view.ViewGroup;
 import com.firebase.ui.auth.AuthUI;
 
 import de.ironcoding.fitsim.R;
-import de.ironcoding.fitsim.databinding.FragmentProfileBinding;
-import de.ironcoding.fitsim.ui.presenter.ProfilePresenter;
+import de.ironcoding.fitsim.databinding.FragmentHighscoreBinding;
+import de.ironcoding.fitsim.ui.presenter.HighscorePresenter;
 
 /**
  * Created by larsl on 27.04.2017.
  */
 
-public class ProfileFragment extends BaseFragment<ProfilePresenter> implements ProfilePresenter.LoginCallback {
+public class HighscoreFragment extends BaseFragment<HighscorePresenter> implements HighscorePresenter.LoginCallback {
 
     public static final int REQUEST_CODE_SIGN_IN = 1;
 
-    public static ProfileFragment getInstance() {
-        return new ProfileFragment();
+    public static HighscoreFragment getInstance() {
+        return new HighscoreFragment();
     }
 
     @Override
-    public ProfilePresenter createPresenter() {
-        return new ProfilePresenter(this);
+    public HighscorePresenter createPresenter() {
+        return new HighscorePresenter(this);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        FragmentProfileBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false);
-        binding.setProfilePresenter(mPresenter);
+        FragmentHighscoreBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_highscore, container, false);
+        binding.setHighscorePresenter(mPresenter);
         return binding.getRoot();
     }
 

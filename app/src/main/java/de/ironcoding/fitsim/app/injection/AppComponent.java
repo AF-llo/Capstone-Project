@@ -9,10 +9,10 @@ import de.ironcoding.fitsim.app.widget.HighscoreWidgetFactory;
 import de.ironcoding.fitsim.ui.activities.MainActivity;
 import de.ironcoding.fitsim.ui.presenter.BasePresenter;
 import de.ironcoding.fitsim.ui.presenter.GymPresenter;
+import de.ironcoding.fitsim.ui.presenter.HighscorePresenter;
 import de.ironcoding.fitsim.ui.presenter.MainPresenter;
 import de.ironcoding.fitsim.ui.presenter.NutritionPresenter;
 import de.ironcoding.fitsim.ui.presenter.OnboardingPresenter;
-import de.ironcoding.fitsim.ui.presenter.ProfilePresenter;
 
 /**
  * Created by larsl on 25.04.2017.
@@ -33,7 +33,7 @@ public interface AppComponent {
 
     void injectNutritionPresenter(NutritionPresenter nutritionPresenter);
 
-    void injectProfilePresenter(ProfilePresenter profilePresenter);
+    void injectProfilePresenter(HighscorePresenter profilePresenter);
 
     void injectJobScheduledService(JobScheduledIntentService intentService);
 

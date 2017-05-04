@@ -23,4 +23,8 @@ public abstract class BaseFragment<T extends MVPPresenter> extends MVPFragment<T
     protected void showInterstitialAd() {
         ((BaseActivity)getContext()).showInterstitial();
     }
+
+    protected void showProfileScreen() {
+        ((BaseActivity)getContext()).showProfile();
+    }
 }

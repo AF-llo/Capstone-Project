@@ -13,7 +13,6 @@ import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.ui.fragments.GymFragment;
 import de.ironcoding.fitsim.ui.fragments.MoreFragment;
 import de.ironcoding.fitsim.ui.fragments.NutritionFragment;
-import de.ironcoding.fitsim.ui.fragments.ProfileFragment;
 import de.ironcoding.fitsim.util.AnalyticsLogger;
 import de.ironcoding.fitsim.util.Jobber;
 
@@ -33,7 +32,7 @@ public class MainPresenter extends BasePresenter implements BottomNavigationView
 
     public MainPresenter(MainCallback mainCallback) {
         this.mainCallback = mainCallback;
-        selectedId.set(R.id.action_profile);
+        selectedId.set(R.id.action_gym);
     }
 
     @Override
@@ -66,10 +65,6 @@ public class MainPresenter extends BasePresenter implements BottomNavigationView
         }
         selectedId.set(newSelectedId);
         switch (item.getItemId()) {
-            case R.id.action_profile:
-                notifyMainCallback(ProfileFragment.getInstance(), item);
-                analyticsLogger.logScreen(AnalyticsLogger.SCREEN_PROFILE);
-                return true;
             case R.id.action_gym:
                 notifyMainCallback(GymFragment.getInstance(), item);
                 analyticsLogger.logScreen(AnalyticsLogger.SCREEN_GYM);

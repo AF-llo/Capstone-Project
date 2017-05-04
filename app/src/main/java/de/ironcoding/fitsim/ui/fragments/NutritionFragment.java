@@ -70,7 +70,7 @@ public class NutritionFragment extends BaseFragment<NutritionPresenter> implemen
 
     @Override
     public void showProfile() {
-        // TODO: 03.05.2017
+        showProfileScreen();
     }
 
     @Override

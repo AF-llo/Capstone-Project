@@ -1,144 +1,74 @@
 package de.ironcoding.fitsim.ui.presenter;
 
 import android.databinding.ObservableArrayList;
-import android.databinding.ObservableBoolean;
+import android.databinding.ObservableInt;
 import android.databinding.ObservableList;
-import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
-
-import de.appsfactory.mvplib.util.ObservableString;
+import de.appsfactory.mvplib.annotations.MVPIncludeToState;
 import de.ironcoding.fitsim.R;
-import de.ironcoding.fitsim.firebase.model.UserHighscore;
-import de.ironcoding.fitsim.util.HighscoreUtil;
-import de.ironcoding.fitsim.ui.model.HighscoreRecyclerItem;
 
 /**
- * Created by larsl on 28.04.2017.
+ * Created by larsl on 03.05.2017.
  */
 
-public class ProfilePresenter extends BasePresenter implements FirebaseAuth.AuthStateListener {
+public class ProfilePresenter extends BasePresenter implements TabLayout.OnTabSelectedListener {
 
-    public ObservableString username = new ObservableString();
+    @MVPIncludeToState
+    public ObservableList<ProfileItem> items = new ObservableArrayList<>();
 
-    public ObservableBoolean loggedin = new ObservableBoolean(false);
+    public ObservableInt selectedItem = new ObservableInt();
 
-    public ObservableList<HighscoreRecyclerItem> higscoreItems = new ObservableArrayList<>();
+    public FragmentManager fragmentManager;
 
-    private LoginCallback loginCallback;
-
-    private ValueEventListener eventListener;
-
-    public ProfilePresenter(LoginCallback callback) {
-        this.loginCallback = callback;
+    public ProfilePresenter(FragmentManager fragmentManager) {
+        this.fragmentManager = fragmentManager;
     }
 
     @Override
-    protected void onPresenterCreated() {
-        super.onPresenterCreated();
-        getFitSimApp().getAppComponent().injectProfilePresenter(this);
-        if (getContext() != null) {
-
-            username.set(getContext().getString(R.string.anonymous));
+    public void onStart() {
+        super.onStart();
+        if (getContext() == null) {
+            return;
+        }
+        if (items.size() == 0) {
+            String highscoreTitle = getContext().getString(R.string.highscore);
+            String bodyTitle = getContext().getString(R.string.body);
+            items.add(() -> highscoreTitle);
+            items.add(() -> bodyTitle);
         }
     }
 
     @Override
-    protected void onAthleteLoaded() {
-        super.onAthleteLoaded();
-
-    }
-
-    public void login() {
-        notifyCallbackLogin();
-    }
-
-    public void logout() {
-        firebaseAuth.signOut();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        firebaseAuth.addAuthStateListener(this);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        firebaseAuth.removeAuthStateListener(this);
-    }
-
-    @Override
-    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        if (user != null) {
-            username.set(user.getDisplayName());
-            loggedin.set(true);
-            updateHighscoreIfLoggedIn();
-            attachHighscoreListener();
-        } else {
-            if (getContext() != null) {
-                username.set(getContext().getString(R.string.anonymous));
-            }
-            loggedin.set(false);
-            detachhighscoreListener();
+    public void onTabSelected(TabLayout.Tab tab) {
+        int newPosition = tab.getPosition();
+        if (newPosition != selectedItem.get()) {
+            setSelectedItem(tab.getPosition());
         }
     }
 
-    private void attachHighscoreListener() {
-        if (eventListener == null) {
-            eventListener = new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    if (higscoreItems.size() > 0) {
-                        higscoreItems.clear();
-                    }
-                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        UserHighscore userHighscore = snapshot.getValue(UserHighscore.class);
-                        if (userHighscore != null) {
-                            higscoreItems.add(new HighscoreRecyclerItem(userHighscore));
-                        }
-                    }
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
 
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            };
-            HighscoreUtil.topTenQuery(highscoreDatabaseReference).addValueEventListener(eventListener);
-        }
     }
 
-    private void detachhighscoreListener() {
-        if (eventListener != null) {
-            highscoreDatabaseReference.removeEventListener(eventListener);
-            eventListener = null;
-        }
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
+    }
+
+    public void setSelectedItem(int selectedItem) {
+        this.selectedItem.set(selectedItem);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (loginCallback != null) {
-            loginCallback = null;
-        }
+        fragmentManager = null;
     }
 
-    private void notifyCallbackLogin() {
-        if (loginCallback != null) {
-            loginCallback.login();
-        }
+    public interface ProfileItem {
+        String getTitle();
     }
-
-    public interface LoginCallback {
-        void login();
-    }
-
 }
