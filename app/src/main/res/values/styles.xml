@@ -10,6 +10,13 @@
         <item name="android:textColor">@color/grey_dark</item>
     </style>
 
+    <style name="ButtonStyle">
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:textColor">@color/grey_dark</item>
+        <item name="android:textSize">@dimen/text_size_subtitle</item>
+        <item name="android:padding">@dimen/spacing_m</item>
+    </style>
+
     <style name="Text">
         <item name="android:fontFamily">sans-serif</item>
     </style>
@@ -25,7 +32,7 @@
     </style>
 
     <style name="Text.Subtitle">
-        <item name="android:textSize">@dimen/text_size_subheading</item>
+        <item name="android:textSize">@dimen/text_size_subtitle</item>
         <item name="android:textColor">@color/grey_light</item>
     </style>
 

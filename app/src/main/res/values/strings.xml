@@ -42,4 +42,10 @@
     <string name="proteine">Proteine</string>
     <string name="fat">Fat</string>
     <string name="carbs">Carbohydrates</string>
+    <string name="hello">Hello!</string>
+    <string name="enter_data">Please enter your basic data.</string>
+    <string name="ektomorph">Ektomorph</string>
+    <string name="mesomorph">Mesomorph</string>
+    <string name="endomorph">Endomorph</string>
+    <string name="invalid_age">Your age should be between 1 and 100</string>
 </resources>

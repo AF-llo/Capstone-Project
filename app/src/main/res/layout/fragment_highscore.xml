@@ -24,6 +24,7 @@
             tools:text="@string/anonymous" />
 
         <Button
+            style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login"
@@ -33,6 +34,7 @@
             android:visibility="@{highscorePresenter.loggedin ? View.GONE : View.VISIBLE}"/>
 
         <Button
+            style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/logout"

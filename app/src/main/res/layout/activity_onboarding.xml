@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="de.ironcoding.fitsim.logic.Athlete"/>
+        <import type="de.ironcoding.fitsim.logic.Body"/>
+        <import type="de.ironcoding.fitsim.logic.BodyType"/>
         <variable
             name="onboardingPresenter"
             type="de.ironcoding.fitsim.ui.presenter.OnboardingPresenter"/>
@@ -12,35 +16,153 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center">
+        android:gravity="center"
+        android:background="@color/grey_dark">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/onboarding"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/spacing_m"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center">
 
-        <EditText
-            android:id="@+id/age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="@string/age"
-            android:layout_gravity="center"
-            android:text="@={onboardingPresenter.age}"/>
+            <TextView
+                style="@style/Text.Header"
+                android:id="@+id/hello"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_m"
+                android:text="@string/hello"
+                android:textColor="@color/white" />
 
-        <EditText
-            android:id="@+id/size"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="@string/size"
-            android:layout_gravity="center"
-            android:text="@={onboardingPresenter.size}"/>
+            <TextView
+                style="@style/Text.Subtitle"
+                android:id="@+id/subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/enter_data"
+                android:textColor="@color/white" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/spacing_m">
+
+                <ImageView
+                    android:src="@{onboardingPresenter.gender == Athlete.MALE ? @drawable/ico_onboarding_male : @drawable/ico_onboarding_male_inactive}"
+                    android:id="@+id/gender_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/spacing_l"
+                    android:onClick="@{() -> onboardingPresenter.selectGender(Athlete.MALE)}"
+                    tools:src="@drawable/ico_onboarding_male"/>
+
+                <ImageView
+                    android:src="@{onboardingPresenter.gender == Athlete.FEMALE ? @drawable/ico_onboarding_female : @drawable/ico_onboarding_female_inactive}"
+                    android:id="@+id/gender_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/spacing_l"
+                    android:onClick="@{() -> onboardingPresenter.selectGender(Athlete.FEMALE)}"
+                    tools:src="@drawable/ico_onboarding_female_inactive"/>
+
+            </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_m">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/age"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/orange"
+                    android:inputType="number"
+                    android:hint="@string/age"
+                    android:layout_gravity="center"
+                    android:text="@={onboardingPresenter.age}" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/spacing_m">
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/spacing_xs"
+                    android:background="@{onboardingPresenter.bodyType.equals(BodyType.EKTOMORPH) ? @color/grey_light : @color/grey_dark}"
+                    android:padding="@dimen/spacing_s"
+                    android:onClick="@{() -> onboardingPresenter.setBodyType(BodyType.EKTOMORPH)}">
+
+                    <TextView
+                        style="@style/Text.Subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:textColor="@color/white"
+                        android:text="@string/ektomorph"/>
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/spacing_xs"
+                    android:background="@{onboardingPresenter.bodyType.equals(BodyType.MESOMORPH) ? @color/grey_light : @color/grey_dark}"
+                    android:padding="@dimen/spacing_s"
+                    android:onClick="@{() -> onboardingPresenter.setBodyType(BodyType.MESOMORPH)}">
+
+                    <TextView
+                        style="@style/Text.Subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:textColor="@color/white"
+                        android:text="@string/mesomorph"/>
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/spacing_xs"
+                    android:background="@{onboardingPresenter.bodyType.equals(BodyType.ENDOMORPH) ? @color/grey_light : @color/grey_dark}"
+                    android:padding="@dimen/spacing_s"
+                    android:onClick="@{() -> onboardingPresenter.setBodyType(BodyType.ENDOMORPH)}">
+
+                    <TextView
+                        style="@style/Text.Subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:textColor="@color/white"
+                        android:text="@string/endomorph"/>
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
 
         <Button
-            android:layout_width="wrap_content"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="@dimen/spacing_m"

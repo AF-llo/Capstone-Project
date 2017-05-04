@@ -1,11 +1,15 @@
 package de.ironcoding.fitsim.ui.presenter;
 
 import android.databinding.ObservableInt;
+import android.text.TextUtils;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 
+import de.appsfactory.mvplib.annotations.MVPIncludeToState;
 import de.appsfactory.mvplib.presenter.MVPPresenter;
 import de.appsfactory.mvplib.util.ObservableString;
+import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.app.FitSimApp;
 import de.ironcoding.fitsim.logic.Athlete;
 import de.ironcoding.fitsim.logic.Body;
@@ -19,19 +23,24 @@ import de.ironcoding.fitsim.util.AppSettings;
 
 public class OnboardingPresenter extends MVPPresenter {
 
+    private static final int MIN_AGE = 1;
+
+    private static final int MAX_AGE = 100;
+
     @Inject
     AppSettings appSettings;
 
     @Inject
     LocalAthleteRepository localAthleteRepository;
 
-    public ObservableInt gender = new ObservableInt(Athlete.FEMALE);
+    @MVPIncludeToState
+    public ObservableInt gender = new ObservableInt(Athlete.MALE);
 
-    public ObservableString bodyType = new ObservableString(BodyType.ENDOMORPH);
+    @MVPIncludeToState
+    public ObservableString bodyType = new ObservableString(BodyType.EKTOMORPH);
 
-    public ObservableString age = new ObservableString(String.valueOf(Body.DEFAULT_AGE));
-
-    public ObservableString size = new ObservableString(String.valueOf(Body.DEFAULT_SIZE_MALE));
+    @MVPIncludeToState
+    public ObservableString age = new ObservableString();
 
     private OnboardingCallback callback;
 
@@ -49,9 +58,21 @@ public class OnboardingPresenter extends MVPPresenter {
     }
 
     public void  createAthlete() {
+        if (getContext() == null) {
+            return;
+        }
+        if (TextUtils.isEmpty(age.get())) {
+            Toast.makeText(getContext(), R.string.invalid_age, Toast.LENGTH_LONG).show();
+            return;
+        }
+        int age = Integer.valueOf(this.age.get());
+        if (age < MIN_AGE | age > MAX_AGE) {
+            Toast.makeText(getContext(), R.string.invalid_age, Toast.LENGTH_LONG).show();
+            return;
+        }
         @BodyType.Name String type = bodyType.get();
         @Athlete.Gender int gender = this.gender.get();
-        localAthleteRepository.createInitialAthlete(type, gender, Integer.valueOf(age.get()), Float.valueOf(size.get()));
+        localAthleteRepository.createInitialAthlete(type, gender, age, Body.DEFAULT_SIZE_MALE);
         notifyCallbackFinishOnboarding();
     }
 
@@ -63,6 +84,14 @@ public class OnboardingPresenter extends MVPPresenter {
         if (callback != null) {
             callback.finishOnboarding();
         }
+    }
+
+    public void setBodyType(@BodyType.Name String bodyType) {
+        this.bodyType.set(bodyType);
+    }
+
+    public void selectGender(@Athlete.Gender int gender) {
+        this.gender.set(gender);
     }
 
     @Override

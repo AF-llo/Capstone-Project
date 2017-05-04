@@ -38,4 +38,10 @@
     <string name="proteine">Eiweiß</string>
     <string name="fat">Fett</string>
     <string name="carbs">Kohlenhydrate</string>
+    <string name="hello">Hallo!</string>
+    <string name="enter_data">Bitte gib deine Grunddaten ein.</string>
+    <string name="ektomorph">Ektomorph</string>
+    <string name="mesomorph">Mesomorph</string>
+    <string name="endomorph">Endomorph</string>
+    <string name="invalid_age">Dein Alter sollte zwischen 0 und 100 sein.</string>
 </resources>
