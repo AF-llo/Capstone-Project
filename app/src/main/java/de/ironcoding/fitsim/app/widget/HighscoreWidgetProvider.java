@@ -6,11 +6,13 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.TaskStackBuilder;
 import android.widget.RemoteViews;
 
 import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.app.service.HighscoreWidgetRemoteViewService;
 import de.ironcoding.fitsim.ui.activities.OnboardingActivity;
+import de.ironcoding.fitsim.ui.activities.ProfileActivity;
 
 /**
  * Implementation of App Widget functionality.
@@ -30,8 +32,11 @@ public class HighscoreWidgetProvider extends AppWidgetProvider {
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, OnboardingActivity.getIntent(context), 0);
             views.setOnClickPendingIntent(R.id.widget, pendingIntent);
 
-            PendingIntent appPendingIntent = PendingIntent.getActivity(context, 0, OnboardingActivity.getIntent(context), PendingIntent.FLAG_UPDATE_CURRENT);
-            views.setPendingIntentTemplate(R.id.widget_list, appPendingIntent);
+            // TODO: 04.05.2017 handle if athlete created
+
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+            stackBuilder.addNextIntentWithParentStack(new Intent(context, ProfileActivity.class));
+            views.setPendingIntentTemplate(R.id.widget_list, stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT));
 
             views.setEmptyView(R.id.widget_list, R.id.empty_view);
 

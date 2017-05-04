@@ -1,8 +1,8 @@
 package de.ironcoding.fitsim.ui.model;
 
 import android.content.Context;
-
-import java.text.DecimalFormat;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.logic.Athlete;
@@ -18,13 +18,10 @@ public class StaminaRecyclerItem extends InfoRecyclerItem {
 
     private float maxStamina;
 
-    private DecimalFormat formatter;
-
     public StaminaRecyclerItem(Athlete athlete) {
         super();
         stamina = athlete.getBody().getFitness().getStamina();
         maxStamina = Body.MAX_FITNESS;
-        formatter = new DecimalFormat(Body.FLOAT_FORMAT_PATTERN);
     }
 
     @Override
@@ -37,4 +34,28 @@ public class StaminaRecyclerItem extends InfoRecyclerItem {
         return String.format(context.getString(R.string.simple_max_string), formatter.format(stamina), formatter.format(maxStamina));
     }
 
+    public StaminaRecyclerItem(Parcel in) {
+        super(in);
+        this.stamina = in.readFloat();
+        this.maxStamina = in.readFloat();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeFloat(stamina);
+        dest.writeFloat(maxStamina);
+    }
+
+    public static final Parcelable.Creator<StaminaRecyclerItem> CREATOR = new Parcelable.Creator<StaminaRecyclerItem>() {
+        @Override
+        public StaminaRecyclerItem createFromParcel(Parcel source) {
+            return new StaminaRecyclerItem(source);
+        }
+
+        @Override
+        public StaminaRecyclerItem[] newArray(int size) {
+            return new StaminaRecyclerItem[size];
+        }
+    };
 }

@@ -1,6 +1,8 @@
 package de.ironcoding.fitsim.ui.model;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.text.DecimalFormat;
 
@@ -36,4 +38,29 @@ public class StrengthRecyclerItem extends InfoRecyclerItem {
     public String getFormattedSubtitle(Context context, String string) {
         return String.format(context.getString(R.string.simple_max_string), formatter.format(strength), formatter.format(maxStrength));
     }
+
+    public StrengthRecyclerItem(Parcel in) {
+        super(in);
+        this.strength = in.readFloat();
+        this.maxStrength = in.readFloat();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeFloat(strength);
+        dest.writeFloat(maxStrength);
+    }
+
+    public static final Parcelable.Creator<StrengthRecyclerItem> CREATOR = new Parcelable.Creator<StrengthRecyclerItem>() {
+        @Override
+        public StrengthRecyclerItem createFromParcel(Parcel source) {
+            return new StrengthRecyclerItem(source);
+        }
+
+        @Override
+        public StrengthRecyclerItem[] newArray(int size) {
+            return new StrengthRecyclerItem[size];
+        }
+    };
 }

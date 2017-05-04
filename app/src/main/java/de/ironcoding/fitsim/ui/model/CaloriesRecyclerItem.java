@@ -1,6 +1,8 @@
 package de.ironcoding.fitsim.ui.model;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.logic.Calories;
@@ -30,4 +32,29 @@ public class CaloriesRecyclerItem extends InfoRecyclerItem {
     public String getFormattedSubtitle(Context context, String string) {
         return String.format(context.getString(R.string.required_calories), formatter.format(consumedCalories), formatter.format(requiredCalories));
     }
+
+    public CaloriesRecyclerItem(Parcel in) {
+        super(in);
+        this.consumedCalories = in.readFloat();
+        this.requiredCalories = in.readFloat();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeFloat(consumedCalories);
+        dest.writeFloat(requiredCalories);
+    }
+
+    public static final Parcelable.Creator<CaloriesRecyclerItem> CREATOR = new Parcelable.Creator<CaloriesRecyclerItem>() {
+        @Override
+        public CaloriesRecyclerItem createFromParcel(Parcel source) {
+            return new CaloriesRecyclerItem(source);
+        }
+
+        @Override
+        public CaloriesRecyclerItem[] newArray(int size) {
+            return new CaloriesRecyclerItem[size];
+        }
+    };
 }

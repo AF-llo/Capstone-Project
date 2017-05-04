@@ -17,7 +17,7 @@ import de.ironcoding.fitsim.app.FitSimApp;
 import de.ironcoding.fitsim.app.injection.DbRepositoryModule;
 import de.ironcoding.fitsim.logic.IHighscore;
 import de.ironcoding.fitsim.repository.HighscoreRepository;
-import de.ironcoding.fitsim.ui.activities.OnboardingActivity;
+import de.ironcoding.fitsim.ui.activities.MainActivity;
 import de.ironcoding.fitsim.ui.model.HighscoreListItemViewModel;
 
 /**
@@ -73,9 +73,9 @@ public class HighscoreWidgetFactory implements RemoteViewsService.RemoteViewsFac
         }
         HighscoreListItemViewModel item = items.get(position);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.layout_widget_item);
-        views.setTextViewText(R.id.highscore_name, item.getName());
-        views.setTextViewText(R.id.highscore_points, item.getPoints());
-        views.setOnClickFillInIntent(R.id.highscore_list_item, OnboardingActivity.getIntent(context));
+        views.setTextViewText(R.id.title, item.getName());
+        views.setTextViewText(R.id.subtitle, item.getPoints());
+        views.setOnClickFillInIntent(R.id.highscore_list_item, MainActivity.getIntent(context));
         return views;
     }
 

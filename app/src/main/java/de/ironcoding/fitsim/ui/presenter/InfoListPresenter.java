@@ -1,7 +1,6 @@
 package de.ironcoding.fitsim.ui.presenter;
 
 import android.databinding.ObservableArrayList;
-import android.databinding.ObservableList;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ import de.ironcoding.fitsim.ui.model.InfoRecyclerItem;
 public abstract class InfoListPresenter extends BasePresenter {
 
     @MVPIncludeToState
-    public ObservableList<InfoRecyclerItem> items = new ObservableArrayList<>();
+    public ObservableArrayList<InfoRecyclerItem> items = new ObservableArrayList<>();
 
     @Override
     protected void onAthleteLoaded() {

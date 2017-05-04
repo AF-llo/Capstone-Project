@@ -8,7 +8,7 @@ import de.ironcoding.fitsim.ui.fragments.BodyFragment;
 import de.ironcoding.fitsim.ui.fragments.HighscoreFragment;
 import de.ironcoding.fitsim.ui.fragments.MuscleInfoFragment;
 import de.ironcoding.fitsim.ui.fragments.NutritionInfoFragment;
-import de.ironcoding.fitsim.ui.presenter.ProfilePresenter;
+import de.ironcoding.fitsim.ui.model.ProfileFragmentItem;
 
 /**
  * Created by larsl on 03.05.2017.
@@ -36,6 +36,6 @@ public class ProfilePagerAdapter extends MVPFragmentAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return ((ProfilePresenter.ProfileItem)getItems().get(position)).getTitle();
+        return ((ProfileFragmentItem)getItems().get(position)).getTitle();
     }
 }

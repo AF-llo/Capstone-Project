@@ -9,40 +9,34 @@
             type="de.ironcoding.fitsim.ui.model.InfoRecyclerItem"/>
     </data>
 
-    <FrameLayout
-        android:id="@+id/info_list_item"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="?android:listPreferredItemHeightSmall"
+        android:layout_marginStart="@dimen/spacing_m"
+        android:layout_marginEnd="@dimen/spacing_m"
         android:layout_marginTop="@dimen/spacing_s"
-        android:layout_marginBottom="@dimen/spacing_s">
+        android:layout_marginBottom="@dimen/spacing_s"
+        android:layout_gravity="center_vertical">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
+        <TextView
+            style="@style/Text.Title"
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@{item.getFormattedTitle(context, item.title)}"
+            tools:text="Lars Lokaizyk" />
+
+        <TextView
+            style="@style/Text.Subtitle"
+            android:id="@+id/subtitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_m"
-            android:layout_marginEnd="@dimen/spacing_m"
-            android:layout_gravity="center_vertical">
+            android:text="@{item.getFormattedSubtitle(context, item.subtitle)}"
+            android:textColor="@color/grey_light"
+            tools:text="1234" />
 
-            <TextView
-                style="@style/Text.Title"
-                android:id="@+id/highscore_name"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@{item.getFormattedTitle(context, item.title)}"
-                tools:text="Lars Lokaizyk" />
-
-            <TextView
-                style="@style/Text.Subtitle"
-                android:id="@+id/highscore_points"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{item.getFormattedSubtitle(context, item.subtitle)}"
-                android:textColor="@color/grey_light"
-                tools:text="1234" />
-
-        </LinearLayout>
-    </FrameLayout>
+    </LinearLayout>
 
 </layout>

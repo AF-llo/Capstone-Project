@@ -2,12 +2,12 @@ package de.ironcoding.fitsim.ui.presenter;
 
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableInt;
-import android.databinding.ObservableList;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 
 import de.appsfactory.mvplib.annotations.MVPIncludeToState;
 import de.ironcoding.fitsim.R;
+import de.ironcoding.fitsim.ui.model.ProfileFragmentItem;
 
 /**
  * Created by larsl on 03.05.2017.
@@ -16,7 +16,7 @@ import de.ironcoding.fitsim.R;
 public class ProfilePresenter extends BasePresenter implements TabLayout.OnTabSelectedListener {
 
     @MVPIncludeToState
-    public ObservableList<ProfileItem> items = new ObservableArrayList<>();
+    public ObservableArrayList<ProfileFragmentItem> items = new ObservableArrayList<>();
 
     public ObservableInt selectedItem = new ObservableInt();
 
@@ -33,14 +33,10 @@ public class ProfilePresenter extends BasePresenter implements TabLayout.OnTabSe
             return;
         }
         if (items.size() == 0) {
-            String highscoreTitle = getContext().getString(R.string.highscore);
-            String bodyTitle = getContext().getString(R.string.body);
-            String muscleTitle = getContext().getString(R.string.muscles);
-            String nutrition = getContext().getString(R.string.nutrition);
-            items.add(() -> highscoreTitle);
-            items.add(() -> bodyTitle);
-            items.add(() -> muscleTitle);
-            items.add(() -> nutrition);
+            items.add(new ProfileFragmentItem(getContext().getString(R.string.highscore)));
+            items.add(new ProfileFragmentItem(getContext().getString(R.string.body)));
+            items.add(new ProfileFragmentItem(getContext().getString(R.string.muscles)));
+            items.add(new ProfileFragmentItem(getContext().getString(R.string.nutrition)));
         }
     }
 

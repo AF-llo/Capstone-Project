@@ -39,6 +39,7 @@
             android:layout_toEndOf="@id/icon"/>
 
         <TextView
+            style="@style/Text.Title"
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,6 +51,7 @@
             android:layout_centerVertical="true" />
 
         <TextView
+            style="@style/Text.Subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="+20 EP, -10 EP"

@@ -16,6 +16,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainPre
 
     private ActivityMainBinding binding;
 
+    public static Intent getIntent(Context context) {
+        return new Intent(context, MainActivity.class);
+    }
+
     @Override
     public MainPresenter createPresenter() {
         return new MainPresenter(this);

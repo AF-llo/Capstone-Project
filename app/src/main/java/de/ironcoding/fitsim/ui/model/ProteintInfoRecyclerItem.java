@@ -1,6 +1,8 @@
 package de.ironcoding.fitsim.ui.model;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.logic.Macros;
@@ -26,4 +28,27 @@ public class ProteintInfoRecyclerItem extends InfoRecyclerItem {
     public String getFormattedSubtitle(Context context, String string) {
         return String.format(context.getString(R.string.consumed_gram), formatter.format(consumedProteine));
     }
+
+    public ProteintInfoRecyclerItem(Parcel in) {
+        super(in);
+        this.consumedProteine = in.readFloat();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeFloat(consumedProteine);
+    }
+
+    public static final Parcelable.Creator<ProteintInfoRecyclerItem> CREATOR = new Parcelable.Creator<ProteintInfoRecyclerItem>() {
+        @Override
+        public ProteintInfoRecyclerItem createFromParcel(Parcel source) {
+            return new ProteintInfoRecyclerItem(source);
+        }
+
+        @Override
+        public ProteintInfoRecyclerItem[] newArray(int size) {
+            return new ProteintInfoRecyclerItem[size];
+        }
+    };
 }
