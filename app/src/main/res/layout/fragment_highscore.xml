@@ -6,49 +6,48 @@
 
     <data>
         <import type="android.view.View"/>
+        <import type="de.ironcoding.fitsim.R"/>
         <variable
             name="highscorePresenter"
             type="de.ironcoding.fitsim.ui.presenter.HighscorePresenter"/>
     </data>
 
-    <LinearLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@{highscorePresenter.username}"
-            tools:text="@string/anonymous" />
-
-        <Button
-            style="@style/ButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login"
-            android:layout_margin="@dimen/spacing_m"
-            android:layout_gravity="center"
-            android:onClick="@{() -> highscorePresenter.login()}"
-            android:visibility="@{highscorePresenter.loggedin ? View.GONE : View.VISIBLE}"/>
-
-        <Button
-            style="@style/ButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/logout"
-            android:layout_margin="@dimen/spacing_m"
-            android:layout_gravity="center"
-            android:onClick="@{() -> highscorePresenter.logout()}"
-            android:visibility="@{highscorePresenter.loggedin ? View.VISIBLE : View.GONE}"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/highscore"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:items="@{highscorePresenter.higscoreItems}"
-            android:visibility="@{highscorePresenter.loggedin ? View.VISIBLE : View.GONE}"/>
+            android:layout_height="match_parent">
 
-    </LinearLayout>
+            <TextView
+                style="@style/Text.Header"
+                android:id="@+id/login_state"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/not_logged_in"
+                android:gravity="center"
+                android:visibility="@{highscorePresenter.loggedin ? View.GONE : View.VISIBLE}" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/highscore"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:items="@{highscorePresenter.higscoreItems}"
+                android:visibility="@{highscorePresenter.loggedin ? View.VISIBLE : View.GONE}" />
+        </FrameLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_m"
+            app:fabSize="normal"
+            android:layout_gravity="end|bottom"
+            app:iconresid="@{highscorePresenter.loggedin ? R.drawable.ico_logout : R.drawable.ico_login}"
+            android:onClick="@{() -> highscorePresenter.loginOrOut()}"
+            tools:src="@drawable/ico_logout"/>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
 </layout>

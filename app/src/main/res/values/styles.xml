@@ -15,7 +15,26 @@
         <item name="windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowBackground">@drawable/pic_sports</item>
+        <item name="android:windowBackground">@color/grey_dark</item>
+        <item name="colorPrimary">@color/grey_light</item>
+        <item name="colorPrimaryDark">@color/grey_dark</item>
+        <item name="android:textColorHint">@color/orange</item>
+        <item name="android:editTextColor">@color/orange</item>
+        <item name="colorControlActivated">@color/orange</item>
+        <item name="colorControlHighlight">@color/orange</item>
+        <item name="colorButtonNormal">@color/orange</item>
+        <item name="android:buttonStyle">@style/FirebaseLoginTheme.Button</item>
+        <item name="android:editTextStyle">@style/FirebaseLoginTheme.EditText</item>
+    </style>
+
+    <style name="FirebaseLoginTheme.EditText" parent="FirebaseUI.EditText">
+        <item name="android:textColor">@color/orange</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="FirebaseLoginTheme.Button" parent="FirebaseUI.Button">
+        <item name="android:textColor">@color/grey_dark</item>
     </style>
 
     <style name="ButtonStyle">

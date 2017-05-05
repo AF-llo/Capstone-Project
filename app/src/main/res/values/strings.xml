@@ -59,4 +59,5 @@
     <string name="ep">EP</string>
     <string name="value_preview">%1$s (%2$s)</string>
     <string name="xp">XP</string>
+    <string name="not_logged_in">Not logged in</string>
 </resources>

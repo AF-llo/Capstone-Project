@@ -53,12 +53,12 @@ public class HighscorePresenter extends BasePresenter implements FirebaseAuth.Au
 
     }
 
-    public void login() {
-        notifyCallbackLogin();
-    }
-
-    public void logout() {
-        firebaseAuth.signOut();
+    public void loginOrOut() {
+        if (loggedin.get()) {
+            firebaseAuth.signOut();
+        } else {
+            notifyCallbackLogin();
+        }
     }
 
     @Override
