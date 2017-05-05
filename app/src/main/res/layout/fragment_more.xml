@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="morePresenter"
+            type="de.ironcoding.fitsim.ui.presenter.MorePresenter"/>
     </data>
 
     <FrameLayout
@@ -12,11 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/more"/>
+            android:text="bmi"
+            android:onClick="@{() -> morePresenter.startBmi()}"/>
 
     </FrameLayout>
 </layout>

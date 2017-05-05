@@ -30,6 +30,7 @@ public class MoreFragment extends BaseFragment<MorePresenter> {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentMoreBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_more, container, false);
+        binding.setMorePresenter(mPresenter);
         return binding.getRoot();
     }
 }

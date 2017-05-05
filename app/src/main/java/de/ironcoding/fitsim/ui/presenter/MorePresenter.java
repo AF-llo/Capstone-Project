@@ -1,8 +1,13 @@
 package de.ironcoding.fitsim.ui.presenter;
 
+import de.ironcoding.fitsim.ui.activities.BmiActivity;
+
 /**
  * Created by larsl on 28.04.2017.
  */
 
 public class MorePresenter extends BasePresenter {
+    public void startBmi() {
+        BmiActivity.start(getContext());
+    }
 }
