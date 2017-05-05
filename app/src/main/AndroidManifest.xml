@@ -30,6 +30,15 @@
                 android:value=".ui.activities.MainActivity" />
         </activity>
 
+        <activity android:name=".ui.activities.FfmiActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".ui.activities.MainActivity" >
+            <!-- The meta-data element is needed for versions lower than 4.1 -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.MainActivity" />
+        </activity>
+
         <activity android:name=".ui.activities.BmiActivity"
             android:label="@string/app_name"
             android:parentActivityName=".ui.activities.MainActivity" >

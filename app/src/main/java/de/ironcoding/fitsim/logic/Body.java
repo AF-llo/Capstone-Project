@@ -32,6 +32,7 @@ public class Body {
     public static final float INITIAL_WEIGHT = 70.0F;
     public static final float DEFAULT_SIZE_MALE = 175.0F;
     public static final float DEFAULT_SIZE_FEMALE = 170.0F;
+    public static final float DEFAULT_KFA = 15.0F;
     public static final int DEFAULT_AGE = 25;
 
     private BodyType type;

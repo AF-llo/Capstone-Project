@@ -48,4 +48,6 @@
     <string name="weight_in_kg">Gewicht in kg</string>
     <string name="size_in_cm">Größe in cm</string>
     <string name="bmi_result">BMI: %s</string>
+    <string name="ffmi_result">FFMI: %s</string>
+    <string name="kfa_in_percent">KFA in %</string>
 </resources>

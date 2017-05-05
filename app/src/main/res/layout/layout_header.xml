@@ -14,7 +14,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/grey_light">
+        android:background="@color/grey_dark">
 
         <android.support.v4.widget.Space
             android:id="@+id/center"
@@ -61,14 +61,14 @@
                 android:id="@+id/energy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textColor="@color/orange"
                 android:layout_centerHorizontal="true"
                 android:text="@{String.format(@string/energy, athleteModel.energy)}"
                 tools:text="100 EP"/>
 
             <ImageView
                 android:id="@+id/icon_health"
-                android:src="@drawable/ico_health_points"
+                android:src="@drawable/ico_lightning_orange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/energy"

@@ -49,7 +49,7 @@
                             android:layout_height="match_parent"
                             android:layout_width="match_parent"
                             android:alpha="@{nutritionPresenter.alpha}"
-                            android:background="?colorPrimary"
+                            android:background="@color/grey_dark"
                             tools:alpha="0.5"/>
 
                         <FrameLayout

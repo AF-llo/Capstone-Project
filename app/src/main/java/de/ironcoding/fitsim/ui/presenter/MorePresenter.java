@@ -1,6 +1,7 @@
 package de.ironcoding.fitsim.ui.presenter;
 
 import de.ironcoding.fitsim.ui.activities.BmiActivity;
+import de.ironcoding.fitsim.ui.activities.FfmiActivity;
 
 /**
  * Created by larsl on 28.04.2017.
@@ -8,6 +9,6 @@ import de.ironcoding.fitsim.ui.activities.BmiActivity;
 
 public class MorePresenter extends BasePresenter {
     public void startBmi() {
-        BmiActivity.start(getContext());
+        FfmiActivity.start(getContext());
     }
 }

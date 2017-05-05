@@ -6,8 +6,8 @@
 
     <data>
         <variable
-            name="bmiPresenter"
-            type="de.ironcoding.fitsim.ui.presenter.BmiPresenter"/>
+            name="ffmiPresenter"
+            type="de.ironcoding.fitsim.ui.presenter.FfmiPresenter"/>
     </data>
 
     <LinearLayout
@@ -43,8 +43,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/spacing_m"
                 android:textColor="@color/orange"
-                android:text="@{bmiPresenter.bmi}"
-                tools:text="BMI: 23.62"/>
+                android:text="@{ffmiPresenter.ffmi}"
+                tools:text="FFMI: 23.62"/>
 
             <TextView
                 style="@style/Text.Subtitle"
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/spacing_m"
                 android:textColor="@color/white"
-                android:text="@{bmiPresenter.info}"
+                android:text="@{ffmiPresenter.info}"
                 tools:text="@string/invalid_data"/>
 
             <android.support.design.widget.TextInputLayout
@@ -68,7 +68,7 @@
                     android:inputType="numberDecimal"
                     android:hint="@string/weight_in_kg"
                     android:layout_gravity="center"
-                    android:text="@={bmiPresenter.weight}" />
+                    android:text="@={ffmiPresenter.weight}" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -85,7 +85,24 @@
                     android:inputType="numberDecimal"
                     android:hint="@string/size_in_cm"
                     android:layout_gravity="center"
-                    android:text="@={bmiPresenter.size}" />
+                    android:text="@={ffmiPresenter.size}" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_m">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/kfa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/orange"
+                    android:inputType="numberDecimal"
+                    android:hint="@string/kfa_in_percent"
+                    android:layout_gravity="center"
+                    android:text="@={ffmiPresenter.kfa}" />
 
             </android.support.design.widget.TextInputLayout>
 

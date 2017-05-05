@@ -7,31 +7,30 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import de.ironcoding.fitsim.R;
-import de.ironcoding.fitsim.databinding.ActivityBmiBinding;
-import de.ironcoding.fitsim.ui.presenter.BmiPresenter;
+import de.ironcoding.fitsim.databinding.ActivityFfmiBinding;
+import de.ironcoding.fitsim.ui.presenter.FfmiPresenter;
 
 /**
  * Created by larsl on 05.05.2017.
  */
 
-public class BmiActivity extends BaseActivity<BmiPresenter> {
+public class FfmiActivity extends BaseActivity<FfmiPresenter> {
 
     public static void start(Context context) {
-        Intent starter = new Intent(context, BmiActivity.class);
+        Intent starter = new Intent(context, FfmiActivity.class);
         context.startActivity(starter);
     }
 
     @Override
-    public BmiPresenter createPresenter() {
-        return new BmiPresenter();
+    public FfmiPresenter createPresenter() {
+        return new FfmiPresenter();
     }
 
-    @SuppressWarnings("ConstantConditions")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityBmiBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_bmi);
-        binding.setBmiPresenter(mPresenter);
+        ActivityFfmiBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_ffmi);
+        binding.setFfmiPresenter(mPresenter);
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);

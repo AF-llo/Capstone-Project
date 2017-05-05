@@ -158,7 +158,7 @@ public class Calories {
      * @param size
      *                  in cm
      * @return
-     *                  bmi or 0 when invalid weight or size is passed.
+     *                  ffmi or 0 when invalid weight or size is passed.
      */
     public static float getBmi(float weight, float size) {
         if (weight < 0) {
