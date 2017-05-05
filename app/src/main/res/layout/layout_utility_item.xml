@@ -27,7 +27,7 @@
                 android:layout_centerVertical="true"
                 android:padding="@dimen/spacing_m"
                 app:resid="@{item.iconResId}"
-                tools:src="@drawable/ico_bmi"/>
+                tools:src="@drawable/ico_ffmi"/>
 
             <TextView
                 style="@style/Text.Header"

@@ -51,7 +51,7 @@
                             android:layout_height="match_parent"
                             android:layout_width="match_parent"
                             android:alpha="@{gymPresenter.alpha}"
-                            android:background="@color/grey_dark"
+                            android:background="@color/grey_light"
                             tools:alpha="0.5"/>
 
                         <FrameLayout
@@ -98,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/bottom_sheet_height"
             android:clipToPadding="true"
-            android:background="@color/white"
+            android:background="@color/grey_dark"
             app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
             app:behavior_peekHeight="0dp">
 
@@ -107,26 +107,17 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="?android:actionBarSize"
-                    android:background="@color/grey_extra_light">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_points"
-                        android:layout_gravity="center"/>
-
-                </FrameLayout>
-
                 <TextView
-                    style="@style/Text.Title"
+                    style="@style/Text.Header"
                     android:layout_width="match_parent"
                     android:layout_height="?android:actionBarSize"
-                    android:gravity="center"
                     android:text="@{gymPresenter.selectedActivity.name}"
-                    android:textColor="@color/grey_dark"
+                    android:layout_marginTop="@dimen/spacing_m"
+                    android:layout_marginBottom="@dimen/spacing_m"
+                    android:layout_marginStart="@dimen/spacing_huge"
+                    android:layout_marginLeft="@dimen/spacing_huge"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/white"
                     tools:text="Benchpress" />
 
                 <android.support.v7.widget.GridLayout
@@ -135,30 +126,49 @@
                     android:layout_weight="1"
                     android:layout_marginStart="@dimen/spacing_m"
                     android:layout_marginLeft="@dimen/spacing_m"
-                    app:columnCount="2">
+                    app:columnCount="3"
+                    app:useDefaultMargins="true">
+
+                    <ImageView
+                        android:layout_width="@dimen/preview_icon_size"
+                        android:layout_height="@dimen/preview_icon_size"
+                        android:src="@drawable/ico_lightning_white"/>
 
                     <TextView
                         style="@style/Text.Subtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_columnWeight="1"
-                        android:layout_marginBottom="@dimen/spacing_s"
-                        android:text="@string/xp"/>
+                        android:layout_marginStart="@dimen/spacing_xl"
+                        android:layout_marginLeft="@dimen/spacing_xl"
+                        android:textColor="@color/white"
+                        android:text="@string/xp"
+                        app:layout_gravity="center_vertical"/>
 
                     <TextView
                         style="@style/Text.Subtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_columnWeight="1"
+                        android:textColor="@color/white"
+                        app:layout_gravity="center_vertical"
                         android:text="@{String.format(@string/value_preview, gymPresenter.athletePreview.experience, gymPresenter.athletePreview.grownExperience)}"
                         tools:text="150 (+50)"/>
 
+                    <ImageView
+                        android:layout_width="@dimen/preview_icon_size"
+                        android:layout_height="@dimen/preview_icon_size"
+                        android:src="@drawable/ico_profil"/>
+
                     <TextView
                         style="@style/Text.Subtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_xl"
+                        android:layout_marginLeft="@dimen/spacing_xl"
                         app:layout_columnWeight="1"
-                        android:layout_marginBottom="@dimen/spacing_s"
+                        android:textColor="@color/white"
+                        app:layout_gravity="center_vertical"
                         android:text="@string/ep"/>
 
                     <TextView
@@ -166,15 +176,25 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_columnWeight="1"
+                        android:textColor="@color/white"
+                        app:layout_gravity="center_vertical"
                         android:text="@{String.format(@string/value_preview, gymPresenter.athletePreview.effort, gymPresenter.athletePreview.lostEnergy)}"
                         tools:text="80 (+25)"/>
+
+                    <ImageView
+                        android:layout_width="@dimen/preview_icon_size"
+                        android:layout_height="@dimen/preview_icon_size"
+                        android:src="@drawable/ico_strength_white"/>
 
                     <TextView
                         style="@style/Text.Subtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_xl"
+                        android:layout_marginLeft="@dimen/spacing_xl"
                         app:layout_columnWeight="1"
-                        android:layout_marginBottom="@dimen/spacing_s"
+                        app:layout_gravity="center_vertical"
+                        android:textColor="@color/white"
                         android:text="@string/strength"/>
 
                     <TextView
@@ -182,15 +202,25 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_columnWeight="1"
+                        android:textColor="@color/white"
+                        app:layout_gravity="center_vertical"
                         android:text="@{String.format(@string/value_preview, gymPresenter.athletePreview.strength, gymPresenter.athletePreview.changedStrength)}"
                         tools:text="80 (+25)"/>
+
+                    <ImageView
+                        android:layout_width="@dimen/preview_icon_size"
+                        android:layout_height="@dimen/preview_icon_size"
+                        android:src="@drawable/ico_stamina_white"/>
 
                     <TextView
                         style="@style/Text.Subtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_xl"
+                        android:layout_marginLeft="@dimen/spacing_xl"
                         app:layout_columnWeight="1"
-                        android:layout_marginBottom="@dimen/spacing_s"
+                        app:layout_gravity="center_vertical"
+                        android:textColor="@color/white"
                         android:text="@string/stamina"/>
 
                     <TextView
@@ -198,6 +228,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_columnWeight="1"
+                        app:layout_gravity="center_vertical"
+                        android:textColor="@color/white"
                         android:text="@{String.format(@string/value_preview, gymPresenter.athletePreview.stamina, gymPresenter.athletePreview.changedStamina)}"
                         tools:text="80 (+25)"/>
 
