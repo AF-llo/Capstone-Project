@@ -1,6 +1,7 @@
 package de.ironcoding.fitsim.ui.presenter;
 
 import android.databinding.ObservableArrayList;
+import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.databinding.ObservableFloat;
 import android.databinding.ObservableList;
@@ -39,7 +40,7 @@ public class NutritionPresenter extends BasePresenter implements NutritionSelect
 
     public ObservableField<NutritionRecyclerItem> selectedNutrition = new ObservableField<>();
 
-    public ObservableFloat backgroundAlpha = new ObservableFloat();
+    public ObservableBoolean nutritionSelected = new ObservableBoolean(false);
 
     public NutritionPresenter(Callback callback) {
         super(callback);
@@ -76,16 +77,18 @@ public class NutritionPresenter extends BasePresenter implements NutritionSelect
         if (getContext() == null) {
             return;
         }
-        Athlete previewAthlete = getAthlete().copy();
-        if (!previewAthlete.canEat(nutrition)) {
+        Athlete current = getAthlete().copy();
+        if (!current.canEat(nutrition)) {
             Toast.makeText(getContext(), getContext().getString(R.string.to_satured), Toast.LENGTH_SHORT).show();
             return;
         }
-        previewAthlete.eat(nutrition);
-        updateAthletePreview(previewAthlete);
-        selectedNutrition.set(new NutritionRecyclerItem(nutrition, previewAthlete.getBody()));
+        Athlete preview = current.copy();
+        preview.eat(nutrition);
+        updateAthletePreview(current, preview, nutrition);
+        selectedNutrition.set(new NutritionRecyclerItem(nutrition, current.getBody()));
         notifyCallbackShowBottomSheet();
         analyticsLogger.logNutritionEaten(nutrition.getName());
+        nutritionSelected.set(true);
     }
 
     /**
@@ -118,6 +121,7 @@ public class NutritionPresenter extends BasePresenter implements NutritionSelect
         bodyChanged(updatedAthlete.getBody());
         updateAthlete(updatedAthlete);
         notifyCallbackHideBottomSheet();
+        nutritionSelected.set(false);
     }
 
     public void showProfile() {
@@ -134,11 +138,7 @@ public class NutritionPresenter extends BasePresenter implements NutritionSelect
         this.alpha.set(alpha);
     }
 
-    private void updateAthletePreview(Athlete athlete) {
-        athletePreview.set(new AthleteNutritionPreviewViewModel(athlete));
-    }
-
-    public void setBackgroundAlpha(float backgroundAlpha) {
-        this.backgroundAlpha.set(backgroundAlpha);
+    private void updateAthletePreview(Athlete currernt, Athlete preview, Nutrition nutrition) {
+        athletePreview.set(new AthleteNutritionPreviewViewModel(currernt, preview, nutrition.getId()));
     }
 }

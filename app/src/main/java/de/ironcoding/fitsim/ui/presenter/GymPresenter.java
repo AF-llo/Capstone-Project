@@ -33,8 +33,6 @@ public class GymPresenter extends BasePresenter implements ActivityItemEvent {
     @Named(LocalModule.REPOSITORY_LOCAL)
     ActivitiesRepository activitiesRepository;
 
-    public ObservableFloat backgroundAlpha = new ObservableFloat();
-
     public ObservableFloat alpha = new ObservableFloat();
 
     public ObservableList<ActivityRecyclerItem> activities = new ObservableArrayList<>();
@@ -161,9 +159,5 @@ public class GymPresenter extends BasePresenter implements ActivityItemEvent {
 
     private void updateAthletePreview(Athlete current, Athlete preview, Activity activity) {
         athletePreview.set(new AthleteActivityPreviewViewModel(current, preview, activity.getId()));
-    }
-
-    public void setBackgroundAlpha(float backgroundAlpha) {
-        this.backgroundAlpha.set(backgroundAlpha);
     }
 }

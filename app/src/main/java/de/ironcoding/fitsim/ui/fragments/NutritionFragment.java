@@ -2,7 +2,6 @@ package de.ironcoding.fitsim.ui.fragments;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomSheetBehavior;
@@ -51,21 +50,8 @@ public class NutritionFragment extends BaseFragment<NutritionPresenter> implemen
         binding.nutritionList.setNestedScrollingEnabled(true);
         bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        bottomSheetBehavior.setBottomSheetCallback(callback);
         return binding.getRoot();
     }
-
-    private BottomSheetBehavior.BottomSheetCallback callback = new BottomSheetBehavior.BottomSheetCallback() {
-        @Override
-        public void onStateChanged(@NonNull View bottomSheet, int newState) {
-
-        }
-
-        @Override
-        public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-            mPresenter.setBackgroundAlpha(slideOffset * BACKGROUND_ALPHA_SCALE);
-        }
-    };
 
     public void showBottomSheet() {
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);

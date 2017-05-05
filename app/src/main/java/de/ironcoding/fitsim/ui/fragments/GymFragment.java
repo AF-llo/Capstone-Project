@@ -2,7 +2,6 @@ package de.ironcoding.fitsim.ui.fragments;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomSheetBehavior;
@@ -16,8 +15,6 @@ import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.databinding.FragmentGymBinding;
 import de.ironcoding.fitsim.ui.presenter.BasePresenter;
 import de.ironcoding.fitsim.ui.presenter.GymPresenter;
-
-import static de.ironcoding.fitsim.ui.fragments.NutritionFragment.BACKGROUND_ALPHA_SCALE;
 
 /**
  * Created by larsl on 27.04.2017.
@@ -56,21 +53,8 @@ public class GymFragment extends BaseFragment<GymPresenter> implements BasePrese
         binding.activityList.setNestedScrollingEnabled(true);
         bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        bottomSheetBehavior.setBottomSheetCallback(callback);
         return binding.getRoot();
     }
-
-    private BottomSheetBehavior.BottomSheetCallback callback = new BottomSheetBehavior.BottomSheetCallback() {
-        @Override
-        public void onStateChanged(@NonNull View bottomSheet, int newState) {
-
-        }
-
-        @Override
-        public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-            mPresenter.setBackgroundAlpha(slideOffset * BACKGROUND_ALPHA_SCALE);
-        }
-    };
 
     @Override
     public void showBottomSheet() {

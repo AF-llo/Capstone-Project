@@ -28,4 +28,5 @@ http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
     <dimen name="divider_height">0.5dp</dimen>
     <dimen name="tab_indicator_height">2dp</dimen>
     <dimen name="preview_icon_size">24dp</dimen>
+    <dimen name="bottom_list_item_height">36dp</dimen>
 </resources>

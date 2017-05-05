@@ -6,6 +6,8 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="de.ironcoding.fitsim.util.IconUtil"/>
+        <import type="android.view.View"/>
         <variable
             name="nutritionPresenter"
             type="de.ironcoding.fitsim.ui.presenter.NutritionPresenter"/>
@@ -49,7 +51,7 @@
                             android:layout_height="match_parent"
                             android:layout_width="match_parent"
                             android:alpha="@{nutritionPresenter.alpha}"
-                            android:background="@color/grey_dark"
+                            android:background="@color/grey_light"
                             tools:alpha="0.5"/>
 
                         <FrameLayout
@@ -97,37 +99,163 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/bottom_sheet_height"
             android:clipToPadding="true"
-            android:background="@color/white"
+            android:background="@color/grey_dark"
             app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
-            app:behavior_peekHeight ="0dp"
-            tools:visibility="visible">
+            app:behavior_peekHeight="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/bottom_sheet_height"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/Text.Header"
                     android:layout_width="match_parent"
                     android:layout_height="?android:actionBarSize"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@color/blue_light"
                     android:text="@{nutritionPresenter.selectedNutrition.name}"
-                    android:gravity="center"
-                    tools:text="text" />
+                    android:layout_marginTop="@dimen/spacing_m"
+                    android:layout_marginBottom="@dimen/spacing_m"
+                    android:layout_marginStart="@dimen/spacing_huge"
+                    android:layout_marginLeft="@dimen/spacing_huge"
+                    android:layout_marginEnd="@dimen/spacing_m"
+                    android:layout_marginRight="@dimen/spacing_m"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/white"
+                    tools:text="Das ist hier ein etwas längerer test" />
 
-                <Button
-                    style="@style/ButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/spacing_m"
-                    android:text="@string/consume_nutrition"
-                    android:onClick="@{() -> nutritionPresenter.eatNutrition()}"/>
+                <android.support.v7.widget.GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/spacing_m"
+                    android:layout_marginLeft="@dimen/spacing_m"
+                    app:columnCount="3"
+                    app:useDefaultMargins="true">
+
+                    <ImageView
+                        android:layout_width="@dimen/preview_icon_size"
+                        android:layout_height="@dimen/bottom_list_item_height"
+                        android:src="@drawable/ico_calories_white"/>
+
+                    <TextView
+                        style="@style/Text.Subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_columnWeight="1"
+                        android:layout_marginStart="@dimen/spacing_xl"
+                        android:layout_marginLeft="@dimen/spacing_xl"
+                        android:textColor="@color/white"
+                        android:text="@string/calories"
+                        app:layout_gravity="center_vertical"/>
+
+                    <TextView
+                        style="@style/Text.Subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_columnWeight="1"
+                        android:textColor="@color/white"
+                        app:layout_gravity="center_vertical"
+                        android:text="@{String.format(@string/value_preview, nutritionPresenter.athletePreview.calories, nutritionPresenter.athletePreview.changedCalories)}"
+                        tools:text="150 (+50)"/>
+
+                    <ImageView
+                        android:layout_width="@dimen/preview_icon_size"
+                        android:layout_height="@dimen/bottom_list_item_height"
+                        android:src="@drawable/ico_protein_white"/>
+
+                    <TextView
+                        style="@style/Text.Subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_xl"
+                        android:layout_marginLeft="@dimen/spacing_xl"
+                        app:layout_columnWeight="1"
+                        android:textColor="@color/white"
+                        app:layout_gravity="center_vertical"
+                        android:text="@string/proteine"/>
+
+                    <TextView
+                        style="@style/Text.Subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_columnWeight="1"
+                        android:textColor="@color/white"
+                        app:layout_gravity="center_vertical"
+                        android:text="@{String.format(@string/value_preview, nutritionPresenter.athletePreview.proteine, nutritionPresenter.athletePreview.changedProteine)}"
+                        tools:text="80 (+25)"/>
+
+                    <ImageView
+                        android:layout_width="@dimen/preview_icon_size"
+                        android:layout_height="@dimen/bottom_list_item_height"
+                        android:src="@drawable/ico_carbs_white"/>
+
+                    <TextView
+                        style="@style/Text.Subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_xl"
+                        android:layout_marginLeft="@dimen/spacing_xl"
+                        app:layout_columnWeight="1"
+                        app:layout_gravity="center_vertical"
+                        android:textColor="@color/white"
+                        android:text="@string/carbs"/>
+
+                    <TextView
+                        style="@style/Text.Subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_columnWeight="1"
+                        android:textColor="@color/white"
+                        app:layout_gravity="center_vertical"
+                        android:text="@{String.format(@string/value_preview, nutritionPresenter.athletePreview.carbs, nutritionPresenter.athletePreview.changedCarbs)}"
+                        tools:text="80 (+25)"/>
+
+                    <ImageView
+                        android:layout_width="@dimen/preview_icon_size"
+                        android:layout_height="@dimen/bottom_list_item_height"
+                        android:src="@drawable/ico_fat_white"/>
+
+                    <TextView
+                        style="@style/Text.Subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_xl"
+                        android:layout_marginLeft="@dimen/spacing_xl"
+                        app:layout_columnWeight="1"
+                        app:layout_gravity="center_vertical"
+                        android:textColor="@color/white"
+                        android:text="@string/fat"/>
+
+                    <TextView
+                        style="@style/Text.Subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_columnWeight="1"
+                        app:layout_gravity="center_vertical"
+                        android:textColor="@color/white"
+                        android:text="@{String.format(@string/value_preview, nutritionPresenter.athletePreview.fat, nutritionPresenter.athletePreview.changedFat)}"
+                        tools:text="80 (+25)"/>
+
+                </android.support.v7.widget.GridLayout>
+
+
 
             </LinearLayout>
 
         </android.support.v4.widget.NestedScrollView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_m"
+            app:layout_anchor="@id/bottom_sheet"
+            app:fabSize="normal"
+            app:layout_anchorGravity="end"
+            app:iconresid="@{IconUtil.nutritionResIdForIcon(nutritionPresenter.athletePreview.id)}"
+            android:visibility="@{nutritionPresenter.nutritionSelected ? View.VISIBLE : View.GONE}"
+            android:onClick="@{() -> nutritionPresenter.eatNutrition()}" />
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>
