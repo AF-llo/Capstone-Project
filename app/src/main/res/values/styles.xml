@@ -10,6 +10,14 @@
         <item name="android:textColor">@color/grey_dark</item>
     </style>
 
+    <style name="FirebaseLoginTheme" parent="FirebaseUI">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@drawable/pic_sports</item>
+    </style>
+
     <style name="ButtonStyle">
         <item name="android:background">@drawable/button_background</item>
         <item name="android:textColor">@color/grey_dark</item>

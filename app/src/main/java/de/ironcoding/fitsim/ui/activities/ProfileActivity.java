@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.view.MenuItem;
 
 import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.databinding.ActivityProfileBinding;
@@ -39,17 +38,4 @@ public class ProfileActivity extends BaseActivity<ProfilePresenter> {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() {
-        finish();
-        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
-    }
 }

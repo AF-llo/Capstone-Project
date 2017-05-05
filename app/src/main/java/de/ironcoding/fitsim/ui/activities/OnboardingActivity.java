@@ -36,5 +36,11 @@ public class OnboardingActivity extends BaseActivity<OnboardingPresenter> implem
     public void finishOnboarding() {
         MainActivity.start(this);
         finish();
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

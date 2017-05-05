@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 
 import com.firebase.ui.auth.AuthUI;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.databinding.FragmentHighscoreBinding;
 import de.ironcoding.fitsim.ui.presenter.HighscorePresenter;
@@ -40,12 +43,14 @@ public class HighscoreFragment extends BaseFragment<HighscorePresenter> implemen
 
     @Override
     public void login() {
+        List<AuthUI.IdpConfig> configs = new ArrayList<>();
+        configs.add(new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build());
         startActivityForResult(
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()
                         .setIsSmartLockEnabled(false)
-                        .setProviders(
-                                AuthUI.EMAIL_PROVIDER)
+                        .setTheme(R.style.FirebaseLoginTheme)
+                        .setProviders(configs)
                         .build(),
                 REQUEST_CODE_SIGN_IN);
     }

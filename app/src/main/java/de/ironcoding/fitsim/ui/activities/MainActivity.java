@@ -50,4 +50,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainPre
         super.onDestroy();
         binding = null;
     }
+
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }
