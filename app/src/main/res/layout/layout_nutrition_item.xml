@@ -58,12 +58,12 @@
             android:layout_below="@id/anchor"
             android:layout_toRightOf="@id/anchor"
             android:layout_toEndOf="@id/anchor"
-            android:text="@{String.format(@string/ep_exp, item.proteine, item.carbs, item.fat)}"/>
+            android:text="@{String.format(@string/prot_carbs_fat, item.proteine, item.carbs, item.fat)}"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/divider_height"
-            android:background="@color/grey_light"
+            android:background="@color/grey_extra_light"
             android:layout_marginStart="@dimen/left_item_space"
             android:layout_marginLeft="@dimen/left_item_space"
             android:layout_alignParentBottom="true"/>

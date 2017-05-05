@@ -63,7 +63,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/divider_height"
-            android:background="@color/grey_light"
+            android:background="@color/grey_extra_light"
             android:layout_marginStart="@dimen/left_item_space"
             android:layout_marginLeft="@dimen/left_item_space"
             android:layout_alignParentBottom="true"/>

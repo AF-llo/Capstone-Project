@@ -16,9 +16,8 @@ import de.ironcoding.fitsim.ui.presenter.BmiPresenter;
 
 public class BmiActivity extends BaseActivity<BmiPresenter> {
 
-    public static void start(Context context) {
-        Intent starter = new Intent(context, BmiActivity.class);
-        context.startActivity(starter);
+    public static Intent getIntent(Context context) {
+        return new Intent(context, BmiActivity.class);
     }
 
     @Override

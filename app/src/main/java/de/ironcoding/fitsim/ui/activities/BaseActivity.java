@@ -14,6 +14,7 @@ import de.appsfactory.mvplib.presenter.MVPPresenter;
 import de.appsfactory.mvplib.view.MVPActivity;
 import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.app.FitSimApp;
+import de.ironcoding.fitsim.ui.model.UtilityRecyclerItem;
 
 /**
  * Created by larsl on 25.04.2017.
@@ -68,6 +69,13 @@ public abstract class BaseActivity<T extends MVPPresenter> extends MVPActivity<T
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
+    public void showUtilityScreen(UtilityRecyclerItem item) {
+        if (item == null) {
+            return;
+        }
+        startActivity(item.getStartIntent(this));
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

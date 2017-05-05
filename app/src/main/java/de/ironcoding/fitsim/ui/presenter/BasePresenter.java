@@ -17,11 +17,11 @@ import de.ironcoding.fitsim.app.injection.DbRepositoryModule;
 import de.ironcoding.fitsim.app.injection.FirebaseModule;
 import de.ironcoding.fitsim.firebase.model.UserHighscore;
 import de.ironcoding.fitsim.logic.Athlete;
-import de.ironcoding.fitsim.util.AnalyticsLogger;
-import de.ironcoding.fitsim.util.HighscoreUtil;
 import de.ironcoding.fitsim.repository.AthleteRepository;
 import de.ironcoding.fitsim.ui.model.AthleteHeaderViewModel;
+import de.ironcoding.fitsim.util.AnalyticsLogger;
 import de.ironcoding.fitsim.util.AppSettings;
+import de.ironcoding.fitsim.util.HighscoreUtil;
 import timber.log.Timber;
 
 /**
@@ -49,7 +49,7 @@ public class BasePresenter extends MVPPresenter {
     @Inject
     AnalyticsLogger analyticsLogger;
 
-    private Callback callback;
+    protected Callback callback;
 
     public ObservableField<AthleteHeaderViewModel> athleteModel = new ObservableField<>();
 

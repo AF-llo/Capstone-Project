@@ -66,16 +66,6 @@ public class GymFragment extends BaseFragment<GymPresenter> implements BasePrese
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
-    @Override
-    public void showInterstitial() {
-        showInterstitialAd();
-    }
-
-    @Override
-    public void showProfile() {
-        showProfileScreen();
-    }
-
     public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
         int maxOffset = binding.appbar.getMeasuredHeight() - binding.toolbar.getMeasuredHeight() - binding.header.getMeasuredHeight();
         int absOffset = Math.abs(verticalOffset);

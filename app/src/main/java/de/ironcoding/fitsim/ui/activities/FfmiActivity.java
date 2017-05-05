@@ -16,9 +16,8 @@ import de.ironcoding.fitsim.ui.presenter.FfmiPresenter;
 
 public class FfmiActivity extends BaseActivity<FfmiPresenter> {
 
-    public static void start(Context context) {
-        Intent starter = new Intent(context, FfmiActivity.class);
-        context.startActivity(starter);
+    public static Intent getIntent(Context context) {
+        return new Intent(context, FfmiActivity.class);
     }
 
     @Override

@@ -67,14 +67,4 @@ public class NutritionFragment extends BaseFragment<NutritionPresenter> implemen
     public void hideBottomSheet() {
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
-
-    @Override
-    public void showProfile() {
-        showProfileScreen();
-    }
-
-    @Override
-    public void showInterstitial() {
-        showInterstitialAd();
-    }
 }

@@ -44,7 +44,7 @@ public class JobStoppedIntentService extends IntentService {
             return;
         }
         Timber.d("onHandleIntent - Event: " + event);
-        // reset flags in settings to start scheduled job again when app is started next time
+        // reset flags in settings to getIntent scheduled job again when app is started next time
         switch (event) {
             case EventJobService.EVENT_REFRESH_BODY:
                 appSettings.writeRefreshJobScheduledToSettings(false);
