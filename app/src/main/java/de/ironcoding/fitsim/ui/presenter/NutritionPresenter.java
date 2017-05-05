@@ -39,6 +39,8 @@ public class NutritionPresenter extends BasePresenter implements NutritionSelect
 
     public ObservableField<NutritionRecyclerItem> selectedNutrition = new ObservableField<>();
 
+    public ObservableFloat backgroundAlpha = new ObservableFloat();
+
     public NutritionPresenter(Callback callback) {
         super(callback);
     }
@@ -134,5 +136,9 @@ public class NutritionPresenter extends BasePresenter implements NutritionSelect
 
     private void updateAthletePreview(Athlete athlete) {
         athletePreview.set(new AthleteNutritionPreviewViewModel(athlete));
+    }
+
+    public void setBackgroundAlpha(float backgroundAlpha) {
+        this.backgroundAlpha.set(backgroundAlpha);
     }
 }

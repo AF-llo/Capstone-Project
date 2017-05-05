@@ -6,6 +6,8 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
+        <import type="de.ironcoding.fitsim.util.IconUtil"/>
         <variable
             name="gymPresenter"
             type="de.ironcoding.fitsim.ui.presenter.GymPresenter"/>
@@ -89,7 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:items="@{gymPresenter.activities}"/>
+            app:items="@{gymPresenter.activities}" />
 
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/bottom_sheet"
@@ -102,29 +104,119 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/bottom_sheet_height"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:actionBarSize"
+                    android:background="@color/grey_extra_light">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_points"
+                        android:layout_gravity="center"/>
+
+                </FrameLayout>
+
                 <TextView
+                    style="@style/Text.Title"
                     android:layout_width="match_parent"
                     android:layout_height="?android:actionBarSize"
                     android:gravity="center"
                     android:text="@{gymPresenter.selectedActivity.name}"
-                    android:background="@color/blue_light"
+                    android:textColor="@color/grey_dark"
                     tools:text="Benchpress" />
 
-                <Button
-                    style="@style/ButtonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/spacing_m"
-                    android:text="@string/train"
-                    android:onClick="@{() -> gymPresenter.startActivity()}"/>
+                <android.support.v7.widget.GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/spacing_m"
+                    android:layout_marginLeft="@dimen/spacing_m"
+                    app:columnCount="2">
+
+                    <TextView
+                        style="@style/Text.Subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_columnWeight="1"
+                        android:layout_marginBottom="@dimen/spacing_s"
+                        android:text="@string/xp"/>
+
+                    <TextView
+                        style="@style/Text.Subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_columnWeight="1"
+                        android:text="@{String.format(@string/value_preview, gymPresenter.athletePreview.experience, gymPresenter.athletePreview.grownExperience)}"
+                        tools:text="150 (+50)"/>
+
+                    <TextView
+                        style="@style/Text.Subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_columnWeight="1"
+                        android:layout_marginBottom="@dimen/spacing_s"
+                        android:text="@string/ep"/>
+
+                    <TextView
+                        style="@style/Text.Subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_columnWeight="1"
+                        android:text="@{String.format(@string/value_preview, gymPresenter.athletePreview.effort, gymPresenter.athletePreview.lostEnergy)}"
+                        tools:text="80 (+25)"/>
+
+                    <TextView
+                        style="@style/Text.Subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_columnWeight="1"
+                        android:layout_marginBottom="@dimen/spacing_s"
+                        android:text="@string/strength"/>
+
+                    <TextView
+                        style="@style/Text.Subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_columnWeight="1"
+                        android:text="@{String.format(@string/value_preview, gymPresenter.athletePreview.strength, gymPresenter.athletePreview.changedStrength)}"
+                        tools:text="80 (+25)"/>
+
+                    <TextView
+                        style="@style/Text.Subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_columnWeight="1"
+                        android:layout_marginBottom="@dimen/spacing_s"
+                        android:text="@string/stamina"/>
+
+                    <TextView
+                        style="@style/Text.Subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_columnWeight="1"
+                        android:text="@{String.format(@string/value_preview, gymPresenter.athletePreview.stamina, gymPresenter.athletePreview.changedStamina)}"
+                        tools:text="80 (+25)"/>
+
+                </android.support.v7.widget.GridLayout>
 
             </LinearLayout>
 
         </android.support.v4.widget.NestedScrollView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_m"
+            app:layout_anchor="@id/bottom_sheet"
+            app:fabSize="normal"
+            app:layout_anchorGravity="end"
+            app:iconresid="@{IconUtil.activityResIdForIcon(gymPresenter.athletePreview.id)}"
+            android:visibility="@{gymPresenter.activitySelected ? View.VISIBLE : View.GONE}"
+            android:onClick="@{() -> gymPresenter.startActivity()}" />
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>

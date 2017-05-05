@@ -52,4 +52,7 @@
     <string name="kfa_in_percent">KFA in %</string>
     <string name="bmi">BMI</string>
     <string name="ffmi">FFMI</string>
+    <string name="ep">EP</string>
+    <string name="value_preview">%1$s (%2$s)</string>
+    <string name="xp">XP</string>
 </resources>

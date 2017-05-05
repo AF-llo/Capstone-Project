@@ -4,7 +4,6 @@ import android.content.Context;
 import android.databinding.Observable;
 
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 
 import de.appsfactory.mvplib.annotations.MVPIncludeToState;
 import de.appsfactory.mvplib.util.ObservableString;
@@ -12,6 +11,7 @@ import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.logic.Athlete;
 import de.ironcoding.fitsim.logic.Body;
 import de.ironcoding.fitsim.logic.Calories;
+import de.ironcoding.fitsim.util.FormatUtil;
 
 /**
  * Created by larsl on 05.05.2017.
@@ -61,10 +61,7 @@ public class FfmiPresenter extends BasePresenter {
     @Override
     protected void onPresenterCreated() {
         super.onPresenterCreated();
-        floatFormat = new DecimalFormat(Body.FLOAT_FORMAT_PATTERN);
-        DecimalFormatSymbols sym = DecimalFormatSymbols.getInstance();
-        sym.setDecimalSeparator('.');
-        floatFormat.setDecimalFormatSymbols(sym);
+        floatFormat = FormatUtil.baseFloatForatter();
         addPropertyCallback();
     }
 

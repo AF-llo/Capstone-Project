@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
 import de.appsfactory.mvplib.presenter.MVPRecyclerItem;
 import de.ironcoding.fitsim.BR;
 import de.ironcoding.fitsim.R;
-import de.ironcoding.fitsim.logic.Body;
+import de.ironcoding.fitsim.util.FormatUtil;
 
 /**
  * Created by larsl on 04.05.2017.
@@ -21,7 +21,7 @@ public abstract class InfoRecyclerItem extends MVPRecyclerItem implements Parcel
     protected DecimalFormat formatter;
 
     public InfoRecyclerItem() {
-        formatter = new DecimalFormat(Body.FLOAT_FORMAT_PATTERN);
+        formatter = FormatUtil.baseFloatForatter();
     }
 
     @Override

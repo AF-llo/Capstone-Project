@@ -1,6 +1,7 @@
 package de.ironcoding.fitsim.ui.presenter;
 
 import android.databinding.ObservableArrayList;
+import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.databinding.ObservableFloat;
 import android.databinding.ObservableList;
@@ -32,6 +33,8 @@ public class GymPresenter extends BasePresenter implements ActivityItemEvent {
     @Named(LocalModule.REPOSITORY_LOCAL)
     ActivitiesRepository activitiesRepository;
 
+    public ObservableFloat backgroundAlpha = new ObservableFloat();
+
     public ObservableFloat alpha = new ObservableFloat();
 
     public ObservableList<ActivityRecyclerItem> activities = new ObservableArrayList<>();
@@ -39,6 +42,8 @@ public class GymPresenter extends BasePresenter implements ActivityItemEvent {
     public ObservableField<AthleteActivityPreviewViewModel> athletePreview = new ObservableField<>();
 
     public ObservableField<ActivityRecyclerItem> selectedActivity = new ObservableField<>();
+
+    public ObservableBoolean activitySelected = new ObservableBoolean(false);
 
     public GymPresenter(Callback callback) {
         super(callback);
@@ -95,16 +100,18 @@ public class GymPresenter extends BasePresenter implements ActivityItemEvent {
         if (getContext() == null) {
             return;
         }
-        Athlete previewAthlete = getAthlete().copy();
-        if (!previewAthlete.isAbleToDo(activity)) {
+        Athlete currentAthlete = getAthlete().copy();
+        Athlete previewAthlete = currentAthlete.copy();
+        if (!currentAthlete.isAbleToDo(activity)) {
             Toast.makeText(getContext(), getContext().getString(R.string.to_tired), Toast.LENGTH_SHORT).show();
             return;
         }
         previewAthlete.doActivity(activity);
-        updateAthletePreview(previewAthlete);
-        selectedActivity.set(new ActivityRecyclerItem(activity, previewAthlete.getBody().getMuscles()));
+        updateAthletePreview(currentAthlete, previewAthlete, activity);
+        selectedActivity.set(new ActivityRecyclerItem(activity, currentAthlete.getBody().getMuscles()));
         notifyCallbackShowBottomSheet();
         analyticsLogger.logActivityDone(activity.getName());
+        activitySelected.set(true);
     }
 
     @Override
@@ -135,6 +142,7 @@ public class GymPresenter extends BasePresenter implements ActivityItemEvent {
             notifyCallbackShowInterstitial();
         }
         updateHighscoreIfLoggedIn();
+        activitySelected.set(false);
     }
 
     public void showProfile() {
@@ -151,7 +159,11 @@ public class GymPresenter extends BasePresenter implements ActivityItemEvent {
         this.alpha.set(alpha);
     }
 
-    private void updateAthletePreview(Athlete athlete) {
-        athletePreview.set(new AthleteActivityPreviewViewModel(athlete));
+    private void updateAthletePreview(Athlete current, Athlete preview, Activity activity) {
+        athletePreview.set(new AthleteActivityPreviewViewModel(current, preview, activity.getId()));
+    }
+
+    public void setBackgroundAlpha(float backgroundAlpha) {
+        this.backgroundAlpha.set(backgroundAlpha);
     }
 }

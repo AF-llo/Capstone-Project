@@ -9,6 +9,7 @@ import java.text.DecimalFormat;
 import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.logic.Athlete;
 import de.ironcoding.fitsim.logic.Body;
+import de.ironcoding.fitsim.util.FormatUtil;
 
 /**
  * Created by larsl on 04.05.2017.
@@ -26,7 +27,7 @@ public class StrengthRecyclerItem extends InfoRecyclerItem {
         super();
         strength = athlete.getBody().getFitness().getStrength();
         maxStrength = Body.MAX_FITNESS;
-        formatter = new DecimalFormat(Body.FLOAT_FORMAT_PATTERN);
+        formatter = FormatUtil.baseFloatForatter();
     }
 
     @Override
