@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.ui.activities.BmiActivity;
+import de.ironcoding.fitsim.util.AnalyticsLogger;
 
 /**
  * Created by larsl on 05.05.2017.
@@ -25,5 +26,10 @@ public class BmiRecyclerItem extends UtilityRecyclerItem {
     @Override
     public Intent getStartIntent(Context context) {
         return BmiActivity.getIntent(context);
+    }
+
+    @Override
+    public String getSreenName() {
+        return AnalyticsLogger.SCREEN_BMI;
     }
 }

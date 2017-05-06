@@ -15,12 +15,18 @@ import java.lang.annotation.RetentionPolicy;
 public class AnalyticsLogger {
 
     @Retention(RetentionPolicy.SOURCE)
-    @StringDef({SCREEN_PROFILE, SCREEN_GYM, SCREEN_NUTRITION, SCREEN_MORE})
+    @StringDef({SCREEN_PROFILE, SCREEN_GYM, SCREEN_NUTRITION, SCREEN_MORE, SCREEN_HIGHSCORE, SCREEN_MUSCLES, SCREEN_BODY, SCREEN_CALORIES, SCREEN_BMI, SCREEN_FFMI})
     public @interface Screen {}
     public static final String SCREEN_PROFILE ="screen_profile";
     public static final String SCREEN_GYM ="screen_gym";
     public static final String SCREEN_NUTRITION ="screen_nutrition";
     public static final String SCREEN_MORE ="screen_more";
+    public static final String SCREEN_HIGHSCORE ="screen_highscore";
+    public static final String SCREEN_MUSCLES ="screen_muscles";
+    public static final String SCREEN_BODY ="screen_body";
+    public static final String SCREEN_CALORIES ="screen_calories";
+    public static final String SCREEN_BMI ="screen_calories";
+    public static final String SCREEN_FFMI ="screen_calories";
 
     private static final String SCREEN_VIEW_EVENT = "screen_view";
     private static final String SCREEN_PARAM_NAME = "screen_name";

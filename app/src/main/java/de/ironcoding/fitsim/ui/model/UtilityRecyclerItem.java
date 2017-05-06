@@ -8,6 +8,7 @@ import de.appsfactory.mvplib.presenter.MVPEventRecyclerItem;
 import de.ironcoding.fitsim.BR;
 import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.events.UtilityEvent;
+import de.ironcoding.fitsim.util.AnalyticsLogger;
 
 /**
  * Created by larsl on 05.05.2017.
@@ -39,4 +40,6 @@ public abstract class UtilityRecyclerItem extends MVPEventRecyclerItem<UtilityEv
     }
 
     public abstract Intent getStartIntent(Context context);
+
+    public abstract @AnalyticsLogger.Screen String getSreenName();
 }
