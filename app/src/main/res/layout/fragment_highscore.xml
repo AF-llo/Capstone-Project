@@ -45,6 +45,7 @@
             android:layout_gravity="end|bottom"
             app:iconresid="@{highscorePresenter.loggedin ? R.drawable.ico_logout : R.drawable.ico_login}"
             android:onClick="@{() -> highscorePresenter.loginOrOut()}"
+            android:contentDescription="@{highscorePresenter.contentDescription}"
             tools:src="@drawable/ico_logout"/>
 
     </android.support.design.widget.CoordinatorLayout>

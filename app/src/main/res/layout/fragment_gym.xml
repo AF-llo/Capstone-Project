@@ -250,6 +250,7 @@
             app:fabSize="normal"
             app:layout_anchorGravity="end"
             app:iconresid="@{IconUtil.activityResIdForIcon(gymPresenter.athletePreview.id)}"
+            android:contentDescription="@string/start_activity"
             android:visibility="@{gymPresenter.activitySelected ? View.VISIBLE : View.GONE}"
             android:onClick="@{() -> gymPresenter.startActivity()}" />
 

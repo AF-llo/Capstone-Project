@@ -253,6 +253,7 @@
             app:layout_anchor="@id/bottom_sheet"
             app:fabSize="normal"
             app:layout_anchorGravity="end"
+            android:contentDescription="@string/eat_nutrition"
             app:iconresid="@{IconUtil.nutritionResIdForIcon(nutritionPresenter.athletePreview.id)}"
             android:visibility="@{nutritionPresenter.nutritionSelected ? View.VISIBLE : View.GONE}"
             android:onClick="@{() -> nutritionPresenter.eatNutrition()}" />

@@ -33,6 +33,8 @@ public class HighscorePresenter extends BasePresenter implements FirebaseAuth.Au
 
     public ObservableList<HighscoreRecyclerItem> higscoreItems = new ObservableArrayList<>();
 
+    public ObservableString contentDescription = new ObservableString();
+
     private LoginCallback loginCallback;
 
     private ValueEventListener eventListener;
@@ -85,9 +87,14 @@ public class HighscorePresenter extends BasePresenter implements FirebaseAuth.Au
             loggedin.set(true);
             updateHighscoreIfLoggedIn();
             attachHighscoreListener();
+            if (getContext() == null) {
+                return;
+            }
+            contentDescription.set(String.format(getContext().getString(R.string.disconnect_from_account), user.getDisplayName()));
         } else {
             if (getContext() != null) {
                 username.set(getContext().getString(R.string.anonymous));
+                contentDescription.set(getContext().getString(R.string.connect_with_account));
             }
             loggedin.set(false);
             detachhighscoreListener();
