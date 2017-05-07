@@ -50,6 +50,7 @@
     <string name="bmi_result">BMI: %s</string>
     <string name="ffmi_result">FFMI: %s</string>
     <string name="kfa_in_percent">KFA in %</string>
+    <string name="consumed_gram">%s g</string>
     <string name="bmi">BMI</string>
     <string name="ffmi">FFMI</string>
     <string name="ep">EP</string>

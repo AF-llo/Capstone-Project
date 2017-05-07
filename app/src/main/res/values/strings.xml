@@ -19,7 +19,6 @@
     <string name="anonymous">Anonymous</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>
-    <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="highscore">Highscore</string>
     <string name="no_data">No data available</string>
