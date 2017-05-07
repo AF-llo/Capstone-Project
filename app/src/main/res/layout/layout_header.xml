@@ -74,6 +74,7 @@
                 android:layout_alignBottom="@+id/energy"
                 android:layout_marginRight="@dimen/spacing_s"
                 android:layout_marginEnd="@dimen/spacing_s"
+                android:contentDescription="@string/current_energy"
                 android:layout_toLeftOf="@+id/energy"
                 android:layout_toStartOf="@+id/energy" />
 

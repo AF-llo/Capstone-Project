@@ -23,7 +23,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?android:actionBarSize"
-                android:background="@color/grey_dark"
+                android:background="@color/grey_light"
                 app:elevation="0dp">
                 <FrameLayout
                     android:layout_width="wrap_content"

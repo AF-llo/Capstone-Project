@@ -56,7 +56,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/spacing_l"
                     android:onClick="@{() -> onboardingPresenter.selectGender(Athlete.MALE)}"
-                    tools:src="@drawable/ico_onboarding_male"/>
+                    android:contentDescription="@string/set_gender_male"
+                    tools:src="@drawable/ico_onboarding_male" />
 
                 <ImageView
                     android:src="@{onboardingPresenter.gender == Athlete.FEMALE ? @drawable/ico_onboarding_female : @drawable/ico_onboarding_female_inactive}"
@@ -65,6 +66,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/spacing_l"
                     android:onClick="@{() -> onboardingPresenter.selectGender(Athlete.FEMALE)}"
+                    android:contentDescription="@string/set_gender_female"
                     tools:src="@drawable/ico_onboarding_female_inactive"/>
 
             </LinearLayout>
@@ -167,6 +169,7 @@
             android:layout_gravity="center"
             android:layout_margin="@dimen/spacing_m"
             android:text="@string/create"
+            android:contentDescription="@string/create_your_athlete"
             android:onClick="@{() -> onboardingPresenter.createAthlete()}"/>
 
     </LinearLayout>

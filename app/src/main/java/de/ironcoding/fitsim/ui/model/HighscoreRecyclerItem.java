@@ -3,6 +3,7 @@ package de.ironcoding.fitsim.ui.model;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import de.ironcoding.fitsim.BR;
 import de.ironcoding.fitsim.R;
@@ -12,7 +13,7 @@ import de.ironcoding.fitsim.logic.IHighscore;
  * Created by larsl on 02.05.2017.
  */
 
-public class HighscoreRecyclerItem extends InfoRecyclerItem {
+public class HighscoreRecyclerItem extends InfoRecyclerItem implements Comparable<HighscoreRecyclerItem> {
 
     private final String name;
 
@@ -42,6 +43,11 @@ public class HighscoreRecyclerItem extends InfoRecyclerItem {
     @Override
     public String getFormattedSubtitle(Context context, String string) {
         return String.format(context.getString(R.string.points), String.valueOf(points));
+    }
+
+    @Override
+    public int compareTo(@NonNull HighscoreRecyclerItem o) {
+        return o.points > points ? 1 : o.points < points ? -1 : 0;
     }
 
     public HighscoreRecyclerItem(Parcel in) {

@@ -65,6 +65,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:src="@drawable/ico_profil"
+                                android:contentDescription="@string/show_profile"
                                 android:layout_margin="@dimen/spacing_m" />
                         </FrameLayout>
 

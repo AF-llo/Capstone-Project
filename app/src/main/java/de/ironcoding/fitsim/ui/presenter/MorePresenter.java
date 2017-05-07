@@ -30,7 +30,7 @@ public class MorePresenter extends BasePresenter implements UtilityEvent {
 
     @Override
     public void utilitySelected(UtilityRecyclerItem utilityRecyclerItem) {
-        analyticsLogger.logScreen(utilityRecyclerItem.getSreenName()p);
+        analyticsLogger.logScreen(utilityRecyclerItem.getSreenName());
         notifyCallbackShowUtilityScreen(utilityRecyclerItem);
     }
 

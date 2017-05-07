@@ -11,11 +11,15 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import de.appsfactory.mvplib.util.ObservableString;
 import de.ironcoding.fitsim.R;
 import de.ironcoding.fitsim.firebase.model.UserHighscore;
-import de.ironcoding.fitsim.util.HighscoreUtil;
 import de.ironcoding.fitsim.ui.model.HighscoreRecyclerItem;
+import de.ironcoding.fitsim.util.HighscoreUtil;
 
 /**
  * Created by larsl on 28.04.2017.
@@ -98,12 +102,15 @@ public class HighscorePresenter extends BasePresenter implements FirebaseAuth.Au
                     if (higscoreItems.size() > 0) {
                         higscoreItems.clear();
                     }
+                    List<HighscoreRecyclerItem> userHighscoreList = new ArrayList<>();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         UserHighscore userHighscore = snapshot.getValue(UserHighscore.class);
                         if (userHighscore != null) {
-                            higscoreItems.add(new HighscoreRecyclerItem(userHighscore));
+                            userHighscoreList.add(new HighscoreRecyclerItem(userHighscore));
                         }
                     }
+                    Collections.sort(userHighscoreList);
+                    higscoreItems.addAll(userHighscoreList);
 
                 }
 

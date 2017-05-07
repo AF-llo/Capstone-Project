@@ -60,4 +60,9 @@
     <string name="value_preview">%1$s (%2$s)</string>
     <string name="xp">XP</string>
     <string name="not_logged_in">Not logged in</string>
+    <string name="set_gender_male">Select male</string>
+    <string name="set_gender_female">Select female</string>
+    <string name="create_your_athlete">Create your athlete</string>
+    <string name="current_energy">Current energy</string>
+    <string name="show_profile">Show your profile</string>
 </resources>

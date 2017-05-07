@@ -32,8 +32,6 @@ public class HighscoreWidgetProvider extends AppWidgetProvider {
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, OnboardingActivity.getIntent(context), 0);
             views.setOnClickPendingIntent(R.id.widget, pendingIntent);
 
-            // TODO: 04.05.2017 handle if athlete created
-
             TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
             stackBuilder.addNextIntentWithParentStack(new Intent(context, ProfileActivity.class));
             views.setPendingIntentTemplate(R.id.widget_list, stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT));
